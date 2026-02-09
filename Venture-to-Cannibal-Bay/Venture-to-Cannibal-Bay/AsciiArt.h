@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -9,7 +10,8 @@ class AsciiArt
 {
 private:
 	string filename;
-	ifstream ArtPrint;
+	ifstream artFile;
+	string linePrint;
 public:
 	AsciiArt(string nFileName);
 	void printAscii();

@@ -1,0 +1,14 @@
+#pragma once
+#include <iostream>
+#include <string>
+using namespace std;
+class GameLoop
+{
+private:
+	string playerName;
+public:
+	Gameloop();
+	void playGame();
+
+};
+

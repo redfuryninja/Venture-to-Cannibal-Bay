@@ -124,10 +124,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AsciiArt.cpp" />
+    <ClCompile Include="GameLoop.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Venture-to-Cannibal-Bay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsciiArt.h" />
+    <ClInclude Include="GameLoop.h" />
+    <ClInclude Include="Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

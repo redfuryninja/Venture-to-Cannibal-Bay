@@ -2,7 +2,8 @@
 //
 
 #include <iostream>
-
+#include "AsciiArt.h"
+using namespace std;
 /*
 * print title
 * menu option, begin quit
@@ -18,6 +19,7 @@
 */
 int main()
 {
-    
+    AsciiArt title = AsciiArt("./Ascii-art/Title.txt");
+    title.printAscii();
 }
 

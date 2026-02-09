@@ -2,9 +2,11 @@
 
 AsciiArt::AsciiArt(string nFileName) {
 	this->filename = nFileName;
-	this->ArtPrint = ifstream(filename);
+	this->artFile = ifstream(this->filename);
 
 }
-void printAscii() {
-
+void AsciiArt::printAscii() {
+	while (getline(this->artFile, this->linePrint)) {
+		cout << linePrint << endl;
+	}
 }
