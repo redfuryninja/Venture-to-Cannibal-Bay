@@ -3,9 +3,9 @@
 Menu::Menu() {
 	this->menuPosition = 0;
 	this->waiting = true;
-	int keyValue = -1;
+	this-> keyValue = -1;
 }
-int getKeyInput() {
+int Menu::getKeyInput() {
 	int value = -1;
 
 	while (1) {
@@ -21,25 +21,22 @@ void Menu::displayTitle() {
 }
 
 void Menu::displayMenu() {
-	Menu menu = Menu();
-	menu.redrawMenu();
+	this->redrawMenu();
 }
 
 void Menu::redrawMenu() {
 	system("cls");
-	displayMenu();
 	cout << "|------------------------|" << endl;
 	if (this->menuPosition < 1) this->menuPosition = 0;
 	if (this->menuPosition > 1) this->menuPosition = 0;
 	switch (this->menuPosition) {
 	case 0:
 		cout <<"| > Venture to the bay < |" << endl;
-		cout <<"|          Exit          |";
-
+		cout <<"|          Exit          |"<<endl;
 		break;
 
 	case 1:
-		cout <<"|    Venture to the bay  |" << endl;
+		cout <<"|   Venture to the bay   |" << endl;
 		cout <<"|        > Exit <        |" << endl;
 		break;
 }
@@ -47,5 +44,13 @@ void Menu::redrawMenu() {
 	cout << "|------------------------|" << endl;
 	while (this->waiting){
 		this->keyValue = getKeyInput();
+		switch (this->keyValue) {
+		case KEY_UP:
+			this->menuPosition--;
+			this->redrawMenu();
+		case KEY_DOWN:
+			this->menuPosition++;
+			this->redrawMenu();
+		}
 	}
 }

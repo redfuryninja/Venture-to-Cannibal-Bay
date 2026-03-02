@@ -7,7 +7,7 @@ class GameLoop
 private:
 	string playerName;
 public:
-	Gameloop();
+	GameLoop();
 	void playGame();
 
 };

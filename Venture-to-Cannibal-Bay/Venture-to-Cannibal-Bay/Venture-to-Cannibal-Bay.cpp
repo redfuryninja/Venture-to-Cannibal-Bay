@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "AsciiArt.h"
+#include "Menu.h"
 using namespace std;
 /*
 * print title
@@ -19,7 +20,11 @@ using namespace std;
 */
 int main()
 {
+    /*
     AsciiArt title = AsciiArt("./Ascii-art/Title.txt");
     title.printAscii();
+    */
+    Menu Start = Menu();
+    Start.displayMenu();
 }
 
