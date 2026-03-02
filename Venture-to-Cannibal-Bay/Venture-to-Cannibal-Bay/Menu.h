@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <conio.h>
 #include <atlstr.h>
+#include "GameLoop.h"
 using namespace std;
 
 #define KEY_UP 72

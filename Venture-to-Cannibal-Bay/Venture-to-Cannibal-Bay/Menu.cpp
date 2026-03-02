@@ -26,8 +26,9 @@ void Menu::displayMenu() {
 
 void Menu::redrawMenu() {
 	system("cls");
+	this->displayTitle();
 	cout << "|------------------------|" << endl;
-	if (this->menuPosition < 1) this->menuPosition = 0;
+	if (this->menuPosition < 0) this->menuPosition = 1;
 	if (this->menuPosition > 1) this->menuPosition = 0;
 	switch (this->menuPosition) {
 	case 0:
@@ -51,6 +52,16 @@ void Menu::redrawMenu() {
 		case KEY_DOWN:
 			this->menuPosition++;
 			this->redrawMenu();
+		case KEY_ENTER:
+			switch (this->menuPosition) {
+			case 0:
+				GameLoop().playGame();
+
+				return;
+			case 1:
+				quick_exit(0);
+				return;
+			}
 		}
 	}
 }
