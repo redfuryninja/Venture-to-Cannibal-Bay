@@ -5,7 +5,7 @@
 #include <ctime>
 #include <thread>
 #include "AsciiArt.h"
-#include "Menu.h"
+#include "MainMenu.h"
 using namespace std;
 /*
 * print title
@@ -23,32 +23,15 @@ using namespace std;
 int main()
 {
 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /*
     AsciiArt title = AsciiArt("./Ascii-art/Title.txt");
     title.printAscii();
     */
 
-   
-    Menu Start = Menu();
+    /*
+    */
+    MainMenu Start = MainMenu("./Ascii-art/Title.txt");
     Start.displayMenu();
-   
+
 }
 

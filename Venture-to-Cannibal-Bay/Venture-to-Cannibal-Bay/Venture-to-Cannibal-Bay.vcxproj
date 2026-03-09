@@ -124,20 +124,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AsciiArt.cpp" />
+    <ClCompile Include="Cyclone.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameLoop.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Pirate.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ShipEvent.cpp" />
+    <ClCompile Include="Siren.cpp" />
     <ClCompile Include="Venture-to-Cannibal-Bay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsciiArt.h" />
+    <ClInclude Include="Cyclone.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameLoop.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Pirate.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ShipEvent.h" />
+    <ClInclude Include="Siren.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

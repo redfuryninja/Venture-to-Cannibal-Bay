@@ -13,19 +13,19 @@ using namespace std;
 #define KEY_ENTER 13
 class Menu
 {
-private:
+protected:
 	int menuPosition;
 	bool waiting;
 	int keyValue;
+	AsciiArt ascii;
 
 public:
-	Menu();
+	Menu(string n_ascii);
 	int getKeyValue();
 	void getKeyInput();
 	void displayTitle();
 	void displayMenu();
-	void redrawMenu();
+	virtual void redrawMenu();
 
 
 };
-
