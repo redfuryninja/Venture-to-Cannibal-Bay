@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <ctime>
+#include <thread>
 #include "AsciiArt.h"
 #include "Menu.h"
 using namespace std;
@@ -20,11 +22,33 @@ using namespace std;
 */
 int main()
 {
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /*
     AsciiArt title = AsciiArt("./Ascii-art/Title.txt");
     title.printAscii();
     */
+
+   
     Menu Start = Menu();
     Start.displayMenu();
+   
 }
 

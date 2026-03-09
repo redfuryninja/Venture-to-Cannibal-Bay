@@ -20,7 +20,8 @@ private:
 
 public:
 	Menu();
-	int getKeyInput();
+	int getKeyValue();
+	void getKeyInput();
 	void displayTitle();
 	void displayMenu();
 	void redrawMenu();

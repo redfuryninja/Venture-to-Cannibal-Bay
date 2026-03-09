@@ -13,6 +13,7 @@ protected:
 	string state;
 	string orientation;
 
+
 	//These member functions are marked as protected (private when inherrited) as
 	//they should only be used from within the class (e.g., only the AI should control 
 	//state and orientation).
