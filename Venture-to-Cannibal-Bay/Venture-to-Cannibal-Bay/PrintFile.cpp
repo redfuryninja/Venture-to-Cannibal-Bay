@@ -1,12 +1,13 @@
-#include "AsciiArt.h"
+#include "PrintFile.h"
 
-AsciiArt::AsciiArt(string nFileName) {
+PrintFile::PrintFile(string nFileName) {
 	this->filename = nFileName;
 	this->artFile = ifstream(this->filename);
 
 }
-void AsciiArt::printAscii() {
+void PrintFile::OutputAscii() {
 	while (getline(this->artFile, this->linePrint)) {
 		cout << linePrint << endl;
 	}
 }
+

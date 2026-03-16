@@ -1,10 +1,9 @@
 #include "Menu.h"
 
-Menu::Menu(string nAscii) {
+Menu::Menu() {
 	this->menuPosition = 0;
 	this->waiting = true;
 	this->keyValue = -1;
-	this->ascii = AsciiArt(nAscii);
 }
 int Menu::getKeyValue() {
 	int value = -1;
@@ -17,7 +16,6 @@ int Menu::getKeyValue() {
 	}
 }
 void Menu::displayTitle() {
-	this->ascii.printAscii();
 }
 
 void Menu::displayMenu() {

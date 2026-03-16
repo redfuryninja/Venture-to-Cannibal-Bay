@@ -1,6 +1,6 @@
 #include "MainMenu.h"
 
-MainMenu::MainMenu(string nAscii): Menu(nAscii) {
+MainMenu::MainMenu(): Menu() {
 
 }
 

@@ -4,7 +4,6 @@
 #include <iostream>
 #include <ctime>
 #include <thread>
-#include "AsciiArt.h"
 #include "MainMenu.h"
 using namespace std;
 /*
@@ -30,7 +29,7 @@ int main()
 
     /*
     */
-    MainMenu Start = MainMenu("./Ascii-art/Title.txt");
+    MainMenu Start = MainMenu();
     Start.displayMenu();
 
 }

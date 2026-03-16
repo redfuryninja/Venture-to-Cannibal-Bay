@@ -4,17 +4,18 @@
 #include <string>
 #include <fstream>
 #include <sstream> 
+
 using namespace std;
 
-class AsciiArt
+class PrintFile
 {
 private:
 	string filename;
 	ifstream artFile;
 	string linePrint;
 public:
-	AsciiArt(string nFileName);
-	void printAscii();
+	PrintFile(string nFileName);
+	void OutputAscii();
 
 
 };

@@ -1,11 +1,13 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "AsciiArt.h"
 #include <windows.h>
 #include <conio.h>
 #include <atlstr.h>
+#include <fstream>
+#include <sstream> 
 #include "GameLoop.h"
+#include "PrintFile.h"
 using namespace std;
 
 #define KEY_UP 72
@@ -17,10 +19,9 @@ protected:
 	int menuPosition;
 	bool waiting;
 	int keyValue;
-	AsciiArt ascii;
 
 public:
-	Menu(string n_ascii);
+	Menu();
 	int getKeyValue();
 	void getKeyInput();
 	void displayTitle();
