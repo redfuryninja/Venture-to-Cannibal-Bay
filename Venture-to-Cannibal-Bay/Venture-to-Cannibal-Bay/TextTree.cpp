@@ -1,3 +1,5 @@
 #include "TextTree.h"
 
-TextTree::TextTree
+TextTree::TextTree() {
+	this->text = {{""},{}}
+}
