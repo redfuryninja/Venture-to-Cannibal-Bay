@@ -4,6 +4,7 @@ Menu::Menu() {
 	this->menuPosition = 0;
 	this->waiting = true;
 	this->keyValue = -1;
+	this->fileName = "./Ascii-art/Title.txt";
 }
 int Menu::getKeyValue() {
 	int value = -1;
@@ -16,6 +17,9 @@ int Menu::getKeyValue() {
 	}
 }
 void Menu::displayTitle() {
+	PrintFile ascii = PrintFile("./Ascii-art/menu.txt");
+	ascii.OutputAscii();
+	
 }
 
 void Menu::displayMenu() {
@@ -24,19 +28,19 @@ void Menu::displayMenu() {
 
 void Menu::redrawMenu() {
 	system("cls");
-	this->displayTitle();
+	displayTitle();
 	cout << "|------------------------|" << endl;
 	if (this->menuPosition < 0) this->menuPosition = 1;
 	if (this->menuPosition > 1) this->menuPosition = 0;
 	switch (this->menuPosition) {
 	case 0:
-		cout <<"|        > Option 1 <        |" << endl;
-		cout <<"|          Option 2          |"<<endl;
+		cout <<"|      > Option 1 <      |" << endl;
+		cout <<"|        Option 2        |"<<endl;
 		break;
 
 	case 1:
-		cout <<"|          Option 1          |" << endl;
-		cout <<"|        > Option 2 <        |" << endl;
+		cout <<"|        Option 1        |" << endl;
+		cout <<"|      > Option 2 <      |" << endl;
 		break;
 }
 

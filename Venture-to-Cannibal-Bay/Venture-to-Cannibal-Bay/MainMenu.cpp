@@ -1,12 +1,17 @@
 #include "MainMenu.h"
 
 MainMenu::MainMenu(): Menu() {
+}
 
+
+void MainMenu::displayTitle() {
+	PrintFile ascii = PrintFile("./Ascii-art/Title.txt");
+	ascii.OutputAscii();
 }
 
 void MainMenu::redrawMenu() {
 	system("cls");
-	this->displayTitle();
+	displayTitle();
 	cout << "|------------------------|" << endl;
 	if (this->menuPosition < 0) this->menuPosition = 1;
 	if (this->menuPosition > 1) this->menuPosition = 0;
@@ -23,5 +28,5 @@ void MainMenu::redrawMenu() {
 	}
 
 	cout << "|------------------------|" << endl;
-	this->getKeyInput();
+	getKeyInput();
 }

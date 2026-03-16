@@ -19,12 +19,12 @@ protected:
 	int menuPosition;
 	bool waiting;
 	int keyValue;
-
+	string fileName;
 public:
 	Menu();
 	int getKeyValue();
 	void getKeyInput();
-	void displayTitle();
+	virtual void displayTitle();
 	void displayMenu();
 	virtual void redrawMenu();
 

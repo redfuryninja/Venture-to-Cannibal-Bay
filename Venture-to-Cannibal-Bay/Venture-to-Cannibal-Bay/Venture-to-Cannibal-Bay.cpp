@@ -5,6 +5,7 @@
 #include <ctime>
 #include <thread>
 #include "MainMenu.h"
+#include "PrintFile.h"
 using namespace std;
 /*
 * print title
@@ -29,8 +30,10 @@ int main()
 
     /*
     */
+
     MainMenu Start = MainMenu();
     Start.displayMenu();
+
 
 }
 

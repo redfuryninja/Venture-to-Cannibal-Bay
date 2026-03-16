@@ -14,9 +14,8 @@ private:
 	ifstream artFile;
 	string linePrint;
 public:
+	PrintFile();
 	PrintFile(string nFileName);
 	void OutputAscii();
 
-
 };
-
