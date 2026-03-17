@@ -11,8 +11,8 @@ private:
 	vector <vector <string>> text;
 public:
 	TextTree();
-	int treePoint;
-	int setTreePoint;
+	int getTreePoint();
+	void setTreePoint(int nPoint);
 
 };
 
