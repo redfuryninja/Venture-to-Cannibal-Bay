@@ -11,15 +11,15 @@
 #include "Menu.h"
 #include <ctime>
 #include <thread>
-#include "PirateMenu.h"
 using namespace std;
 
-class Pirate
+class PirateMenu : public Menu
 {
 private:
-	int startClock;
-	int endClock;
-	bool failed;
+
 public:
+	void displayTitle() override;
+	void redrawMenu() override;
+	void getKeyInput() override;
 };
 

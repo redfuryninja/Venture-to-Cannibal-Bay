@@ -6,6 +6,7 @@
 #include <thread>
 #include "MainMenu.h"
 #include "PrintFile.h"
+#include "Player.h"
 using namespace std;
 /*
 * print title
@@ -30,10 +31,9 @@ int main()
 
     /*
     */
-
+    Player user = Player();
     MainMenu Start = MainMenu();
     Start.displayMenu();
-
 
 }
 

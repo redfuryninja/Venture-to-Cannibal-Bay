@@ -1,7 +1,10 @@
 #include "GameLoop.h"
-
 GameLoop::GameLoop() {
-	this->playerName = "derrick";
+
+}
+
+GameLoop::GameLoop(Player* c_User) {
+	this->user = c_User;
 }
 
 void GameLoop::playGame() {

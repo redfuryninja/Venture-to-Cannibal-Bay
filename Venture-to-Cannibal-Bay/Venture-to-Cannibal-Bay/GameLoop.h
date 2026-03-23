@@ -1,13 +1,16 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Pirate.h"
+#include "Player.h"
 using namespace std;
 class GameLoop
 {
 private:
-	string playerName;
+	Player* user;
 public:
 	GameLoop();
+	GameLoop(Player* c_User);
 	void playGame();
 
 };

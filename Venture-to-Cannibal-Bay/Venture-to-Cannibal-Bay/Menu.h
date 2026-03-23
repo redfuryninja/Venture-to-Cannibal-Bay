@@ -6,8 +6,9 @@
 #include <atlstr.h>
 #include <fstream>
 #include <sstream> 
-#include "GameLoop.h"
 #include "PrintFile.h"
+#include "Player.h"
+#include "GameLoop.h"
 using namespace std;
 
 #define KEY_UP 72
@@ -20,10 +21,13 @@ protected:
 	bool waiting;
 	int keyValue;
 	string fileName;
+	Player* user;
+	GameLoop game;
 public:
 	Menu();
+	Menu(Player* c_User);
 	int getKeyValue();
-	void getKeyInput();
+	virtual void getKeyInput();
 	virtual void displayTitle();
 	void displayMenu();
 	virtual void redrawMenu();

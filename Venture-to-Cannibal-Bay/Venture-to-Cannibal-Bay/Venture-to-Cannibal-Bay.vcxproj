@@ -130,6 +130,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Pirate.cpp" />
+    <ClCompile Include="PirateMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PrintFile.cpp" />
     <ClCompile Include="ShipEvent.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Pirate.h" />
+    <ClInclude Include="PirateMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PrintFile.h" />
     <ClInclude Include="ShipEvent.h" />

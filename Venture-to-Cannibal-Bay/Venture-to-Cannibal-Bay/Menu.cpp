@@ -1,11 +1,22 @@
 #include "Menu.h"
+#include "GameLoop.h"
 
 Menu::Menu() {
 	this->menuPosition = 0;
 	this->waiting = true;
 	this->keyValue = -1;
-	this->fileName = "./Ascii-art/Title.txt";
+	this->fileName = "./Ascii-art/menu.txt";
 }
+
+Menu::Menu(Player* c_User) {
+	this->user = c_User;
+	this->menuPosition = 0;
+	this->waiting = true;
+	this->keyValue = -1;
+	this->fileName = "./Ascii-art/menu.txt";
+	this->game = GameLoop(user);
+}
+
 int Menu::getKeyValue() {
 	int value = -1;
 
@@ -62,8 +73,7 @@ void Menu::getKeyInput() {
 		case KEY_ENTER:
 			switch (this->menuPosition) {
 			case 0:
-				GameLoop().playGame();
-
+				game.playGame();
 				return;
 			case 1:
 				quick_exit(0);

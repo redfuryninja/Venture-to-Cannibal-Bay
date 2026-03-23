@@ -3,13 +3,14 @@
 #include <iostream>
 #include <ctime>
 #include <thread>
-#include "Entity.h"
-class Player: public Entity
+using namespace std;
+class Player
 {
 protected:
 	int lives;
 	int food;
 	int ammo;
+
 public:
 	Player();
 	int getLives();

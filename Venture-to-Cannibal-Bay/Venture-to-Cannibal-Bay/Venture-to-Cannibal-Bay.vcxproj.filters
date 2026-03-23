@@ -33,7 +33,7 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pirate.cpp">
+    <ClCompile Include="PirateMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShipEvent.cpp">
@@ -54,6 +54,9 @@
     <ClCompile Include="TextTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Pirate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">
@@ -71,7 +74,7 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pirate.h">
+    <ClInclude Include="PirateMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ShipEvent.h">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pirate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
