@@ -6,12 +6,9 @@
 #include <atlstr.h>
 #include <fstream>
 #include <sstream> 
-#include "PrintFile.h"
-#include "Player.h"
-#include "Menu.h"
 #include <ctime>
 #include <thread>
-#include "PirateMenu.h"
+#include "Player.h"
 using namespace std;
 
 class Pirate
@@ -20,6 +17,10 @@ private:
 	int startClock;
 	int endClock;
 	bool failed;
+	Player* user;
 public:
+	Pirate();
+	Pirate(Player* c_User);
+	void action();
 };
 

@@ -47,12 +47,12 @@ void Menu::redrawMenu() {
 	case 0:
 		cout <<"|      > Option 1 <      |" << endl;
 		cout <<"|        Option 2        |"<<endl;
-		break;
+		return;
 
 	case 1:
 		cout <<"|        Option 1        |" << endl;
 		cout <<"|      > Option 2 <      |" << endl;
-		break;
+		return;
 }
 
 	cout << "|------------------------|" << endl;

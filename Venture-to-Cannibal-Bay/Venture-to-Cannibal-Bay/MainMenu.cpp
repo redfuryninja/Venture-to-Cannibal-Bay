@@ -6,8 +6,15 @@ MainMenu::MainMenu(): Menu() {
 
 
 void MainMenu::displayTitle() {
-	PrintFile ascii = PrintFile("./Ascii-art/Title.txt");
+	int loop = 0;
+	for (int i = 0; i <= 1000; i++) {
+	PrintFile ascii = PrintFile("./Ascii-art/sword.txt");
 	ascii.OutputAscii();
+	system("cls");
+	PrintFile ascii2 = PrintFile("./Ascii-art/test.txt");
+	ascii2.OutputAscii();
+	system("cls");
+	}
 }
 
 void MainMenu::redrawMenu() {

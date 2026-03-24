@@ -5,8 +5,9 @@ GameLoop::GameLoop() {
 
 GameLoop::GameLoop(Player* c_User) {
 	this->user = c_User;
+	this->game = Pirate(user);
 }
 
 void GameLoop::playGame() {
-	cout << "gameloop" << endl;
+	this->game.action();
 }

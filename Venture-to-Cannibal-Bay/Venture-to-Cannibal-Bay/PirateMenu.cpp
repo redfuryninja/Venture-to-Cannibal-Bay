@@ -4,7 +4,7 @@
 
 
 void PirateMenu::displayTitle() {
-	PrintFile ascii = PrintFile("./Ascii-art/Ships");
+	PrintFile ascii = PrintFile("./Ascii-art/Ships.txt");
 	ascii.OutputAscii();
 }
 
@@ -53,11 +53,14 @@ void PirateMenu::getKeyInput() {
 		case KEY_ENTER:
 			switch (this->menuPosition) {
 			case 0:
-				cout << "sup" << endl;
-				return;
+				cout << "swords" << endl;
+				break;
 			case 1:
-				quick_exit(0);
-				return;
+				cout << "guns" << endl;
+				break;
+			case 2:
+				cout << "supplies" << endl;
+				break;
 			}
 		}
 	}

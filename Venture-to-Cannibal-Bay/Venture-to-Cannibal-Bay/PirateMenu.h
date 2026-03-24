@@ -7,10 +7,8 @@
 #include <fstream>
 #include <sstream> 
 #include "PrintFile.h"
-#include "Player.h"
 #include "Menu.h"
-#include <ctime>
-#include <thread>
+
 using namespace std;
 
 class PirateMenu : public Menu

@@ -8,6 +8,7 @@ class GameLoop
 {
 private:
 	Player* user;
+	Pirate game;
 public:
 	GameLoop();
 	GameLoop(Player* c_User);
