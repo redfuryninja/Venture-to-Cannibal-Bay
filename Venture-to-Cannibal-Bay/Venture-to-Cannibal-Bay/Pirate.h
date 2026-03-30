@@ -3,7 +3,7 @@
 #include <string>
 #include <windows.h>
 #include <conio.h>
-#include <atlstr.h>
+
 #include <fstream>
 #include <sstream> 
 #include <ctime>
