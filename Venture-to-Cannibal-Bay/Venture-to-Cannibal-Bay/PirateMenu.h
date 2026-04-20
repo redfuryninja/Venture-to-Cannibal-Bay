@@ -13,11 +13,13 @@ using namespace std;
 class PirateMenu : public Menu
 {
 private:
-
+	string path;
 public:
+	PirateMenu();
 	void displayTitle() override;
 	void redrawMenu() override;
 	void getKeyInput() override;
 	void animation();
+	string getPath();
 };
 

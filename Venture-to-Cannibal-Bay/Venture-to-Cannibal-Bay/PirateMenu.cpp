@@ -1,7 +1,12 @@
 #include "PirateMenu.h"
 
 
-
+PirateMenu::PirateMenu() {
+	this->path = "N/A";
+}
+string PirateMenu::getPath() {
+	return path;
+}
 
 void PirateMenu::displayTitle() {
 	PrintFile ascii = PrintFile("./Ascii-art/Ships.txt");
@@ -53,14 +58,17 @@ void PirateMenu::getKeyInput() {
 		case KEY_ENTER:
 			switch (this->menuPosition) {
 			case 0:
+				this->path = "swords";
 				cout << "swords" << endl;
-				break;
+				return;
 			case 1:
+				this->path = "guns";
 				cout << "guns" << endl;
-				break;
+				return;
 			case 2:
+				this->path = "suppliess";
 				cout << "supplies" << endl;
-				break;
+				return;
 			}
 		}
 	}

@@ -22,5 +22,6 @@ public:
 	Pirate();
 	Pirate(Player* c_User);
 	void action();
+	void sword();
 };
 
