@@ -9,6 +9,8 @@
 #include <ctime>
 #include <thread>
 #include "Player.h"
+
+#define KEY_E 101
 using namespace std;
 
 class Pirate
@@ -23,5 +25,7 @@ public:
 	Pirate(Player* c_User);
 	void action();
 	void sword();
+	void animation();
+	int getKeyValue();
 };
 

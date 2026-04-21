@@ -19,7 +19,6 @@ public:
 	void displayTitle() override;
 	void redrawMenu() override;
 	void getKeyInput() override;
-	void animation();
 	string getPath();
 };
 

@@ -7,6 +7,7 @@
 #include "MainMenu.h"
 #include "PrintFile.h"
 #include "Player.h"
+#include "Ship.h"
 using namespace std;
 /*
 * print title
@@ -30,10 +31,13 @@ int main()
     */
 
     /*
-    */
+  
     Player user = Player();
     MainMenu Start = MainMenu();
     Start.displayMenu();
-
+     */
+    Ship map = Ship();
+    map.outputMap();
+    
 }
 

@@ -123,16 +123,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Act2.cpp" />
     <ClCompile Include="Cyclone.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameLoop.cpp" />
+    <ClCompile Include="Investigation.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Pirate.cpp" />
     <ClCompile Include="PirateMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PrintFile.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="ShipEvent.cpp" />
     <ClCompile Include="Siren.cpp" />
     <ClCompile Include="TextTree.cpp" />
@@ -143,12 +146,14 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameLoop.h" />
+    <ClInclude Include="Investigation.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Pirate.h" />
     <ClInclude Include="PirateMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PrintFile.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="ShipEvent.h" />
     <ClInclude Include="Siren.h" />
     <ClInclude Include="TextTree.h" />
