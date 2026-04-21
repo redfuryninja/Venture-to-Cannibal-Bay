@@ -10,8 +10,11 @@ PrintFile::PrintFile(string nFileName) {
 
 }
 void PrintFile::OutputAscii() {
+	string buffer = "";
 	while (getline(this->artFile, this->linePrint)) {
-		cout << linePrint << endl;
+		buffer += this->linePrint;
+		buffer += "\n";
 	}
+	cout << buffer << endl;
 }
 
