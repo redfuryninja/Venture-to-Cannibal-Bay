@@ -1,4 +1,5 @@
 #include "GameLoop.h"
+#include "Ship.h"
 GameLoop::GameLoop() {
 
 }
@@ -9,5 +10,10 @@ GameLoop::GameLoop(Player* c_User) {
 }
 
 void GameLoop::playGame() {
+	
+	/* 
 	this->game.action();
+	*/
+	Ship map = Ship();
+	map.mapLoop();
 }

@@ -31,14 +31,12 @@ int main()
     */
 
     /*
+    
+     */
     Player user = Player();
     MainMenu Start = MainMenu();
     Start.displayMenu();
     
-     */
-    
-  Ship map = Ship();
-  map.outputMap();
-  map.mapLoop();
+ 
 }
 
