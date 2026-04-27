@@ -29,5 +29,4 @@ void MainMenu::redrawMenu() {
 	}
 
 	cout << "|------------------------|" << endl;
-	getKeyInput();
 }

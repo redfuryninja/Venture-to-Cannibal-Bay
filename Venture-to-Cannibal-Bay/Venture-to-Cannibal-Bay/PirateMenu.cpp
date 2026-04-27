@@ -45,7 +45,7 @@ void PirateMenu::redrawMenu() {
 
 
 
-void PirateMenu::getKeyInput() {
+bool PirateMenu::getKeyInput() {
 	while (this->waiting) {
 		this->keyValue = getKeyValue();
 		switch (this->keyValue) {
@@ -60,15 +60,15 @@ void PirateMenu::getKeyInput() {
 			case 0:
 				this->path = "swords";
 				cout << "swords" << endl;
-				return;
+				return true;
 			case 1:
 				this->path = "guns";
 				cout << "guns" << endl;
-				return;
+				return true;
 			case 2:
 				this->path = "suppliess";
 				cout << "supplies" << endl;
-				return;
+				return true;
 			}
 		}
 	}

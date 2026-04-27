@@ -24,11 +24,12 @@ protected:
 	string fileName;
 	Player* user;
 	GameLoop game;
+	string path;
 public:
 	Menu();
 	Menu(Player* c_User);
 	int getKeyValue();
-	virtual void getKeyInput();
+	virtual bool getKeyInput();
 	virtual void displayTitle();
 	void displayMenu();
 	virtual void redrawMenu();

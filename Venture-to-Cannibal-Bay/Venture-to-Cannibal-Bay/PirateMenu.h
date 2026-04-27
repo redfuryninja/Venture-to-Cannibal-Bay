@@ -18,7 +18,7 @@ public:
 	PirateMenu();
 	void displayTitle() override;
 	void redrawMenu() override;
-	void getKeyInput() override;
+	bool getKeyInput() override;
 	string getPath();
 };
 

@@ -34,10 +34,13 @@ void Menu::displayTitle() {
 }
 
 void Menu::displayMenu() {
-	//while loop
-	this->redrawMenu();
-	//this->redrawMenu(up/down);
-	//this->getKeyInput();
+	bool loop = true;
+	while (loop = true) {
+		this->redrawMenu();
+		//this->redrawMenu(up/down);
+		loop = this->getKeyInput();
+	}
+
 }
 
 void Menu::redrawMenu() {
@@ -59,28 +62,26 @@ void Menu::redrawMenu() {
 }
 
 	cout << "|------------------------|" << endl;
-	this->getKeyInput();
+	//this->getKeyInput();
 }
 
 
-void Menu::getKeyInput() {
+bool Menu::getKeyInput() {
 	while (this->waiting) {
 		this->keyValue = getKeyValue();
 		switch (this->keyValue) {
 		case KEY_UP:
 			this->menuPosition--;
-			this->redrawMenu();
 		case KEY_DOWN:
 			this->menuPosition++;
-			this->redrawMenu();
 		case KEY_ENTER:
 			switch (this->menuPosition) {
 			case 0:
 				game.playGame();
-				return;
+				return true;
 			case 1:
-				quick_exit(0);
-				return;
+				//quick_exit(0);
+				return true;
 			}
 		}
 	}

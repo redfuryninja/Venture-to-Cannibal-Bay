@@ -3,14 +3,14 @@
 Ship::Ship(){
 	this->playerX = 10;
 	this->playerY = 2;
-	this->mapWidth = 19;
-	this->mapHeight = 41;
+	this->mapWidth = 21;
+	this->mapHeight = 42;
 	this->playerChar = 'V';
 	this->mapChar = ' ';
 	this->canMoveX = false;
 	this->canMoveY = false;
 	this->map = "";
-	this->filename = "./Ascii-art/shipMap.txt";
+	this->filename = "./Ascii-art/bigShipMap.txt";
 	this->artFile = ifstream(this->filename);
 	while (getline(this->artFile, this->linePrint)) {
 		this->map += this->linePrint;

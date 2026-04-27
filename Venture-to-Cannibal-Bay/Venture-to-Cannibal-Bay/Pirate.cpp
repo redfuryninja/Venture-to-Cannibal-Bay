@@ -15,7 +15,12 @@ Pirate::Pirate(Player* c_User) {
 }
 void Pirate::action() {
 	PirateMenu options = PirateMenu();
-	options.displayMenu();
+	while (true) {
+		options.displayMenu();
+		options.getKeyInput();
+	}
+		
+
 	if (options.getPath() == "swords") {
 		this->sword();
 	}
