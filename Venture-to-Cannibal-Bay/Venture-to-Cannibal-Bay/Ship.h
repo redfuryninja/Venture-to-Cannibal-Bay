@@ -27,8 +27,6 @@ private:
 	int mapWidth;
 	int mapHeight;
 	string map;
-	bool collisionX;
-	bool collisionY;
 	char playerChar;
 	char mapChar;
 	bool canMoveX;

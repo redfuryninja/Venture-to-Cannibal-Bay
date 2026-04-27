@@ -1,16 +1,16 @@
 #include "Ship.h"
 
 Ship::Ship(){
-	this->playerX = 5;
-	this->playerY = 5;
-	this->mapWidth = 11;
-	this->mapHeight = 10;
+	this->playerX = 10;
+	this->playerY = 2;
+	this->mapWidth = 21;
+	this->mapHeight = 42;
 	this->playerChar = 'V';
 	this->mapChar = ' ';
 	this->canMoveX = false;
 	this->canMoveY = false;
 	this->map = "";
-	this->filename = "./Ascii-art/testMap.txt";
+	this->filename = "./Ascii-art/shipMap.txt";
 	this->artFile = ifstream(this->filename);
 	while (getline(this->artFile, this->linePrint)) {
 		this->map += this->linePrint;
@@ -21,7 +21,7 @@ Ship::Ship(){
 	
 bool Ship::checkHorizontal(int futureX, int futureY) {
 	this->mapChar = map[futureX + this->playerY * this->mapWidth];
-	if (this->mapChar == ' ') {
+	if (this->mapChar != '-' and this->mapChar != '/' and this->mapChar != '\\') {
 		return true;
 	}
 	return false;
@@ -30,7 +30,7 @@ bool Ship::checkHorizontal(int futureX, int futureY) {
 
 bool Ship::checkVertical(int futureX, int futureY) {
 	this->mapChar = map[futureY + this->playerX * this->mapWidth];
-	if (this->mapChar == ' ') {
+	if (this->mapChar != '-' and this->mapChar != '/' and this->mapChar != '\\') {
 		return true;
 	}
 	return false;
@@ -62,17 +62,9 @@ void Ship::mapLoop() {
 		clock_t start = clock();
 
 		//######## Process Input ########//
+		int key = getKeyValue();
 
-		if (this->getKeyValue() == KEY_UP) {
-			this->playerChar = '^';
-			this->canMoveY = checkVertical(this->playerX, this->playerY - 1);
-			if (this->canMoveY == true) {
-				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
-				this->playerY -= 1;
-				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
-			}
-		}
-		else if (this->getKeyValue() == KEY_DOWN) {
+		if (key == KEY_DOWN) {
 			this->playerChar = 'V';
 			this->canMoveY = checkVertical(this->playerX, this->playerY + 1);
 			if (this->canMoveY == true) {
@@ -81,16 +73,25 @@ void Ship::mapLoop() {
 				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 			}
 		}
-		else if (this->getKeyValue() == KEY_LEFT) {
+		else if (key == KEY_UP) {
+			this->playerChar = '^';
+			this->canMoveY = checkVertical(this->playerX, this->playerY - 1);
+			if (this->canMoveY == true) {
+				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
+				this->playerY -= 1;
+				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
+			}
+		}
+		else if (key == KEY_LEFT) {
 			this->playerChar = '<';
-			this->canMoveX = checkHorizontal(this->playerX-1, this->playerY);
+			this->canMoveX = checkHorizontal(this->playerX - 1, this->playerY);
 			if (this->canMoveX == true) {
 				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
 				this->playerX -= 1;
 				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 			}
 		}
-		else if (this->getKeyValue() == KEY_RIGHT) {
+		else if (key == KEY_RIGHT) {
 			this->playerChar = '>';
 			this->canMoveX = checkHorizontal(this->playerX + 1, this->playerY);
 			if (this->canMoveX == true) {
