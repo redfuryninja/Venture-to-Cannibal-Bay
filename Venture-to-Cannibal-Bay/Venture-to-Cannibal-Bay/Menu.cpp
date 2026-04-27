@@ -34,7 +34,10 @@ void Menu::displayTitle() {
 }
 
 void Menu::displayMenu() {
+	//while loop
 	this->redrawMenu();
+	//this->redrawMenu(up/down);
+	//this->getKeyInput();
 }
 
 void Menu::redrawMenu() {

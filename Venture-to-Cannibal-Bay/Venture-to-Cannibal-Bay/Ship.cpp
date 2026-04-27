@@ -3,8 +3,8 @@
 Ship::Ship(){
 	this->playerX = 10;
 	this->playerY = 2;
-	this->mapWidth = 21;
-	this->mapHeight = 42;
+	this->mapWidth = 19;
+	this->mapHeight = 41;
 	this->playerChar = 'V';
 	this->mapChar = ' ';
 	this->canMoveX = false;
@@ -20,22 +20,26 @@ Ship::Ship(){
 }
 	
 bool Ship::checkHorizontal(int futureX, int futureY) {
-	this->mapChar = map[futureX + this->playerY * this->mapWidth];
-	if (this->mapChar != '-' and this->mapChar != '/' and this->mapChar != '\\') {
+	int coord = futureX + this->playerY * this->mapWidth;
+	this->mapChar = map[futureX + futureY * this->mapWidth];
+	if (this->mapChar == ' ') {
+		//mapChar = ' ';
 		return true;
+
 	}
 	return false;
 }
 
 
 bool Ship::checkVertical(int futureX, int futureY) {
-	this->mapChar = map[futureY + this->playerX * this->mapWidth];
-	if (this->mapChar != '-' and this->mapChar != '/' and this->mapChar != '\\') {
+	this->mapChar = map[futureX + futureY * this->mapWidth];
+	if (this->mapChar == ' ') {
+		//mapChar = ' ';
 		return true;
 	}
 	return false;
 }
-
+// if (this->mapChar == ' ')
 
 
 void Ship::outputMap() {
@@ -103,17 +107,8 @@ void Ship::mapLoop() {
 
 
 
-		//######## Update Game ########//
-		//Loop through all entities in the game and call their update method (doing AI etc.).
-	
-		//############################//
-
-
-
 		//######## Render ########//
-		//\r is called a carriage-return. Instead of using system("cls") (which 
-		// will cause screen flickering), \r moves the cout curser to the beginning of
-		// the line (which allows us to overwrite previous output).
+
 		system("cls");
 		
 		outputMap();
@@ -122,7 +117,8 @@ void Ship::mapLoop() {
 		//Calculating how long to wait to achieve desired FPS.
 		
 		
-		/*clock_t end = clock();
+		/*
+		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 200 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
