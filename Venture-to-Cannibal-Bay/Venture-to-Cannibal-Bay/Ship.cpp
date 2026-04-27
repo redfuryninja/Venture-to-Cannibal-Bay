@@ -1,16 +1,16 @@
 #include "Ship.h"
 
 Ship::Ship(){
-	this->playerX = 7;
-	this->playerY = 2;
-	this->mapWidth = 13;
-	this->mapHeight = 34;
+	this->playerX = 5;
+	this->playerY = 5;
+	this->mapWidth = 11;
+	this->mapHeight = 10;
 	this->playerChar = 'V';
 	this->mapChar = ' ';
 	this->canMoveX = false;
 	this->canMoveY = false;
 	this->map = "";
-	this->filename = "./Ascii-art/ShipMap.txt";
+	this->filename = "./Ascii-art/testMap.txt";
 	this->artFile = ifstream(this->filename);
 	while (getline(this->artFile, this->linePrint)) {
 		this->map += this->linePrint;
@@ -67,6 +67,7 @@ void Ship::mapLoop() {
 			this->playerChar = '^';
 			this->canMoveY = checkVertical(this->playerX, this->playerY - 1);
 			if (this->canMoveY == true) {
+				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
 				this->playerY -= 1;
 				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 			}
@@ -76,7 +77,7 @@ void Ship::mapLoop() {
 			this->canMoveY = checkVertical(this->playerX, this->playerY + 1);
 			if (this->canMoveY == true) {
 				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
-				this->playerY -= 1;
+				this->playerY += 1;
 				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 			}
 		}
@@ -84,6 +85,7 @@ void Ship::mapLoop() {
 			this->playerChar = '<';
 			this->canMoveX = checkHorizontal(this->playerX-1, this->playerY);
 			if (this->canMoveX == true) {
+				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
 				this->playerX -= 1;
 				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 			}
@@ -92,6 +94,7 @@ void Ship::mapLoop() {
 			this->playerChar = '>';
 			this->canMoveX = checkHorizontal(this->playerX + 1, this->playerY);
 			if (this->canMoveX == true) {
+				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
 				this->playerX += 1;
 				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 			}
@@ -116,11 +119,13 @@ void Ship::mapLoop() {
 
 
 		//Calculating how long to wait to achieve desired FPS.
-		clock_t end = clock();
+		
+		
+		/*clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 200 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
-
+		*/
 	}
 	/*while (true) {
 
