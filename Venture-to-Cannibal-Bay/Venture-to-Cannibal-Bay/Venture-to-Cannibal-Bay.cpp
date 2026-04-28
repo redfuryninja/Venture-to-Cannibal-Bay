@@ -8,6 +8,7 @@
 #include "PrintFile.h"
 #include "Player.h"
 #include "Ship.h"
+#include "GameLoop.h"
 using namespace std;
 /*
 * print title
@@ -34,8 +35,10 @@ int main()
     
      */
     Player user = Player();
-    MainMenu Start = MainMenu();
-    Start.displayMenu();
+    Player* userPointer = &user;
+    GameLoop game = GameLoop(userPointer);
+   
+    game.playGame();
     
  
 }

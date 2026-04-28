@@ -6,7 +6,7 @@
 using namespace std;
 class Player
 {
-protected:
+private:
 	int lives;
 	int food;
 	int ammo;

@@ -8,7 +8,6 @@ class Entity
 protected:
 	int x;
 	int y;
-	int z;
 	bool alive;
 	string state;
 	string orientation;
@@ -19,6 +18,8 @@ protected:
 	//state and orientation).
 	void setX(int nX);
 	int getX();
+	void setY(int nY);
+	int getY();
 	void setState(string nState);
 	void setOrientation(string nOrientation);
 
@@ -34,5 +35,6 @@ public:
 	virtual void setLocation(vector<string>& gameMap, int nX) = 0;
 
 	virtual void update(vector<string>& gameMap) = 0;
+	virtual void move();
 };
 

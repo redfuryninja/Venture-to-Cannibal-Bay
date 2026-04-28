@@ -18,7 +18,25 @@ Ship::Ship(){
 	}
 	this->map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 }
-	
+Ship::Ship(Player* c_User) {
+	this->playerX = 10;
+	this->playerY = 2;
+	this->mapWidth = 21;
+	this->mapHeight = 42;
+	this->playerChar = 'V';
+	this->mapChar = ' ';
+	this->canMoveX = false;
+	this->canMoveY = false;
+	this->map = "";
+	this->filename = "./Ascii-art/bigShipMap.txt";
+	this->artFile = ifstream(this->filename);
+	while (getline(this->artFile, this->linePrint)) {
+		this->map += this->linePrint;
+		this->map += "\n";
+	}
+	this->map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
+	this->user = c_User;
+}
 bool Ship::checkHorizontal(int futureX, int futureY) {
 	int coord = futureX + this->playerY * this->mapWidth;
 	this->mapChar = map[futureX + futureY * this->mapWidth];
@@ -57,6 +75,47 @@ int Ship::getKeyValue() {
 	}
 }
 
+void Ship::playerMove() {
+	int key = getKeyValue();
+	if (key == KEY_DOWN) {
+		this->playerChar = 'V';
+		this->canMoveY = checkVertical(this->playerX, this->playerY + 1);
+		if (this->canMoveY == true) {
+			map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
+			this->playerY += 1;
+			map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
+		}
+	}
+	else if (key == KEY_UP) {
+		this->playerChar = '^';
+		this->canMoveY = checkVertical(this->playerX, this->playerY - 1);
+		if (this->canMoveY == true) {
+			map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
+			this->playerY -= 1;
+			map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
+		}
+	}
+	else if (key == KEY_LEFT) {
+		this->playerChar = '<';
+		this->canMoveX = checkHorizontal(this->playerX - 1, this->playerY);
+		if (this->canMoveX == true) {
+			map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
+			this->playerX -= 1;
+			map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
+		}
+	}
+	else if (key == KEY_RIGHT) {
+		this->playerChar = '>';
+		this->canMoveX = checkHorizontal(this->playerX + 1, this->playerY);
+		if (this->canMoveX == true) {
+			map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
+			this->playerX += 1;
+			map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
+		}
+	}
+
+}
+
 void Ship::mapLoop() {
 	
 
@@ -66,45 +125,8 @@ void Ship::mapLoop() {
 		clock_t start = clock();
 
 		//######## Process Input ########//
-		int key = getKeyValue();
-
-		if (key == KEY_DOWN) {
-			this->playerChar = 'V';
-			this->canMoveY = checkVertical(this->playerX, this->playerY + 1);
-			if (this->canMoveY == true) {
-				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
-				this->playerY += 1;
-				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
-			}
-		}
-		else if (key == KEY_UP) {
-			this->playerChar = '^';
-			this->canMoveY = checkVertical(this->playerX, this->playerY - 1);
-			if (this->canMoveY == true) {
-				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
-				this->playerY -= 1;
-				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
-			}
-		}
-		else if (key == KEY_LEFT) {
-			this->playerChar = '<';
-			this->canMoveX = checkHorizontal(this->playerX - 1, this->playerY);
-			if (this->canMoveX == true) {
-				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
-				this->playerX -= 1;
-				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
-			}
-		}
-		else if (key == KEY_RIGHT) {
-			this->playerChar = '>';
-			this->canMoveX = checkHorizontal(this->playerX + 1, this->playerY);
-			if (this->canMoveX == true) {
-				map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
-				this->playerX += 1;
-				map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
-			}
-		}
-
+		
+		this->playerMove();
 
 
 		//######## Render ########//

@@ -14,7 +14,6 @@ Menu::Menu(Player* c_User) {
 	this->waiting = true;
 	this->keyValue = -1;
 	this->fileName = "./Ascii-art/menu.txt";
-	this->game = GameLoop(user);
 }
 
 int Menu::getKeyValue() {
@@ -35,9 +34,8 @@ void Menu::displayTitle() {
 
 void Menu::displayMenu() {
 	bool loop = true;
-	while (loop = true) {
+	while (loop == true) {
 		this->redrawMenu();
-		//this->redrawMenu(up/down);
 		loop = this->getKeyInput();
 	}
 
@@ -62,7 +60,7 @@ void Menu::redrawMenu() {
 }
 
 	cout << "|------------------------|" << endl;
-	//this->getKeyInput();
+	
 }
 
 
@@ -72,16 +70,17 @@ bool Menu::getKeyInput() {
 		switch (this->keyValue) {
 		case KEY_UP:
 			this->menuPosition--;
+			return true;
 		case KEY_DOWN:
 			this->menuPosition++;
+			return true;
 		case KEY_ENTER:
 			switch (this->menuPosition) {
 			case 0:
-				game.playGame();
-				return true;
+				return false;
 			case 1:
-				//quick_exit(0);
-				return true;
+				quick_exit(0);
+				return false;
 			}
 		}
 	}

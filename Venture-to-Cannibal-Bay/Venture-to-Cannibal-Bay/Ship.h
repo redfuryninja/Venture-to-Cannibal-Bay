@@ -11,6 +11,9 @@
 #include <iostream>
 #include <string>
 #include <conio.h>
+#include "Entity.h"
+#include "Player.h"
+#include "Enemy.h"
 
 #define KEY_UP 72
 #define KEY_DOWN 80
@@ -34,12 +37,15 @@ private:
 	string filename;
 	ifstream artFile;
 	string linePrint;
+	Player* user;
 public:
 	Ship();
+	Ship(Player* c_User);
 	void outputMap();
 	bool checkHorizontal(int futureX, int futureY);
 	bool checkVertical(int futureX, int futureY);
 	int getKeyValue();
 	void mapLoop();
+	void playerMove();
 };
 

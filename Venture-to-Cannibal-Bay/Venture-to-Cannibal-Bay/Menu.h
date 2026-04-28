@@ -8,7 +8,6 @@
 #include <sstream> 
 #include "PrintFile.h"
 #include "Player.h"
-#include "GameLoop.h"
 using namespace std;
 
 #define KEY_UP 72
@@ -23,7 +22,6 @@ protected:
 	int keyValue;
 	string fileName;
 	Player* user;
-	GameLoop game;
 	string path;
 public:
 	Menu();

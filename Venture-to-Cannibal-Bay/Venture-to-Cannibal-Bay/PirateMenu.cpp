@@ -1,7 +1,7 @@
 #include "PirateMenu.h"
 
 
-PirateMenu::PirateMenu() {
+PirateMenu::PirateMenu():Menu() {
 	this->path = "N/A";
 }
 string PirateMenu::getPath() {
@@ -39,7 +39,6 @@ void PirateMenu::redrawMenu() {
 	}
 
 	cout << "|------------------------|" << endl;
-	getKeyInput();
 }
 
 
@@ -51,24 +50,24 @@ bool PirateMenu::getKeyInput() {
 		switch (this->keyValue) {
 		case KEY_UP:
 			this->menuPosition--;
-			this->redrawMenu();
+			return true;
 		case KEY_DOWN:
 			this->menuPosition++;
-			this->redrawMenu();
+			return true;
 		case KEY_ENTER:
 			switch (this->menuPosition) {
 			case 0:
 				this->path = "swords";
 				cout << "swords" << endl;
-				return true;
+				return false;
 			case 1:
 				this->path = "guns";
 				cout << "guns" << endl;
-				return true;
+				return false;
 			case 2:
 				this->path = "suppliess";
 				cout << "supplies" << endl;
-				return true;
+				return false;
 			}
 		}
 	}

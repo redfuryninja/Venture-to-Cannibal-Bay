@@ -15,9 +15,10 @@ Pirate::Pirate(Player* c_User) {
 }
 void Pirate::action() {
 	PirateMenu options = PirateMenu();
-	while (true) {
-		options.displayMenu();
-		options.getKeyInput();
+	bool loop = true;
+	while (loop == true) {
+		options.redrawMenu();
+		loop = options.getKeyInput();
 	}
 		
 
@@ -62,7 +63,7 @@ void Pirate::sword(){
 	}
 	clock_t end = clock();
 	int duration = end - start;
-	if (duration > 1500) {
+	if (duration > 15) {
 		system("cls");
 		PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
 		ascii.OutputAscii();
