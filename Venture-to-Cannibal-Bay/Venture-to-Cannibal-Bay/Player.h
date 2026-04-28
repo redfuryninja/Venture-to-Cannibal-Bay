@@ -1,8 +1,13 @@
 #pragma once
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <ctime>
 #include <thread>
+#include <windows.h>
+#include <string>
+#include <fstream>
+#include <sstream> 
+#include <conio.h>
 using namespace std;
 class Player
 {
@@ -19,5 +24,6 @@ public:
 	void setLives(int nLives);
 	void setFood(int nFood);
 	void setAmmo(int nAmmo);
+	int getKeyValue();
 };
 

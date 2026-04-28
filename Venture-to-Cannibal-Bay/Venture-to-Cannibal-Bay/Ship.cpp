@@ -41,7 +41,7 @@ bool Ship::checkHorizontal(int futureX, int futureY) {
 	int coord = futureX + this->playerY * this->mapWidth;
 	this->mapChar = map[futureX + futureY * this->mapWidth];
 	if (this->mapChar == ' ') {
-		//mapChar = ' ';
+		
 		return true;
 
 	}
@@ -52,18 +52,10 @@ bool Ship::checkHorizontal(int futureX, int futureY) {
 bool Ship::checkVertical(int futureX, int futureY) {
 	this->mapChar = map[futureX + futureY * this->mapWidth];
 	if (this->mapChar == ' ') {
-		//mapChar = ' ';
 		return true;
 	}
 	return false;
 }
-// if (this->mapChar == ' ')
-
-
-void Ship::outputMap() {
-	cout << this->map << endl;
-}
-
 int Ship::getKeyValue() {
 	int value = -1;
 
@@ -115,6 +107,12 @@ void Ship::playerMove() {
 	}
 
 }
+
+
+void Ship::outputMap() {
+	cout << this->map << endl;
+}
+
 
 void Ship::mapLoop() {
 	

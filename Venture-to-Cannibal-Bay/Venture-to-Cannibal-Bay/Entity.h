@@ -31,10 +31,6 @@ public:
 
 	bool isAlive();
 	void kill();
-
 	virtual void setLocation(vector<string>& gameMap, int nX) = 0;
-
 	virtual void update(vector<string>& gameMap) = 0;
-	virtual void move();
 };
-

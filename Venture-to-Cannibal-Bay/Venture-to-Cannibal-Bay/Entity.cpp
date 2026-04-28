@@ -5,7 +5,6 @@ Entity::Entity()
 {
 	this->x = 0;
 	this->y = 0;
-	this->z = 0;
 	this->state = "Neutral";
 	this->orientation = "Left";
 	this->alive = true;
@@ -50,4 +49,3 @@ void Entity::kill()
 {
 	this->alive = false;
 }
-
