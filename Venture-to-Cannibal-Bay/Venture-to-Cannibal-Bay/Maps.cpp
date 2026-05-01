@@ -54,3 +54,8 @@ void Maps::moveEntity(int x, int y){
 void Maps::removeEntity(int x, int y) {
 	this->map[x + y * this->mapWidth] = this->mapChar;
 }
+
+char Maps::getMapChar(int x, int y) {
+	this->mapChar = map[x + y * this->mapWidth];
+	return this->mapChar
+}

@@ -8,7 +8,7 @@
 #include <fstream>
 #include <sstream> 
 #include <conio.h>
-#include "Maps"
+#include "Maps.h"
 using namespace std;
 
 #define KEY_UP 72
@@ -36,7 +36,7 @@ private:
 
 public:
 	Player();
-	Player(string* curMap);
+	Player(Maps* currMap);
 	int getLives();
 	int getFood();
 	int getAmmo();
@@ -44,5 +44,8 @@ public:
 	void setFood(int nFood);
 	void setAmmo(int nAmmo);
 	int getKeyValue();
+	bool checkHorizontal(int futureX, int futureY);
+	bool checkVertical(int futureX, int futureY);
+	void playerMove();
 };
 

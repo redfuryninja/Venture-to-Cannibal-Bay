@@ -28,4 +28,5 @@ public:
 	void changeChar(int currChar);
 	void moveEntity(int x, int y);
 	void removeEntity(int x, int y);
+	char getMapChar(int x, int y);
 };
