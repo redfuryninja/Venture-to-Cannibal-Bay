@@ -24,13 +24,3 @@ void Player::setFood(int nFood) {
 void Player::setAmmo(int nAmmo) {
 	this->ammo = nAmmo;
 }
-int getKeyValue() {
-	int value = -1;
-
-	while (1) {
-		value = _getch();
-
-		if (value != -1)
-			return value;
-	}
-}

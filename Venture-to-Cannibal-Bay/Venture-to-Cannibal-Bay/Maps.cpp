@@ -1,0 +1,56 @@
+#include "Maps.h"
+
+Maps::Maps(){
+	this-> mapWidth = 0;
+	this->mapHeight = 0;
+	this->map = "";
+	this->entityChar = 'E';
+	this->mapChar = ' ';
+	this->filename = "./Ascii-art/testMap.txt";
+	this->artFile= ifstream(this->filename);
+	this->linePrint = "";
+}
+
+Maps::Maps(string file){
+	this->mapWidth = 20;
+	this->mapHeight = 41;
+	this->map = "";
+	this->entityChar = 'E';
+	this->mapChar = ' ';
+	this->filename = file;
+	this->artFile = ifstream(this->filename);
+	this->linePrint = "";
+}
+
+void Maps::createMap(){
+	this->artFile = ifstream(this->filename);
+	while (getline(this->artFile, this->linePrint)) {
+		this->map += this->linePrint;
+		this->map += "\n";
+	}
+}
+
+string Maps::getMap(){
+	return this->map;
+}
+
+int Maps::getDimensions(){
+	return this->mapWidth, this->mapHeight;
+}
+
+void Maps::setDimensions(int width, int height){
+	this->mapWidth = width;
+	this->mapHeight = height;
+}
+
+void Maps::changeChar(int currChar){
+	this->entityChar = currChar;
+}
+
+void Maps::moveEntity(int x, int y){
+	this-> map[x + y * this->mapWidth] = this->entityChar;
+}
+
+void Maps::removeEntity(int x, int y) {
+	this->map[x + y * this->mapWidth] = this->mapChar;
+}

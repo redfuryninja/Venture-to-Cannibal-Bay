@@ -63,7 +63,7 @@ void Pirate::sword(){
 	}
 	clock_t end = clock();
 	int duration = end - start;
-	if (duration > 15) {
+	if (duration > 1500) {
 		system("cls");
 		PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
 		ascii.OutputAscii();

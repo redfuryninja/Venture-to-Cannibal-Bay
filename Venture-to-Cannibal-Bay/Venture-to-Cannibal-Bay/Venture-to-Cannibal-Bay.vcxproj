@@ -130,6 +130,7 @@
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="Investigation.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Maps.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Pirate.cpp" />
     <ClCompile Include="PirateMenu.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="Investigation.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Maps.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Pirate.h" />
     <ClInclude Include="PirateMenu.h" />

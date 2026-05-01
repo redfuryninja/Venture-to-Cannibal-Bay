@@ -37,6 +37,7 @@ Ship::Ship(Player* c_User) {
 	this->map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 	this->user = c_User;
 }
+
 bool Ship::checkHorizontal(int futureX, int futureY) {
 	int coord = futureX + this->playerY * this->mapWidth;
 	this->mapChar = map[futureX + futureY * this->mapWidth];
@@ -123,7 +124,13 @@ void Ship::mapLoop() {
 		clock_t start = clock();
 
 		//######## Process Input ########//
+		/*
+		create map
+		pass map to entity
+		run entity movement
+		give map entity coords
 		
+		*/
 		this->playerMove();
 
 
