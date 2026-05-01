@@ -1,14 +1,18 @@
 #include "GameLoop.h"
 
 GameLoop::GameLoop() {
-
-}
-
-GameLoop::GameLoop(Player* c_User) {
-	this->user = c_User;
+	Player Pointer = Player();
+	this->user = &Pointer;
 	this->game = Pirate(user);
 	this->Start = MainMenu();
-	Ship map = Ship();
+	this->shipLoop = Ship(this->user);
+}
+
+GameLoop::GameLoop(Player* cUser) {
+	this->user = cUser;
+	this->game = Pirate(user);
+	this->Start = MainMenu();
+	this->shipLoop = Ship(this->user);
 } 
 void GameLoop::playGame() {
 	
@@ -16,6 +20,6 @@ void GameLoop::playGame() {
 	*/
 
 	this->Start.displayMenu();
-	this->map.mapLoop();
+	this->shipLoop.mapLoop();
 	this->game.action();
 }

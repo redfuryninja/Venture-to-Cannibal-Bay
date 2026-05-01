@@ -12,10 +12,10 @@ private:
 	Player* user;
 	Pirate game;
 	MainMenu Start;
-	Ship map;
+	Ship shipLoop;
 public:
 	GameLoop();
-	GameLoop(Player* c_User);
+	GameLoop(Player* cUser);
 	void playGame();
 
 };

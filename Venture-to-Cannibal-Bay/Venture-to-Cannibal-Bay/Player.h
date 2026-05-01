@@ -33,10 +33,11 @@ private:
 	char mapChar;
 	bool canMoveX;
 	bool canMoveY;
+	char charCheck;
 
 public:
 	Player();
-	Player(Maps* currMap);
+	void setMap(Maps* currMap);
 	int getLives();
 	int getFood();
 	int getAmmo();
@@ -44,8 +45,7 @@ public:
 	void setFood(int nFood);
 	void setAmmo(int nAmmo);
 	int getKeyValue();
-	bool checkHorizontal(int futureX, int futureY);
-	bool checkVertical(int futureX, int futureY);
+	bool checkSpace(int futureX, int futureY);
 	void playerMove();
 };
 

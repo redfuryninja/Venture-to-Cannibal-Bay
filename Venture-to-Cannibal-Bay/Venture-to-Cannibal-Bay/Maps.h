@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream> 
 #include <conio.h>
+#include "Maps.h"
 using namespace std;
 class Maps
 {	
@@ -27,6 +28,6 @@ public:
 	void setDimensions(int width, int height);
 	void changeChar(int currChar);
 	void moveEntity(int x, int y);
-	void removeEntity(int x, int y);
+	void clearSpace(int x, int y);
 	char getMapChar(int x, int y);
 };

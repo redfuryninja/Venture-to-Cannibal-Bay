@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream> 
 #include <conio.h>
+#include "Maps.h"
 #include "Entity.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -26,7 +27,8 @@ private:
 	int playerY;
 	int mapWidth;
 	int mapHeight;
-	string map;
+	Maps map;
+	Maps* mapPointer;
 	char playerChar;
 	char mapChar;
 	bool canMoveX;

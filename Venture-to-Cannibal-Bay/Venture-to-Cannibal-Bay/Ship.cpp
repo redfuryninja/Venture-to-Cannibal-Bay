@@ -1,6 +1,8 @@
 #include "Ship.h"
 
 Ship::Ship(){
+	Player Pointer = Player();
+	this->user = &Pointer;
 	this->playerX = 10;
 	this->playerY = 2;
 	this->mapWidth = 21;
@@ -9,6 +11,11 @@ Ship::Ship(){
 	this->mapChar = ' ';
 	this->canMoveX = false;
 	this->canMoveY = false;
+	this->filename = "./Ascii-art/bigShipMap.txt";
+	this->map = Maps(this->filename);
+	this->mapPointer = &this->map;
+	/*
+	
 	this->map = "";
 	this->filename = "./Ascii-art/bigShipMap.txt";
 	this->artFile = ifstream(this->filename);
@@ -17,8 +24,11 @@ Ship::Ship(){
 		this->map += "\n";
 	}
 	this->map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
+	
+	*/
 }
-Ship::Ship(Player* c_User) {
+Ship::Ship(Player* cUser) {
+	this->user = cUser;
 	this->playerX = 10;
 	this->playerY = 2;
 	this->mapWidth = 21;
@@ -27,16 +37,18 @@ Ship::Ship(Player* c_User) {
 	this->mapChar = ' ';
 	this->canMoveX = false;
 	this->canMoveY = false;
-	this->map = "";
 	this->filename = "./Ascii-art/bigShipMap.txt";
+	this->map = Maps(this->filename);
+	this->mapPointer = &this->map;
+}
+/*
+	this->map = "";
 	this->artFile = ifstream(this->filename);
 	while (getline(this->artFile, this->linePrint)) {
 		this->map += this->linePrint;
 		this->map += "\n";
 	}
 	this->map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
-	this->user = c_User;
-}
 
 bool Ship::checkHorizontal(int futureX, int futureY) {
 	int coord = futureX + this->playerY * this->mapWidth;
@@ -50,13 +62,16 @@ bool Ship::checkHorizontal(int futureX, int futureY) {
 }
 
 
-bool Ship::checkVertical(int futureX, int futureY) {
+	bool Ship::checkVertical(int futureX, int futureY) {
 	this->mapChar = map[futureX + futureY * this->mapWidth];
 	if (this->mapChar == ' ') {
 		return true;
 	}
 	return false;
 }
+	*/
+
+
 int Ship::getKeyValue() {
 	int value = -1;
 
@@ -67,6 +82,7 @@ int Ship::getKeyValue() {
 			return value;
 	}
 }
+/*
 
 void Ship::playerMove() {
 	int key = getKeyValue();
@@ -113,11 +129,12 @@ void Ship::playerMove() {
 void Ship::outputMap() {
 	cout << this->map << endl;
 }
+*/
 
 
 void Ship::mapLoop() {
 	
-
+	this->user->setMap(this->mapPointer);
 	bool quit = false;
 
 	while (quit == false) {
@@ -131,14 +148,16 @@ void Ship::mapLoop() {
 		give map entity coords
 		
 		*/
-		this->playerMove();
+		this->user->playerMove();
 
 
 		//######## Render ########//
 
 		system("cls");
 		
-		outputMap();
+		cout << this->mapPointer->getMap();
+
+		//outputMap();
 
 
 		//Calculating how long to wait to achieve desired FPS.
