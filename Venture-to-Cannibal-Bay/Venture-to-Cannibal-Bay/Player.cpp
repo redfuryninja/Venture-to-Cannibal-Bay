@@ -4,8 +4,6 @@ Player::Player(){
 	this->lives = 5;
 	this->food = 10;
 	this->ammo = 10;
-	Maps createMap = Maps();
-	this->map = &createMap;
 	this->playerX = 10;
 	this->playerY = 2;
 	this->mapWidth = 21;
@@ -22,7 +20,10 @@ Player::Player(){
 
 void Player::setMap(Maps* currMap) {
 	this->map = currMap;
-	this->mapWidth, this->mapHeight = this->map->getDimensions();
+	this->mapWidth = this->map->getWidth();
+	this->mapHeight = this->map->getHeight();
+	this->map->changeChar(this->playerChar);
+	this->map->moveEntity(this->playerX, this->playerY);
 }
 int Player::getLives() {
 	return this->lives;
@@ -72,6 +73,7 @@ void Player::playerMove() {
 		this->playerChar = 'V';
 		this->canMoveY = checkSpace(this->playerX, this->playerY + 1);
 		if (this->canMoveY == true) {
+			this->map->changeChar(this->playerChar);
 			this->map->clearSpace(this->playerX, this->playerY);
 			//map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
 			this->playerY += 1;
@@ -83,6 +85,7 @@ void Player::playerMove() {
 		this->playerChar = '^';
 		this->canMoveY = checkSpace(this->playerX, this->playerY - 1);
 		if (this->canMoveY == true) {
+			this->map->changeChar(this->playerChar);
 			//map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->playerX, this->playerY);
 			this->playerY -= 1;
@@ -94,9 +97,10 @@ void Player::playerMove() {
 		this->playerChar = '<';
 		this->canMoveX = checkSpace(this->playerX - 1, this->playerY);
 		if (this->canMoveX == true) {
+			this->map->changeChar(this->playerChar);
 			//map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->playerX, this->playerY);
-			this->playerY -= 1;
+			this->playerX -= 1;
 			this->map->moveEntity(this->playerX, this->playerY);
 			//map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 		}
@@ -105,9 +109,10 @@ void Player::playerMove() {
 		this->playerChar = '>';
 		this->canMoveX = checkSpace(this->playerX + 1, this->playerY);
 		if (this->canMoveX == true) {
+			this->map->changeChar(this->playerChar);
 			//map[this->playerX + this->playerY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->playerX, this->playerY);
-			this->playerY -= 1;
+			this->playerX += 1;
 			this->map->moveEntity(this->playerX, this->playerY);
 			//map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
 		}

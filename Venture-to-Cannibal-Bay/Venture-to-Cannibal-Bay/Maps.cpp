@@ -1,8 +1,8 @@
 #include "Maps.h"
 
 Maps::Maps(){
-	this-> mapWidth = 0;
-	this->mapHeight = 0;
+	this-> mapWidth = 45;
+	this->mapHeight = 6;
 	this->map = "";
 	this->entityChar = 'E';
 	this->mapChar = ' ';
@@ -12,8 +12,8 @@ Maps::Maps(){
 }
 
 Maps::Maps(string file){
-	this->mapWidth = 20;
-	this->mapHeight = 41;
+	this->mapWidth = 21;
+	this->mapHeight = 42;
 	this->map = "";
 	this->entityChar = 'E';
 	this->mapChar = ' ';
@@ -34,10 +34,12 @@ string Maps::getMap(){
 	return this->map;
 }
 
-int Maps::getDimensions(){
-	return this->mapWidth, this->mapHeight;
+int Maps::getWidth(){
+	return this->mapWidth;
 }
-
+int Maps::getHeight() {
+	return this->mapHeight;
+}
 void Maps::setDimensions(int width, int height){
 	this->mapWidth = width;
 	this->mapHeight = height;
@@ -48,7 +50,7 @@ void Maps::changeChar(int currChar){
 }
 
 void Maps::moveEntity(int x, int y){
-	this-> map[x + y * this->mapWidth] = this->entityChar;
+	this->map[x + y * this->mapWidth] = this->entityChar;
 }
 
 void Maps::clearSpace(int x, int y) {

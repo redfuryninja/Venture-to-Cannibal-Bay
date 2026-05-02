@@ -39,7 +39,7 @@ Ship::Ship(Player* cUser) {
 	this->canMoveY = false;
 	this->filename = "./Ascii-art/bigShipMap.txt";
 	this->map = Maps(this->filename);
-	this->mapPointer = &this->map;
+
 }
 /*
 	this->map = "";
@@ -133,7 +133,9 @@ void Ship::outputMap() {
 
 
 void Ship::mapLoop() {
-	
+	this->map.createMap();
+	this->map.setDimensions(this->mapWidth, this->mapHeight);
+	this->mapPointer = &this->map;
 	this->user->setMap(this->mapPointer);
 	bool quit = false;
 
@@ -150,13 +152,13 @@ void Ship::mapLoop() {
 		*/
 		this->user->playerMove();
 
-
+		
 		//######## Render ########//
 
 		system("cls");
 		
-		cout << this->mapPointer->getMap();
-
+		cout<< this->map.getMap();
+		
 		//outputMap();
 
 

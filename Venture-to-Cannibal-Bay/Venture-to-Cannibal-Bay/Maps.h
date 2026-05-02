@@ -24,7 +24,8 @@ public:
 	Maps(string file);
 	void createMap();
 	string getMap();
-	int getDimensions();
+	int getWidth();
+	int getHeight();
 	void setDimensions(int width, int height);
 	void changeChar(int currChar);
 	void moveEntity(int x, int y);
