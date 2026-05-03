@@ -12,7 +12,7 @@ protected:
 	string state;
 	string orientation;
 
-
+	
 	//These member functions are marked as protected (private when inherrited) as
 	//they should only be used from within the class (e.g., only the AI should control 
 	//state and orientation).
@@ -31,6 +31,9 @@ public:
 
 	bool isAlive();
 	void kill();
-	virtual void setLocation(vector<string>& gameMap, int nX) = 0;
-	virtual void update(vector<string>& gameMap) = 0;
+	void setMap(Maps* currMap);
+	int getKeyValue();
+	bool checkSpace(int futureX, int futureY);
+	void Move();
+
 };

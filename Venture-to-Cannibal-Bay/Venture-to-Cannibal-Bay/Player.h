@@ -9,6 +9,7 @@
 #include <sstream> 
 #include <conio.h>
 #include "Maps.h"
+#include "Entity.h"
 using namespace std;
 
 #define KEY_UP 72
@@ -18,7 +19,7 @@ using namespace std;
 #define KEY_ENTER 13
 #define KEY_E 101
 
-class Player
+class Player: public Entity
 {
 private:
 	int lives;
@@ -46,6 +47,6 @@ public:
 	void setAmmo(int nAmmo);
 	int getKeyValue();
 	bool checkSpace(int futureX, int futureY);
-	void playerMove();
+	void Move();
 };
 

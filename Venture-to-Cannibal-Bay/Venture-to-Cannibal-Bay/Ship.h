@@ -40,11 +40,7 @@ private:
 public:
 	Ship();
 	Ship(Player* c_User);
-	void outputMap();
-	bool checkHorizontal(int futureX, int futureY);
-	bool checkVertical(int futureX, int futureY);
-	int getKeyValue();
 	void mapLoop();
-	void playerMove();
+
 };
 

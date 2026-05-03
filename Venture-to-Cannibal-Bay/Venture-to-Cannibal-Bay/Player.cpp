@@ -67,7 +67,7 @@ int Player::getKeyValue() {
 	}
 }
 
-void Player::playerMove() {
+void Player::Move() {
 	int key = getKeyValue();
 	if (key == KEY_DOWN) {
 		this->playerChar = 'V';
