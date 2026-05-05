@@ -25,28 +25,19 @@ private:
 	int lives;
 	int food;
 	int ammo;
-	int playerX;
-	int playerY;
-	int mapWidth;
-	int mapHeight;
-	Maps* map;
-	char playerChar;
-	char mapChar;
-	bool canMoveX;
-	bool canMoveY;
-	char charCheck;
+
 
 public:
 	Player();
-	void setMap(Maps* currMap);
+	//void setMap(Maps* currMap);
 	int getLives();
 	int getFood();
 	int getAmmo();
 	void setLives(int nLives);
 	void setFood(int nFood);
 	void setAmmo(int nAmmo);
-	int getKeyValue();
-	bool checkSpace(int futureX, int futureY);
+
+	//bool checkSpace(int futureX, int futureY);
 	void Move();
 };
 
