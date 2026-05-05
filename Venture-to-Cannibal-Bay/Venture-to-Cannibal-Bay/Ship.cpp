@@ -67,7 +67,8 @@ void Ship::mapLoop() {
 
 		system("cls");
 		
-		cout<< this->map.getMap();
+		cout << this->map.getMap() << endl;
+		cout << this->map.getMessage() << endl;
 		
 		//outputMap();
 

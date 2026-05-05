@@ -12,12 +12,6 @@
 #include "Entity.h"
 using namespace std;
 
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
-#define KEY_ENTER 13
-#define KEY_E 101
 
 class Player: public Entity
 {
@@ -25,19 +19,18 @@ private:
 	int lives;
 	int food;
 	int ammo;
-
+	Entity* bullet;
 
 public:
 	Player();
-	//void setMap(Maps* currMap);
+
 	int getLives();
 	int getFood();
 	int getAmmo();
 	void setLives(int nLives);
 	void setFood(int nFood);
 	void setAmmo(int nAmmo);
-
-	//bool checkSpace(int futureX, int futureY);
-	void Move();
+	void shoot();
+	void Move() override;
 };
 

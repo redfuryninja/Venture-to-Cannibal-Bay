@@ -1,14 +1,14 @@
 #include "Entity.h"
 
 Entity::Entity() {
-	this->state = "Neutral";
-	this->orientation = "Left";
+	this->state = NUETRAL;
+	this->orientation = DOWN;
 	this->alive = true;
 	this->entityX = 10;
 	this->entityY = 2;
 	this->mapWidth = 21;
 	this->mapHeight = 42;
-	this->playerChar = 'V';
+	this->entityChar = 'V';
 	this->mapChar = ' ';
 	this->canMoveX = false;
 	this->canMoveY = false;
@@ -37,25 +37,6 @@ int Entity::getY()
 
 
 
-std::string Entity::getState()
-{
-	return this->state;
-}
-
-void Entity::setState(std::string nState)
-{
-	this->state = nState;
-}
-
-std::string Entity::getOrientation()
-{
-	return this->orientation;
-}
-
-void Entity::setOrientation(std::string nOrientation)
-{
-	this->orientation = nOrientation;
-}
 
 bool Entity::isAlive()
 {
@@ -71,7 +52,7 @@ void Entity::setMap(Maps* currMap) {
 	this->map = currMap;
 	this->mapWidth = this->map->getWidth();
 	this->mapHeight = this->map->getHeight();
-	this->map->changeChar(this->playerChar);
+	this->map->changeChar(this->entityChar);
 	this->map->moveEntity(this->entityX, this->entityY);
 }
 
@@ -104,56 +85,55 @@ int Entity::getKeyValue() {
 	}
 }
 
-/*https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-6.0/aa299374(v=vs.60) */
 
 void Entity::Move() {
 	int key = getKeyValue();
 	if (key == KEY_DOWN) {
-		this->playerChar = 'V';
+		this->entityChar = 'M';
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);
 		if (this->canMoveY == true) {
-			this->map->changeChar(this->playerChar);
+			this->map->changeChar(this->entityChar);
 			this->map->clearSpace(this->entityX, this->entityY);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->entityY += 1;
-			//map[this->entityX + this->entityY * this->mapWidth] = this->playerChar;
+			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 			this->map->moveEntity(this->entityX, this->entityY);
 		}
 	}
 	else if (key == KEY_UP) {
-		this->playerChar = '^';
+		this->entityChar = 'M';
 		this->canMoveY = checkSpace(this->entityX, this->entityY - 1);
 		if (this->canMoveY == true) {
-			this->map->changeChar(this->playerChar);
+			this->map->changeChar(this->entityChar);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityY -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->playerChar;
+			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
 	}
 	else if (key == KEY_LEFT) {
-		this->playerChar = '<';
+		this->entityChar = 'M';
 		this->canMoveX = checkSpace(this->entityX - 1, this->entityY);
 		if (this->canMoveX == true) {
-			this->map->changeChar(this->playerChar);
+			this->map->changeChar(this->entityChar);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityX -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->playerChar;
+			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
 	}
 	else if (key == KEY_RIGHT) {
-		this->playerChar = '>';
+		this->entityChar = 'M';
 		this->canMoveX = checkSpace(this->entityX + 1, this->entityY);
 		if (this->canMoveX == true) {
-			this->map->changeChar(this->playerChar);
+			this->map->changeChar(this->entityChar);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityX += 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->playerChar;
+			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
 	}
 

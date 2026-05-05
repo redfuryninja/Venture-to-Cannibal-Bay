@@ -19,6 +19,7 @@ private:
 	string filename;
 	ifstream artFile;
 	string linePrint;
+	string message;
 public:
 	Maps();
 	Maps(string file);
@@ -31,4 +32,6 @@ public:
 	void moveEntity(int x, int y);
 	void clearSpace(int x, int y);
 	char getMapChar(int x, int y);
+	string getMessage();
+	void setMessage(string nMessage);
 };

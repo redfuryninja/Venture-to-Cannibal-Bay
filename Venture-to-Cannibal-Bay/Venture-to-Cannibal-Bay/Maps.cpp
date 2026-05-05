@@ -61,3 +61,11 @@ char Maps::getMapChar(int x, int y) {
 	this->mapChar = map[x + y * this->mapWidth];
 	return this->mapChar;
 }
+
+string Maps::getMessage() {
+	return this->message;
+}
+
+void Maps::setMessage(string nMessage) {
+	this->message = nMessage;
+}
