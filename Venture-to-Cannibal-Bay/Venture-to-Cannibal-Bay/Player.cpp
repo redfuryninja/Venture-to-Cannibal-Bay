@@ -86,59 +86,15 @@ void Player::Move() {
 	else if (key == KEY_Q) {
 		shoot();
 	}
-	this->state = NUETRAL;
 }
 
 void Player::shoot() {
-	if (this->state != NUETRAL) {
-		this->map->setMessage("can't shoot in current state");
+	if (this->state == SHOOTING) {
+		this->map->setMessage("can't shoot, reloading");
 		this->state = NUETRAL;
 	}
 	else {
 		this->state = SHOOTING;
-
-		if (this->orientation == DOWN) {
-			
-			this->canMoveY = checkSpace(this->entityX, this->entityY + 1);
-			if (this->canMoveY == true) {
-				this->map->changeChar(this->entityChar);
-				this->map->clearSpace(this->entityX, this->entityY);
-				this->entityY += 1;
-				this->map->moveEntity(this->entityX, this->entityY);
-			}
-		}
-		else if (this->orientation == UP) {
-
-
-			this->canMoveY = checkSpace(this->entityX, this->entityY - 1);
-			if (this->canMoveY == true) {
-				this->map->changeChar(this->entityChar);
-				this->map->clearSpace(this->entityX, this->entityY);
-				this->entityY -= 1;
-				this->map->moveEntity(this->entityX, this->entityY);
-			}
-		}
-		else if (this->orientation == LEFT) {
-
-			this->canMoveX = checkSpace(this->entityX - 1, this->entityY);
-			if (this->canMoveX == true) {
-				this->map->changeChar(this->entityChar);
-				this->map->clearSpace(this->entityX, this->entityY);
-				this->entityX -= 1;
-				this->map->moveEntity(this->entityX, this->entityY);
-
-			}
-		}
-		else if (this->orientation == RIGHT) {
-
-			this->canMoveX = checkSpace(this->entityX + 1, this->entityY);
-			if (this->canMoveX == true) {
-				this->map->changeChar(this->entityChar);
-				this->map->clearSpace(this->entityX, this->entityY);
-				this->entityX += 1;
-				this->map->moveEntity(this->entityX, this->entityY);
-
-			}
-		}
+		this->map->setMessage("shooting");
 	}
 }

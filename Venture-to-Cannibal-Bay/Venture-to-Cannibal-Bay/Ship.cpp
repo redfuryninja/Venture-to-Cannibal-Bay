@@ -42,15 +42,30 @@ Ship::Ship(Player* cUser) {
 
 }
 
+void Ship::fillMag() {
+	for (int i = 0; i < this->user->getAmmo() + 1; i++) {
+		Entity nBullet = Entity();
+		nBullet.setChar('O');
+		nBullet.setMap(this->mapPointer);
+		this->magazine.push_back(nBullet);
+	}
+
+}
+
 void Ship::mapLoop() {
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
+	fillMag();
 	this->user->setMap(this->mapPointer);
 	bool quit = false;
 
 	while (quit == false) {
 		clock_t start = clock();
+		system("cls");
+		cout << this->map.getMap() << endl;
+		cout << this->map.getMessage() << endl;
+		
 
 		//######## Process Input ########//
 		/*
@@ -60,15 +75,84 @@ void Ship::mapLoop() {
 		give map entity coords
 		
 		*/
+		
+		/*
+		
+		*/
+		for (int i = 0; i < this->projectiles.size(); i++) {
+			this->projectiles[i].Move();
+		}
 		this->user->Move();
+
+		for (int i = 0; i < this->activeEntities.size(); i++) {
+			this->activeEntities[i]->Move();
+		}
+		if (this->user->getState() == SHOOTING) {
+			this->bullet = magazine[this->user->getAmmo()];
+
+				if (this->user->getOrientation() == UP and this->bullet.getState() != MOVING) {
+					if (this->user->checkSpace(this->user->getX(), this->user->getY() - 1) == true) {
+						this->bullet.setState(MOVING);
+					this->bullet.setX(this->user->getX());
+					this->bullet.setY(this->user->getY()-1);
+					this->bullet.setOrientation(UP);
+					this->projectiles.push_back(this->bullet);
+
+					}
+					
+
+				}
+				else if (this->user->getOrientation() == DOWN ) {
+					if (this->user->checkSpace(this->user->getX(), this->user->getY() + 1) == true) {
+						this->bullet.setState(MOVING);
+						this->bullet.setX(this->user->getX());
+						this->bullet.setY(this->user->getY() + 1);
+						this->bullet.setOrientation(DOWN);
+						this->projectiles.push_back(this->bullet);
+
+					}
+
+
+				}
+				else if (this->user->getOrientation() == LEFT and this->bullet.getState() != MOVING) {
+					if (this->user->checkSpace(this->user->getX()-1, this->user->getY()) == true) {
+						this->bullet.setState(MOVING);
+						this->bullet.setX(this->user->getX()-1);
+						this->bullet.setY(this->user->getY());
+						this->bullet.setOrientation(DOWN);
+						this->projectiles.push_back(this->bullet);
+
+					}
+
+
+				}
+				else if (this->user->getOrientation() == RIGHT and this->bullet.getState() != MOVING) {
+					if (this->user->checkSpace(this->user->getX() + 1, this->user->getY()) == true) {
+						this->bullet.setState(MOVING);
+						this->bullet.setX(this->user->getX() + 1);
+						this->bullet.setY(this->user->getY());
+						this->bullet.setOrientation(DOWN);
+						this->projectiles.push_back(this->bullet);
+
+					}
+
+
+				}
+		}
+
+		for (int i = 0; i < this->projectiles.size(); i++) {
+			this->projectiles[i].Move();
+			cout << this->projectiles.size();
+		}
+		
+		system("cls");
+		cout << this->map.getMap() << endl;
+		cout << this->map.getMessage() << endl;
+
+
 
 		
 		//######## Render ########//
-
-		system("cls");
-		
-		cout << this->map.getMap() << endl;
-		cout << this->map.getMessage() << endl;
 		
 		//outputMap();
 
@@ -76,17 +160,20 @@ void Ship::mapLoop() {
 		//Calculating how long to wait to achieve desired FPS.
 		
 		
+	
 		/*
 		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 200 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
 		*/
-	}
-	/*while (true) {
+	
+		}
+	/*
+	while (true) {
 
 		if (this->getKeyValue() == KEY_E) {
 			break;
 		}
 	*/
-}
+	}

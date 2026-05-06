@@ -63,9 +63,13 @@ public:
 	int getY();
 	bool isAlive();
 	void kill();
-
+	EntityState getState();
+	EntityOrientation getOrientation();
+	void setState(EntityState nState);
+	void setOrientation(EntityOrientation nOrientation);
 	void setMap(Maps* currMap);
 	int getKeyValue();
 	bool checkSpace(int futureX, int futureY);
 	virtual void Move();
+	void setChar(char nChar);
 };

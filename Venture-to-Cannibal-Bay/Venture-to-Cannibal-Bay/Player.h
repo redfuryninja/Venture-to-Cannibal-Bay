@@ -19,7 +19,6 @@ private:
 	int lives;
 	int food;
 	int ammo;
-	Entity* bullet;
 
 public:
 	Player();

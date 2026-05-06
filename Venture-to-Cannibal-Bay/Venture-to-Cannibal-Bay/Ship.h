@@ -37,9 +37,15 @@ private:
 	ifstream artFile;
 	string linePrint;
 	Player* user;
+	vector <Entity> magazine;
+	Entity bullet;
+	vector <Entity*> activeEntities;
+	vector <Entity> projectiles;
+
 public:
 	Ship();
 	Ship(Player* c_User);
+	void fillMag();
 	void mapLoop();
 
 };

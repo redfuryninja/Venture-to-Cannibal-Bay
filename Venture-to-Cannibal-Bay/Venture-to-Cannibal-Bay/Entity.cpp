@@ -30,13 +30,28 @@ void Entity::setY(int nY)
 	this->entityY = nY;
 }
 
+void Entity::setChar(char nChar) {
+	this->entityChar = nChar;
+}
+
 int Entity::getY()
 {
 	return this->entityY;
 }
 
+EntityState Entity::getState(){
+	return this->state;
+}
+EntityOrientation Entity::getOrientation() {
+	return this->orientation;
+}
 
-
+void Entity::setState(EntityState nState) {
+	this->state = nState;
+}
+void Entity::setOrientation(EntityOrientation nOrientation) {
+	this->orientation = nOrientation;
+}
 
 bool Entity::isAlive()
 {
@@ -87,9 +102,8 @@ int Entity::getKeyValue() {
 
 
 void Entity::Move() {
-	int key = getKeyValue();
-	if (key == KEY_DOWN) {
-		this->entityChar = 'M';
+	if (this->orientation == DOWN) {
+
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);
 		if (this->canMoveY == true) {
 			this->map->changeChar(this->entityChar);
@@ -99,9 +113,12 @@ void Entity::Move() {
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 			this->map->moveEntity(this->entityX, this->entityY);
 		}
+		else {
+			this->entityChar = ' ';
+		}
 	}
-	else if (key == KEY_UP) {
-		this->entityChar = 'M';
+	else if (this->orientation == UP) {
+
 		this->canMoveY = checkSpace(this->entityX, this->entityY - 1);
 		if (this->canMoveY == true) {
 			this->map->changeChar(this->entityChar);
@@ -111,9 +128,12 @@ void Entity::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
+		else {
+			this->entityChar = ' ';
+		}
 	}
-	else if (key == KEY_LEFT) {
-		this->entityChar = 'M';
+	else if (this->orientation == LEFT) {
+
 		this->canMoveX = checkSpace(this->entityX - 1, this->entityY);
 		if (this->canMoveX == true) {
 			this->map->changeChar(this->entityChar);
@@ -123,9 +143,12 @@ void Entity::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
+		else {
+			this->entityChar = ' ';
+		}
 	}
-	else if (key == KEY_RIGHT) {
-		this->entityChar = 'M';
+	else if (this->orientation == RIGHT) {
+
 		this->canMoveX = checkSpace(this->entityX + 1, this->entityY);
 		if (this->canMoveX == true) {
 			this->map->changeChar(this->entityChar);
@@ -134,6 +157,9 @@ void Entity::Move() {
 			this->entityX += 1;
 			this->map->moveEntity(this->entityX, this->entityY);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
+		}
+		else {
+			this->entityChar = ' ';
 		}
 	}
 
