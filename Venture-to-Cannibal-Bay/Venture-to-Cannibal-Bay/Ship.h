@@ -47,6 +47,7 @@ public:
 	Ship(Player* c_User);
 	void fillMag();
 	void mapLoop();
+	void createEnemies();
 
 };
 

@@ -41,6 +41,33 @@ Ship::Ship(Player* cUser) {
 	this->map = Maps(this->filename);
 
 
+	
+}
+
+void Ship::createEnemies() {
+	Enemy maori1 = Enemy();
+	Enemy maori2 = Enemy();
+	Enemy maori3 = Enemy();
+	Enemy maori4 = Enemy();
+	Enemy maori5 = Enemy();
+	Enemy maori6 = Enemy();
+	maori1.setX(2);
+	/*
+	maori2.setX(4);
+	maori3.setX(6);
+	maori4.setX(15);
+	maori5.setX(17);
+	maori6.setX(19);
+	maori1.setY(33);
+	maori2.setY(33);
+	maori3.setY(33);
+	maori4.setY(33);
+	maori5.setY(33);
+	maori6.setY(33);
+	
+	*/
+
+	this->activeEntities = { &maori1,user };
 }
 
 void Ship::fillMag() {
@@ -58,7 +85,14 @@ void Ship::mapLoop() {
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
 	fillMag();
-	this->user->setMap(this->mapPointer);
+	this->createEnemies();
+	//this->user->setMap(this->mapPointer);
+	
+	for (int i = 0; i < this->activeEntities.size(); i++) {
+		this->activeEntities[i]->setMap(this->mapPointer);
+	}
+
+
 	bool quit = false;
 
 	while (quit == false) {
@@ -81,7 +115,7 @@ void Ship::mapLoop() {
 		
 		*/
 
-		this->user->Move();
+		//this->user->Move();
 
 		for (int i = 0; i < this->activeEntities.size(); i++) {
 			this->activeEntities[i]->Move();
