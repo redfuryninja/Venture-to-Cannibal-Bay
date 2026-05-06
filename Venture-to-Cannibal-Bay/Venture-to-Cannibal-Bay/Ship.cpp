@@ -40,6 +40,7 @@ Ship::Ship(Player* cUser) {
 	this->filename = "./Ascii-art/bigShipMap.txt";
 	this->map = Maps(this->filename);
 
+
 }
 
 void Ship::fillMag() {
@@ -79,20 +80,19 @@ void Ship::mapLoop() {
 		/*
 		
 		*/
-		for (int i = 0; i < this->projectiles.size(); i++) {
-			this->projectiles[i].Move();
-		}
+
 		this->user->Move();
 
 		for (int i = 0; i < this->activeEntities.size(); i++) {
 			this->activeEntities[i]->Move();
 		}
 		if (this->user->getState() == SHOOTING) {
+			this->user->setState(NUETRAL);
 			this->bullet = magazine[this->user->getAmmo()];
 
 				if (this->user->getOrientation() == UP and this->bullet.getState() != MOVING) {
 					if (this->user->checkSpace(this->user->getX(), this->user->getY() - 1) == true) {
-						this->bullet.setState(MOVING);
+					this->bullet.setState(MOVING);
 					this->bullet.setX(this->user->getX());
 					this->bullet.setY(this->user->getY()-1);
 					this->bullet.setOrientation(UP);
@@ -141,8 +141,17 @@ void Ship::mapLoop() {
 		}
 
 		for (int i = 0; i < this->projectiles.size(); i++) {
+			if (this->projectiles[i].isAlive()) {
 			this->projectiles[i].Move();
-			cout << this->projectiles.size();
+			}
+			else {
+				this->map.changeChar(' ');
+				this->map.moveEntity(this->projectiles[i].getX(), this->projectiles[i].getY());
+				this->map.moveEntity(0,0);
+				this->projectiles.erase(projectiles.begin() + i, projectiles.begin() + i + 1);
+			}
+			
+
 		}
 		
 		system("cls");
@@ -161,12 +170,12 @@ void Ship::mapLoop() {
 		
 		
 	
-		/*
+		
 		clock_t end = clock();
 		int msDuration = end - start;
-		int msRemaining = 200 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
+		int msRemaining = 50 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
-		*/
+		
 	
 		}
 	/*

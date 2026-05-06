@@ -114,7 +114,7 @@ void Entity::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 		}
 		else {
-			this->entityChar = ' ';
+			this->alive = false;
 		}
 	}
 	else if (this->orientation == UP) {
@@ -129,7 +129,7 @@ void Entity::Move() {
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
 		else {
-			this->entityChar = ' ';
+			this->alive = false;
 		}
 	}
 	else if (this->orientation == LEFT) {
@@ -144,7 +144,7 @@ void Entity::Move() {
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
 		else {
-			this->entityChar = ' ';
+			this->alive = false;
 		}
 	}
 	else if (this->orientation == RIGHT) {
@@ -159,7 +159,7 @@ void Entity::Move() {
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
 		else {
-			this->entityChar = ' ';
+			this->alive = false;
 		}
 	}
 
