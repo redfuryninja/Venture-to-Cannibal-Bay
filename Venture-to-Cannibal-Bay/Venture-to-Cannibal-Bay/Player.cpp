@@ -33,8 +33,12 @@ void Player::revive() {
 	this->alive = true;
 }
 
-void Player::setKey(bool nKey) {
-	this->key = nKey;
+bool Player::getShipKey() {
+	return this->shipKey;
+}
+
+void Player::setShipKey(bool nKey) {
+	this->shipKey = nKey;
 }
 bool Player::checkIfKey(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
@@ -77,6 +81,13 @@ void Player::Move() {
 			this->entityY += 1;
 			this->map->moveEntity(this->entityX, this->entityY);
 		}
+		else if (this->checkIfKey(this->entityX, this->entityY + 1) == true) {
+			this->map->changeChar(this->entityChar);
+			this->map->clearSpace(this->entityX, this->entityY);
+			this->entityY += 1;
+			this->map->moveEntity(this->entityX, this->entityY);
+			this->shipKey = true;
+		}
 
 
 	}
@@ -91,6 +102,13 @@ void Player::Move() {
 			this->entityY -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
 		}
+		else if (this->checkIfKey(this->entityX, this->entityY - 1) == true) {
+			this->map->changeChar(this->entityChar);
+			this->map->clearSpace(this->entityX, this->entityY);
+			this->entityY -= 1;
+			this->map->moveEntity(this->entityX, this->entityY);
+			this->shipKey = true;
+		}
 
 	}
 	else if (key == KEY_LEFT) {
@@ -103,6 +121,13 @@ void Player::Move() {
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityX -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
+		}
+		else if (this->checkIfKey(this->entityX - 1, this->entityY) == true) {
+			this->map->changeChar(this->entityChar);
+			this->map->clearSpace(this->entityX, this->entityY);
+			this->entityX -= 1;
+			this->map->moveEntity(this->entityX, this->entityY);
+			this->shipKey = true;
 		}
 	}
 	else if (key == KEY_RIGHT) {
@@ -117,10 +142,37 @@ void Player::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 
 		}
+		else if (this->checkIfKey(this->entityX +1, this->entityY) == true) {
+			this->map->changeChar(this->entityChar);
+			this->map->clearSpace(this->entityX, this->entityY);
+			this->entityX += 1;
+			this->map->moveEntity(this->entityX, this->entityY);
+			this->shipKey = true;
+		}
 	}
 	else if (key == KEY_Q) {
 		shoot();
 	}
+	else if (key == KEY_F) {
+		if (this->shipKey == true) {
+			if (this->orientation == RIGHT and this->map->getChar(this->entityX+1, this->entityY) == 'D') {
+				this->map->changeChar(this->entityChar);
+				this->map->clearSpace(this->entityX, this->entityY);
+				this->entityX += 1;
+				this->map->moveEntity(this->entityX, this->entityY);
+
+				}
+			else if (this->orientation == LEFT and this->map->getChar(this->entityX-1, this->entityY) == 'D') {
+				this->map->changeChar(this->entityChar);
+				this->map->clearSpace(this->entityX, this->entityY);
+				this->entityX -= 1;
+				this->map->moveEntity(this->entityX, this->entityY);
+
+			}
+		}
+	}
+	
+	
 }
 
 void Player::shoot() {
@@ -130,6 +182,5 @@ void Player::shoot() {
 	}
 	else {
 		this->state = SHOOTING;
-		this->map->setMessage("shooting");
 	}
 }

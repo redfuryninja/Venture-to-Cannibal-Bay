@@ -92,7 +92,8 @@ void Ship::mapLoop() {
 
 
 	bool quit = false;
-
+	bool quit2 = false;
+	//this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 	while (quit == false) {
 		clock_t start = clock();
 		system("cls");
@@ -111,6 +112,8 @@ void Ship::mapLoop() {
 		
 		/*
 		*/
+
+
 		for (int i = 0; i < this->activeEntities.size(); i++) {
 			if (this->activeEntities[i].isAlive()) {
 				this->activeEntities[i].Move();
@@ -210,10 +213,24 @@ void Ship::mapLoop() {
 
 		}
 		
+		if (this->user->getY() == 18 and this->user->getX() == 7) {
+			this->map.setMessage("access to next room");
+		}
+		else if (this->user->getY() == 19 and this->user->getX() != 6) {
+			if (this->user->getShipKey() == true) {
+				this->map.setMessage("if you face this door and press F you can open it");
+			}
+			else {
+				this->map.setMessage("if you had a key you could open this door");
+
+			}
+		}
+
 		system("cls");
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
 
+	
 
 
 		

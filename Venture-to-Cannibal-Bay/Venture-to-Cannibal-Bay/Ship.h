@@ -22,7 +22,7 @@
 using namespace std;
 class Ship
 {
-private:
+protected:
 	int playerX;
 	int playerY;
 	int mapWidth;
@@ -46,7 +46,7 @@ public:
 	Ship();
 	Ship(Player* c_User);
 	void fillMag();
-	void mapLoop();
+	virtual void mapLoop();
 	void createEnemies();
 
 };

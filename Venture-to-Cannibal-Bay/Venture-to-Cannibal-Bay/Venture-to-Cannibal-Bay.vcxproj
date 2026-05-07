@@ -138,6 +138,7 @@
     <ClCompile Include="PrintFile.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="ShipEvent.cpp" />
+    <ClCompile Include="ShipRoom.cpp" />
     <ClCompile Include="Siren.cpp" />
     <ClCompile Include="TextTree.cpp" />
     <ClCompile Include="Venture-to-Cannibal-Bay.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="PrintFile.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="ShipEvent.h" />
+    <ClInclude Include="ShipRoom.h" />
     <ClInclude Include="Siren.h" />
     <ClInclude Include="TextTree.h" />
   </ItemGroup>

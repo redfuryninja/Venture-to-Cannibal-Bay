@@ -17,6 +17,7 @@
 #define KEY_ENTER 13
 #define KEY_E 101
 #define KEY_Q 113
+#define KEY_F 102
 
 using namespace std;
 

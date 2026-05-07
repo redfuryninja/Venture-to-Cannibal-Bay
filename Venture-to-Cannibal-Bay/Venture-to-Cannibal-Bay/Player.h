@@ -19,7 +19,7 @@ private:
 	int lives;
 	int food;
 	int ammo;
-	bool key;
+	bool shipKey;
 	vector<char> enemyChar;
 
 public:
@@ -28,9 +28,9 @@ public:
 	int getLives();
 	int getFood();
 	int getAmmo();
-	bool getKey();
-	void setKey(bool nKey);
-	bool checkifKey(int futureX, int futureY);
+	bool getShipKey();
+	void setShipKey(bool nKey);
+	bool checkIfKey(int futureX, int futureY);
 	void setLives(int nLives);
 	void setFood(int nFood);
 	void setAmmo(int nAmmo);
