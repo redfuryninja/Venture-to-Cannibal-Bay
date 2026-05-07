@@ -1,6 +1,8 @@
 #include "Enemy.h"
 Enemy::Enemy() :Entity() {
 	this->entityChar = 'M';
+	this->state = MOVING;
+	this->orientation = DOWN;
 }
 
 void Enemy::Move() {
@@ -60,19 +62,19 @@ void Enemy::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
-		else {
-			if (this->orientation == UP) {
-				this->orientation = DOWN;
-			}
-			else if (this->orientation == DOWN) {
-				this->orientation = UP;
-			}
-			else if (this->orientation == LEFT) {
-				this->orientation = RIGHT;
-			}
-			else if (this->orientation == RIGHT) {
-				this->orientation = LEFT;
-			}
+	else {
+		if (this->orientation == UP) {
+			this->orientation = DOWN;
+		}
+		else if (this->orientation == DOWN) {
+			this->orientation = UP;
+		}
+		else if (this->orientation == LEFT) {
+			this->orientation = RIGHT;
+		}
+		else if (this->orientation == RIGHT) {
+			this->orientation = LEFT;
+		}
 		}
 	}
 }

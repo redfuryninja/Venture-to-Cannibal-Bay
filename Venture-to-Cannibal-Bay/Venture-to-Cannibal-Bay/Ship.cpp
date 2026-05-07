@@ -52,6 +52,7 @@ void Ship::createEnemies() {
 	Enemy maori5 = Enemy();
 	Enemy maori6 = Enemy();
 	maori1.setX(2);
+	maori1.setY(33);
 	/*
 	maori2.setX(4);
 	maori3.setX(6);
@@ -66,8 +67,8 @@ void Ship::createEnemies() {
 	maori6.setY(33);
 	
 	*/
-
-	this->activeEntities = { &maori1,user };
+	Enemy* m1 = &maori1;
+	this->activeEntities = {maori1};
 }
 
 void Ship::fillMag() {
@@ -86,10 +87,10 @@ void Ship::mapLoop() {
 	this->mapPointer = &this->map;
 	fillMag();
 	this->createEnemies();
-	//this->user->setMap(this->mapPointer);
+	this->user->setMap(this->mapPointer);
 	
 	for (int i = 0; i < this->activeEntities.size(); i++) {
-		this->activeEntities[i]->setMap(this->mapPointer);
+		this->activeEntities[i].setMap(this->mapPointer);
 	}
 
 
@@ -112,14 +113,12 @@ void Ship::mapLoop() {
 		*/
 		
 		/*
-		
 		*/
-
-		//this->user->Move();
-
 		for (int i = 0; i < this->activeEntities.size(); i++) {
-			this->activeEntities[i]->Move();
+			this->activeEntities[i].Move();
 		}
+
+		this->user->Move();
 		if (this->user->getState() == SHOOTING) {
 			this->user->setState(NUETRAL);
 			this->bullet = magazine[this->user->getAmmo()];
