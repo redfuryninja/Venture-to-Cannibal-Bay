@@ -6,6 +6,8 @@ Entity::Entity() {
 	this->alive = true;
 	this->entityX = 10;
 	this->entityY = 2;
+	this->startX = 0;
+	this->startY = 0;
 	this->mapWidth = 21;
 	this->mapHeight = 42;
 	this->entityChar = 'V';
@@ -15,6 +17,12 @@ Entity::Entity() {
 	this->charCheck = '/';
 }
 
+int Entity::getStartX() {
+	return this->startX;
+}
+int Entity::getStartY() {
+	return this->startY;
+}
 void Entity::setX(int nX)
 {
 	this->entityX = nX;

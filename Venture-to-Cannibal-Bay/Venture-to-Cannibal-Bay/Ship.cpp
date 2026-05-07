@@ -52,8 +52,6 @@ void Ship::createEnemies() {
 	Enemy maori5 = Enemy();
 	Enemy maori6 = Enemy();
 	maori1.setX(2);
-	maori1.setY(33);
-	/*
 	maori2.setX(4);
 	maori3.setX(6);
 	maori4.setX(15);
@@ -66,9 +64,8 @@ void Ship::createEnemies() {
 	maori5.setY(33);
 	maori6.setY(33);
 	
-	*/
-	Enemy* m1 = &maori1;
-	this->activeEntities = {maori1};
+
+	this->activeEntities = {maori1,maori2, maori4, maori5};
 }
 
 void Ship::fillMag() {
@@ -115,15 +112,41 @@ void Ship::mapLoop() {
 		/*
 		*/
 		for (int i = 0; i < this->activeEntities.size(); i++) {
-			this->activeEntities[i].Move();
+			if (this->activeEntities[i].isAlive()) {
+				this->activeEntities[i].Move();
+			}
+			else {
+				if (this->activeEntities[i].getWeaponDeath() == false) {
+					this->user->setLives(this->user->getLives() - 1);
+					this->map.clearSpace(this->user->getX(), this->user->getY());
+					this->user->setX(10);
+					this->user->setY(2);
+		
+					if (user->getLives() < 0) {
+						this->user->kill();
+						}
+				}
+				this->map.clearSpace(this->activeEntities[i].getX(), this->activeEntities[i].getY());
+				this->map.moveEntity(0, 0);
+				this->activeEntities.erase(activeEntities.begin() + i, activeEntities.begin() + i + 1);
+				this->map.clearSpace(0,0);
+
+				
+			}
+
+
 		}
 
-		this->user->Move();
-		if (this->user->getState() == SHOOTING) {
+		if (this->user->isAlive()) {
+			this->user->Move();
+
+		}
+
+		if (this->user->getState() == SHOOTING and this->user->getAmmo() > 0) {
 			this->user->setState(NUETRAL);
 			this->bullet = magazine[this->user->getAmmo()];
-
-				if (this->user->getOrientation() == UP and this->bullet.getState() != MOVING) {
+			this->user->setAmmo(this->user->getAmmo() - 1);
+				if (this->user->getOrientation() == UP) {
 					if (this->user->checkSpace(this->user->getX(), this->user->getY() - 1) == true) {
 					this->bullet.setState(MOVING);
 					this->bullet.setX(this->user->getX());
@@ -134,7 +157,7 @@ void Ship::mapLoop() {
 					}
 					
 
-				}
+				} 
 				else if (this->user->getOrientation() == DOWN ) {
 					if (this->user->checkSpace(this->user->getX(), this->user->getY() + 1) == true) {
 						this->bullet.setState(MOVING);
@@ -147,24 +170,24 @@ void Ship::mapLoop() {
 
 
 				}
-				else if (this->user->getOrientation() == LEFT and this->bullet.getState() != MOVING) {
+				else if (this->user->getOrientation() == LEFT) {
 					if (this->user->checkSpace(this->user->getX()-1, this->user->getY()) == true) {
 						this->bullet.setState(MOVING);
 						this->bullet.setX(this->user->getX()-1);
 						this->bullet.setY(this->user->getY());
-						this->bullet.setOrientation(DOWN);
+						this->bullet.setOrientation(LEFT);
 						this->projectiles.push_back(this->bullet);
 
 					}
 
 
 				}
-				else if (this->user->getOrientation() == RIGHT and this->bullet.getState() != MOVING) {
+				else if (this->user->getOrientation() == RIGHT) {
 					if (this->user->checkSpace(this->user->getX() + 1, this->user->getY()) == true) {
 						this->bullet.setState(MOVING);
 						this->bullet.setX(this->user->getX() + 1);
 						this->bullet.setY(this->user->getY());
-						this->bullet.setOrientation(DOWN);
+						this->bullet.setOrientation(RIGHT);
 						this->projectiles.push_back(this->bullet);
 
 					}
@@ -201,13 +224,14 @@ void Ship::mapLoop() {
 
 		//Calculating how long to wait to achieve desired FPS.
 		
-		
-	
-		
+		/*
 		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 50 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
+		
+		*/
+		
 		
 	
 		}

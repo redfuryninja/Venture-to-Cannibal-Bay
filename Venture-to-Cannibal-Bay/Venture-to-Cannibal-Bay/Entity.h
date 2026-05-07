@@ -52,11 +52,14 @@ protected:
 	char charCheck;
 	int projX;
 	int projY;
+	int startX;
+	int startY;
 
 
 public:
 	Entity();
-
+	int getStartX();
+	int getStartY();
 	void setX(int nX);
 	int getX();
 	void setY(int nY);

@@ -39,7 +39,7 @@ private:
 	Player* user;
 	vector <Entity> magazine;
 	Entity bullet;
-	vector <Entity> activeEntities;
+	vector <Enemy> activeEntities;
 	vector <Entity> projectiles;
 
 public:

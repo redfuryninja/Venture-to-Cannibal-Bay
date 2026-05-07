@@ -34,4 +34,5 @@ public:
 	char getMapChar(int x, int y);
 	string getMessage();
 	void setMessage(string nMessage);
+	char getChar(int x, int y);
 };

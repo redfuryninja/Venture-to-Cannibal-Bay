@@ -4,6 +4,9 @@ Player::Player(): Entity(){
 	this->lives = 5;
 	this->food = 10;
 	this->ammo = 10;
+	this->startX = 10;
+	this->startY = 2;
+	this->enemyChar = { 'M', 'A' };
 
 }
 
@@ -26,6 +29,38 @@ void Player::setAmmo(int nAmmo) {
 	this->ammo = nAmmo;
 }
 
+void Player::revive() {
+	this->alive = true;
+}
+
+void Player::setKey(bool nKey) {
+	this->key = nKey;
+}
+bool Player::checkIfKey(int futureX, int futureY) {
+	this->charCheck = this->map->getMapChar(futureX, futureY);
+	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	if (this->charCheck == 'K') {
+
+		return true;
+
+	}
+	return false;
+}
+
+
+bool Player::checkIfEnemy(int futureX, int futureY) {
+	this->charCheck = this->map->getMapChar(futureX, futureY);
+	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	for (int i = 0; i < this->enemyChar.size(); i++) {
+		if (this->charCheck == enemyChar[i]) {
+			return true;
+		}
+
+	}
+
+
+	return false;
+}
 
 void Player::Move() {
 	int key = getKeyValue();
@@ -42,6 +77,7 @@ void Player::Move() {
 			this->entityY += 1;
 			this->map->moveEntity(this->entityX, this->entityY);
 		}
+
 
 	}
 	else if (key == KEY_UP) {
@@ -67,7 +103,6 @@ void Player::Move() {
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityX -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-
 		}
 	}
 	else if (key == KEY_RIGHT) {

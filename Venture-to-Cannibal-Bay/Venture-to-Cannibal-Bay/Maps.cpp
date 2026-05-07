@@ -30,6 +30,10 @@ void Maps::createMap(){
 	}
 }
 
+char Maps::getChar(int x, int y) {
+	return this->map[x + y * this->mapWidth];
+}
+
 string Maps::getMap(){
 	return this->map;
 }
@@ -54,7 +58,7 @@ void Maps::moveEntity(int x, int y){
 }
 
 void Maps::clearSpace(int x, int y) {
-	this->map[x + y * this->mapWidth] = this->mapChar;
+	this->map[x + y * this->mapWidth] = ' ';
 }
 
 char Maps::getMapChar(int x, int y) {
