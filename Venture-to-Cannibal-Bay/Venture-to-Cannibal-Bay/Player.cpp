@@ -160,6 +160,8 @@ void Player::Move() {
 				this->map->clearSpace(this->entityX, this->entityY);
 				this->entityX += 1;
 				this->map->moveEntity(this->entityX, this->entityY);
+				string test = "x = " + this->entityX + this->entityY;
+				this->map->setMessage(test);
 
 				}
 			else if (this->orientation == LEFT and this->map->getChar(this->entityX-1, this->entityY) == 'D') {
@@ -167,7 +169,9 @@ void Player::Move() {
 				this->map->clearSpace(this->entityX, this->entityY);
 				this->entityX -= 1;
 				this->map->moveEntity(this->entityX, this->entityY);
-
+				this->map->moveEntity(this->entityX, this->entityY);
+				string test = "x = " + this->entityX + this->entityY;
+				this->map->setMessage(test);
 			}
 		}
 	}

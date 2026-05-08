@@ -1,5 +1,5 @@
 #include "Ship.h"
-
+#include "ShipRoom.h"
 Ship::Ship(){
 	Player Pointer = Player();
 	this->user = &Pointer;
@@ -93,7 +93,7 @@ void Ship::mapLoop() {
 
 	bool quit = false;
 	bool quit2 = false;
-	//this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
+	this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 	while (quit == false) {
 		clock_t start = clock();
 		system("cls");
@@ -213,10 +213,18 @@ void Ship::mapLoop() {
 
 		}
 		
-		if (this->user->getY() == 18 and this->user->getX() == 7) {
-			this->map.setMessage("access to next room");
+		if (this->user->getY() == 20 and this->user->getX() == 5) {
+			while (quit2 == false) {
+				
+				this->map.createMap();
+				this->map.setDimensions(this->mapWidth, this->mapHeight);
+				this->mapPointer = &this->map;
+				fillMag();
+				this->createEnemies();
+				this->user->setMap(this->mapPointer);
+			}
 		}
-		else if (this->user->getY() == 19 and this->user->getX() != 6) {
+		else if (this->user->getY() == 20) {
 			if (this->user->getShipKey() == true) {
 				this->map.setMessage("if you face this door and press F you can open it");
 			}
@@ -225,6 +233,11 @@ void Ship::mapLoop() {
 
 			}
 		}
+		else {
+			this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
+		}
+		
+		
 
 		system("cls");
 		cout << this->map.getMap() << endl;
