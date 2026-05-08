@@ -7,7 +7,8 @@ Player::Player(): Entity(){
 	this->startX = 10;
 	this->startY = 2;
 	this->enemyChar = { 'M', 'A' };
-
+	this->textTreePoint = 0;
+	this->tree = TextTree();
 }
 
 int Player::getLives() {
@@ -67,11 +68,13 @@ bool Player::checkIfEnemy(int futureX, int futureY) {
 }
 
 void Player::Move() {
-	int key = getKeyValue();
+	//int key = getKeyValue();
 	this->projX = entityX;
 	this->projY = entityY;
-	if (key == KEY_DOWN) {
+	if (GetAsyncKeyState(KEY_DOWN)) {
 		this->entityChar = 'V';
+		this->map->changeChar(this->entityChar);
+		this->map->moveEntity(this->entityX, this->entityY);
 		this->orientation = DOWN;
 		this->state = MOVING;
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);
@@ -91,8 +94,10 @@ void Player::Move() {
 
 
 	}
-	else if (key == KEY_UP) {
+	else if (GetAsyncKeyState(KEY_UP) & 0x8000) {
 		this->entityChar = '^';
+		this->map->changeChar(this->entityChar);
+		this->map->moveEntity(this->entityX, this->entityY);
 		this->orientation = UP;
 		this->state = MOVING;
 		this->canMoveY = checkSpace(this->entityX, this->entityY - 1);
@@ -111,8 +116,10 @@ void Player::Move() {
 		}
 
 	}
-	else if (key == KEY_LEFT) {
+	else if (GetAsyncKeyState(KEY_LEFT) & 0x8000) {
 		this->entityChar = '<';
+		this->map->changeChar(this->entityChar);
+		this->map->moveEntity(this->entityX, this->entityY);
 		this->orientation = LEFT;
 		this->state = MOVING;
 		this->canMoveX = checkSpace(this->entityX - 1, this->entityY);
@@ -130,8 +137,10 @@ void Player::Move() {
 			this->shipKey = true;
 		}
 	}
-	else if (key == KEY_RIGHT) {
+	else if (GetAsyncKeyState(KEY_RIGHT) & 0x8000) {
 		this->entityChar = '>';
+		this->map->changeChar(this->entityChar);
+		this->map->moveEntity(this->entityX, this->entityY);
 		this->orientation = RIGHT;
 		this->state = MOVING;
 		this->canMoveX = checkSpace(this->entityX + 1, this->entityY);
@@ -150,31 +159,48 @@ void Player::Move() {
 			this->shipKey = true;
 		}
 	}
-	else if (key == KEY_Q) {
+	else if (GetAsyncKeyState(KEY_Q)) {
 		shoot();
 	}
-	else if (key == KEY_F) {
+	else if (GetAsyncKeyState(KEY_F) & 0x8000) {
 		if (this->shipKey == true) {
 			if (this->orientation == RIGHT and this->map->getChar(this->entityX+1, this->entityY) == 'D') {
+				this->entityChar = 'D';
 				this->map->changeChar(this->entityChar);
 				this->map->clearSpace(this->entityX, this->entityY);
 				this->entityX += 1;
 				this->map->moveEntity(this->entityX, this->entityY);
-				string test = "x = " + this->entityX + this->entityY;
-				this->map->setMessage(test);
+				this->entityChar = '>';
 
 				}
 			else if (this->orientation == LEFT and this->map->getChar(this->entityX-1, this->entityY) == 'D') {
+				this->entityChar = 'D';
 				this->map->changeChar(this->entityChar);
 				this->map->clearSpace(this->entityX, this->entityY);
 				this->entityX -= 1;
 				this->map->moveEntity(this->entityX, this->entityY);
-				this->map->moveEntity(this->entityX, this->entityY);
-				string test = "x = " + this->entityX + this->entityY;
-				this->map->setMessage(test);
+				this->entityChar = '<';
+	
+				
 			}
 		}
+		if (this->orientation == RIGHT and this->map->getChar(this->entityX + 1, this->entityY) == '!') {
+			system("cls");
+			this->tree.outputText();
+			this->tree.setTreePoint(this->tree.getTreePoint() + 1);
+			if (this->tree.getTreePoint() > this->tree.getBookSize()) {
+				this->tree.setTreePoint(this->tree.getBookSize());
+			}
+			system("cls");
+		}
+		else if (this->orientation == LEFT and this->map->getChar(this->entityX - 1, this->entityY) == '!') {
+			system("cls");
+			this->tree.outputText();
+			system("cls");
+
+		}
 	}
+
 	
 	
 }

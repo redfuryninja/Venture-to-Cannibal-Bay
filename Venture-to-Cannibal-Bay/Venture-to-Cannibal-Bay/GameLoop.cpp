@@ -20,6 +20,6 @@ void GameLoop::playGame() {
 	*/
 
 	this->Start.displayMenu();
-	this->shipLoop.mapLoop();
 	this->game.action();
+	this->shipLoop.mapLoop();
 }

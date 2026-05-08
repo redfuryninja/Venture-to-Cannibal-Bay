@@ -10,14 +10,14 @@
 #include <conio.h>
 #include "Maps.h"
 #include "Entity.h"
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
+#define KEY_UP 38
+#define KEY_DOWN 40
+#define KEY_LEFT 37
+#define KEY_RIGHT 39
 #define KEY_ENTER 13
-#define KEY_E 101
-#define KEY_Q 113
-#define KEY_F 102
+#define KEY_E 69
+#define KEY_Q 81
+#define KEY_F 70
 
 using namespace std;
 

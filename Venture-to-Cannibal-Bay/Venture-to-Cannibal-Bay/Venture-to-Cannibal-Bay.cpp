@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Ship.h"
 #include "GameLoop.h"
+
 using namespace std;
 /*
 * print title
@@ -34,6 +35,7 @@ int main()
     /*
     
      */
+
     Player user = Player();
     Player* userPointer = &user;
     GameLoop game = GameLoop(userPointer);

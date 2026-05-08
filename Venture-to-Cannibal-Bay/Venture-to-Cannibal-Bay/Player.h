@@ -10,6 +10,7 @@
 #include <conio.h>
 #include "Maps.h"
 #include "Entity.h"
+#include "TextTree.h"
 using namespace std;
 
 
@@ -20,8 +21,9 @@ private:
 	int food;
 	int ammo;
 	bool shipKey;
+	int textTreePoint;
 	vector<char> enemyChar;
-
+	TextTree tree;
 public:
 	Player();
 

@@ -25,6 +25,9 @@ void Pirate::action() {
 	if (options.getPath() == "swords") {
 		this->sword();
 	}
+	else {
+		action();
+	}
 
 }
 

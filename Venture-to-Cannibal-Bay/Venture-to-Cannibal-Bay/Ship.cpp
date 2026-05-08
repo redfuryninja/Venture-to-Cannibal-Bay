@@ -92,14 +92,13 @@ void Ship::mapLoop() {
 
 
 	bool quit = false;
-	bool quit2 = false;
+
 	this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 	while (quit == false) {
 		clock_t start = clock();
 		system("cls");
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
-		
 
 		//######## Process Input ########//
 		/*
@@ -214,15 +213,13 @@ void Ship::mapLoop() {
 		}
 		
 		if (this->user->getY() == 20 and this->user->getX() == 5) {
-			while (quit2 == false) {
-				
-				this->map.createMap();
-				this->map.setDimensions(this->mapWidth, this->mapHeight);
-				this->mapPointer = &this->map;
-				fillMag();
-				this->createEnemies();
-				this->user->setMap(this->mapPointer);
-			}
+			ShipRoom room = ShipRoom(this->user);
+			room.mapLoop();
+			this->user->setX(4);
+			this->user->setY(20);
+			this->user->setMap(this->mapPointer);
+
+
 		}
 		else if (this->user->getY() == 20) {
 			if (this->user->getShipKey() == true) {
@@ -255,13 +252,13 @@ void Ship::mapLoop() {
 		//Calculating how long to wait to achieve desired FPS.
 		
 		/*
-		clock_t end = clock();
-		int msDuration = end - start;
-		int msRemaining = 50 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
-		this_thread::sleep_for(chrono::milliseconds(msRemaining));
-		
 		*/
 		
+		
+		clock_t end = clock();
+		int msDuration = end - start;
+		int msRemaining = 100 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
+		this_thread::sleep_for(chrono::milliseconds(msRemaining));
 		
 	
 		}
