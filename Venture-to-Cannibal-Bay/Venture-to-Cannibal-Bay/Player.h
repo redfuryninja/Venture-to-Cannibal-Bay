@@ -21,7 +21,7 @@ private:
 	int food;
 	int ammo;
 	bool shipKey;
-	int textTreePoint;
+	int clues;
 	vector<char> enemyChar;
 	TextTree tree;
 public:
