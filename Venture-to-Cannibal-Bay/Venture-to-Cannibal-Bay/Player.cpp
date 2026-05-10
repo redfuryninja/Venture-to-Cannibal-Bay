@@ -2,12 +2,12 @@
 
 Player::Player(): Entity(){
 	this->lives = 5;
-	this->food = 10;
+	this->food = 300000;
 	this->ammo = 10;
 	this->startX = 10;
 	this->startY = 2;
 	this->enemyChar = { 'M', 'A' };
-	this->textTreePoint = 0;
+	this->clues = 0;
 	this->tree = TextTree();
 }
 
@@ -183,18 +183,33 @@ void Player::Move() {
 	
 				
 			}
+			else if (this->orientation == UP and this->map->getChar(this->entityX, this->entityY-1) == 'D') {
+				this->entityChar = 'D';
+				this->map->changeChar(this->entityChar);
+				this->map->clearSpace(this->entityX, this->entityY);
+				this->entityY -= 1;
+				this->map->moveEntity(this->entityX, this->entityY);
+				this->entityChar = '^';
+
+			}
+			else if (this->orientation == LEFT and this->map->getChar(this->entityX, this->entityY+1) == 'D') {
+				this->entityChar = 'D';
+				this->map->changeChar(this->entityChar);
+				this->map->clearSpace(this->entityX, this->entityY);
+				this->entityY += 1;
+				this->map->moveEntity(this->entityX, this->entityY);
+				this->entityChar = 'V';
+
+
+			}
 		}
 		if (this->orientation == RIGHT and this->map->getChar(this->entityX + 1, this->entityY) == '!') {
-			system("cls");
+			
 			this->tree.outputText();
-			this->tree.setTreePoint(this->tree.getTreePoint() + 1);
-			if (this->tree.getTreePoint() > this->tree.getBookSize()) {
-				this->tree.setTreePoint(this->tree.getBookSize());
-			}
 			system("cls");
 		}
 		else if (this->orientation == LEFT and this->map->getChar(this->entityX - 1, this->entityY) == '!') {
-			system("cls");
+			
 			this->tree.outputText();
 			system("cls");
 

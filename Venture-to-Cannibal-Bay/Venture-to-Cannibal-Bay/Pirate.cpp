@@ -66,18 +66,21 @@ void Pirate::sword(){
 	}
 	clock_t end = clock();
 	int duration = end - start;
+	this->user->setFood(this->user->getFood() - duration);
 	if (duration > 1500) {
 		system("cls");
 		PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
 		ascii.OutputAscii();
 		this->user->setLives(this->user->getLives() - 1);
 		cout << " you lost a life" << endl;
+		system("pause");
 	}
 	else {
 		animation();
 		PrintFile ascii = PrintFile("./Ascii-art/Win.txt");
 		ascii.OutputAscii();
 		cout << " you won the fight and didn't lose a life" << endl;
+		system("pause");
 	}
 	
 }

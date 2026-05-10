@@ -22,4 +22,5 @@ void GameLoop::playGame() {
 	this->Start.displayMenu();
 	this->game.action();
 	this->shipLoop.mapLoop();
+	cout << "end so far";
 }

@@ -45,11 +45,6 @@ void ShipRoom::mapLoop() {
 	this->map.setMessage("press arrow keys to move, and F to interact");
 	while (quit == false) {
 		clock_t start = clock();
-		system("cls");
-		cout << this->map.getMap() << endl;
-		cout << this->map.getMessage() << endl;
-
-
 		//######## Process Input ########//
 
 
@@ -65,7 +60,9 @@ void ShipRoom::mapLoop() {
 		system("cls");
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
-
+		cout << "Lives: " << this->user->getLives() << endl;
+		cout << "Ammo: " << this->user->getAmmo() << endl;
+		cout << "Time Left: " << this->user->getFood() << endl;
 
 
 
@@ -80,6 +77,7 @@ void ShipRoom::mapLoop() {
 		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 100 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
+		this->user->setFood(this->user->getFood() - msRemaining);
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
 
 		

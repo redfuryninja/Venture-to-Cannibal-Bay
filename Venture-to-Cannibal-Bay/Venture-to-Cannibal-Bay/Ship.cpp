@@ -99,7 +99,9 @@ void Ship::mapLoop() {
 		system("cls");
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
-
+		cout << "Lives: " << this->user->getLives() << endl;
+		cout << "Ammo: " << this->user->getAmmo() << endl;
+		cout << "Time Left: " << this->user->getFood() << endl;
 		//######## Process Input ########//
 		/*
 		create map
@@ -126,6 +128,7 @@ void Ship::mapLoop() {
 		
 					if (user->getLives() < 0) {
 						this->user->kill();
+						this->map.setMessage("you lost a life");
 						}
 				}
 				this->map.clearSpace(this->activeEntities[i].getX(), this->activeEntities[i].getY());
@@ -221,6 +224,11 @@ void Ship::mapLoop() {
 
 
 		}
+		else if (this->user->getY() == 1 and this->user->getX() == 9) {
+			quit = true;
+
+
+		}
 		else if (this->user->getY() == 20) {
 			if (this->user->getShipKey() == true) {
 				this->map.setMessage("if you face this door and press F you can open it");
@@ -239,6 +247,9 @@ void Ship::mapLoop() {
 		system("cls");
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
+		cout << "Lives: " << this->user->getLives()<<endl;
+		cout << "Ammo: " << this->user->getAmmo()<<endl;
+		cout << "Time Left: " << this->user->getFood()<<endl;
 
 	
 
@@ -258,6 +269,7 @@ void Ship::mapLoop() {
 		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 100 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
+		this->user->setFood(this->user->getFood() - msRemaining);
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
 		
 	
