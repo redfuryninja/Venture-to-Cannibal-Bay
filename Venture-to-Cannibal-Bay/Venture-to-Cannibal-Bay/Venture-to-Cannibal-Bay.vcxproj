@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Act2.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Cyclone.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="Venture-to-Cannibal-Bay.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Cyclone.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />

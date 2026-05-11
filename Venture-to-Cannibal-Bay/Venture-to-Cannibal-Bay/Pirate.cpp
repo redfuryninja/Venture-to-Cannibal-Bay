@@ -12,6 +12,7 @@ Pirate::Pirate(Player* c_User) {
 	int startClock = 0;
 	int endClock = 0;
 	bool failed = false;
+	Animation ani = Animation();
 }
 void Pirate::action() {
 	PirateMenu options = PirateMenu();
@@ -25,36 +26,15 @@ void Pirate::action() {
 	if (options.getPath() == "swords") {
 		this->sword();
 	}
+	else if (options.getPath() == "guns") {
+		this->gun();
+	}
 	else {
 		action();
 	}
 
 }
 
-void Pirate::animation() {
-	bool quit = false;
-	int pos = 0;
-	for (int i = 0; i < 20; i++) {
-		clock_t start = clock();
-		if (pos == 0) {
-			PrintFile ascii = PrintFile("./Ascii-art/sword.txt");
-			ascii.OutputAscii();
-			pos = 1;
-
-		}
-		else if (pos == 1) {
-			PrintFile ascii2 = PrintFile("./Ascii-art/fight.txt");
-			ascii2.OutputAscii();
-			pos = 0;
-
-		}
-		clock_t end = clock();
-		int msDuration = end - start;
-		int msRemaining = 150 - msDuration;
-		this_thread::sleep_for(chrono::milliseconds(msRemaining));
-		system("cls");
-	}
-}
 void Pirate::sword(){
 	clock_t start = clock();
 	cout << "you are being attacked by pirates, press E to Dodge" << endl;
@@ -76,13 +56,19 @@ void Pirate::sword(){
 		system("pause");
 	}
 	else {
-		animation();
+		this->ani.swordAnimation();
 		PrintFile ascii = PrintFile("./Ascii-art/Win.txt");
 		ascii.OutputAscii();
 		cout << " you won the fight and didn't lose a life" << endl;
 		system("pause");
 	}
 	
+}
+void Pirate::gun() {
+	this->ani.gunAnimation();
+	cout << " you shot all the pirates" << endl;
+	system("pause");
+	this->user->setAmmo(this->user->getAmmo() - 5);
 }
 
 int Pirate::getKeyValue() {

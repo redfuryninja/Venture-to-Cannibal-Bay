@@ -65,7 +65,7 @@ bool PirateMenu::getKeyInput() {
 				cout << "guns" << endl;
 				return false;
 			case 2:
-				this->path = "suppliess";
+				this->path = "supplies";
 				cout << "supplies" << endl;
 				return false;
 			}

@@ -9,6 +9,7 @@
 #include <ctime>
 #include <thread>
 #include "Player.h"
+#include "Animation.h"
 
 #define KEY_E 101
 using namespace std;
@@ -20,12 +21,14 @@ private:
 	int endClock;
 	bool failed;
 	Player* user;
+	Animation ani;
 public:
 	Pirate();
 	Pirate(Player* c_User);
 	void action();
 	void sword();
-	void animation();
+	void gun();
+	void food();
 	int getKeyValue();
 };
 
