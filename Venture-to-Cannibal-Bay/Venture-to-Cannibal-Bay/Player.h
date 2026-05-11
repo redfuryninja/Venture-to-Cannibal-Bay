@@ -24,6 +24,9 @@ private:
 	int clues;
 	vector<char> enemyChar;
 	TextTree tree;
+	vector <Entity> magazine;
+	vector <Entity> projectiles;
+	Entity bullet;
 public:
 	Player();
 
@@ -40,5 +43,9 @@ public:
 	void Move() override;
 	bool checkIfEnemy(int futureX, int futureY);
 	void revive();
+	void fillMag();
+	void shootBullet();
+	void moveBullet();
+	//void setMap(Maps* currMap);
 };
 

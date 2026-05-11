@@ -29,6 +29,9 @@ void Pirate::action() {
 	else if (options.getPath() == "guns") {
 		this->gun();
 	}
+	else if (options.getPath() == "supplies") {
+		this->food();
+	}
 	else {
 		action();
 	}
@@ -71,6 +74,15 @@ void Pirate::gun() {
 	this->user->setAmmo(this->user->getAmmo() - 5);
 }
 
+void Pirate::food() {
+	PrintFile ascii = PrintFile("./Ascii-art/supplies.txt");
+	ascii.OutputAscii();
+	cout << " you bribed the Pirates and gave up your supplies in exchange for your lives" << endl;
+	this->user->setFood(this->user->getFood() - 200000);
+	system("pause");
+}
+
+
 int Pirate::getKeyValue() {
 	int value = -1;
 
@@ -81,3 +93,4 @@ int Pirate::getKeyValue() {
 			return value;
 	}
 }
+

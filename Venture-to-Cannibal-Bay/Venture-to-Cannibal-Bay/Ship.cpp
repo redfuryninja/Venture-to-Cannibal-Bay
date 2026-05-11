@@ -67,7 +67,7 @@ void Ship::createEnemies() {
 
 	this->activeEntities = {maori1,maori2, maori4, maori5};
 }
-
+/*
 void Ship::fillMag() {
 	for (int i = 0; i < this->user->getAmmo() + 1; i++) {
 		Entity nBullet = Entity();
@@ -77,14 +77,15 @@ void Ship::fillMag() {
 	}
 
 }
+*/
 
 void Ship::mapLoop() {
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
-	fillMag();
 	this->createEnemies();
 	this->user->setMap(this->mapPointer);
+	this->user->fillMag();
 	
 	for (int i = 0; i < this->activeEntities.size(); i++) {
 		this->activeEntities[i].setMap(this->mapPointer);
@@ -93,15 +94,18 @@ void Ship::mapLoop() {
 
 	bool quit = false;
 
+	system("cls");
+	cout << this->map.getMap() << endl;
+	cout << this->map.getMessage() << endl;
+	cout << "Lives: " << this->user->getLives() << endl;
+	cout << "Ammo: " << this->user->getAmmo() << endl;
+	cout << "Time Left: " << this->user->getFood() << endl;
+	cout << "x: " << this->user->getX() << endl;
+	cout << "y: " << this->user->getY() << endl;
 	this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 	while (quit == false) {
 		clock_t start = clock();
-		system("cls");
-		cout << this->map.getMap() << endl;
-		cout << this->map.getMessage() << endl;
-		cout << "Lives: " << this->user->getLives() << endl;
-		cout << "Ammo: " << this->user->getAmmo() << endl;
-		cout << "Time Left: " << this->user->getFood() << endl;
+
 		//######## Process Input ########//
 		/*
 		create map
@@ -146,7 +150,8 @@ void Ship::mapLoop() {
 			this->user->Move();
 
 		}
-
+		/*
+		
 		if (this->user->getState() == SHOOTING and this->user->getAmmo() > 0) {
 			this->user->setState(NUETRAL);
 			this->bullet = magazine[this->user->getAmmo()];
@@ -201,6 +206,10 @@ void Ship::mapLoop() {
 				}
 		}
 
+		*/
+		this->user->moveBullet();
+		/*
+		
 		for (int i = 0; i < this->projectiles.size(); i++) {
 			if (this->projectiles[i].isAlive()) {
 			this->projectiles[i].Move();
@@ -214,18 +223,16 @@ void Ship::mapLoop() {
 			
 
 		}
-		
-		if (this->user->getY() == 20 and this->user->getX() == 5) {
+		*/
+		if (this->user->getY() == 1 and this->user->getX() == 8) {
+			quit = true;
+		}
+		else if (this->user->getY() == 20 and this->user->getX() == 5) {
 			ShipRoom room = ShipRoom(this->user);
 			room.mapLoop();
 			this->user->setX(4);
 			this->user->setY(20);
 			this->user->setMap(this->mapPointer);
-
-
-		}
-		else if (this->user->getY() == 1 and this->user->getX() == 9) {
-			quit = true;
 
 
 		}
@@ -250,6 +257,8 @@ void Ship::mapLoop() {
 		cout << "Lives: " << this->user->getLives()<<endl;
 		cout << "Ammo: " << this->user->getAmmo()<<endl;
 		cout << "Time Left: " << this->user->getFood()<<endl;
+		cout << "x: " << this->user->getX() << endl;
+		cout << "y: " << this->user->getY() << endl;
 
 	
 

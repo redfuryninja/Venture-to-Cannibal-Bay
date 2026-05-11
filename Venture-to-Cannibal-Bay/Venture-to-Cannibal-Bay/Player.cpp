@@ -9,6 +9,7 @@ Player::Player(): Entity(){
 	this->enemyChar = { 'M', 'A' };
 	this->clues = 0;
 	this->tree = TextTree();
+
 }
 
 int Player::getLives() {
@@ -192,7 +193,7 @@ void Player::Move() {
 				this->entityChar = '^';
 
 			}
-			else if (this->orientation == LEFT and this->map->getChar(this->entityX, this->entityY+1) == 'D') {
+			else if (this->orientation == DOWN and this->map->getChar(this->entityX, this->entityY+1) == 'D') {
 				this->entityChar = 'D';
 				this->map->changeChar(this->entityChar);
 				this->map->clearSpace(this->entityX, this->entityY);
@@ -220,6 +221,16 @@ void Player::Move() {
 	
 }
 
+void Player::fillMag() {
+	for (int i = 0; i < this->ammo + 1; i++) {
+		Entity nBullet = Entity();
+		nBullet.setChar('O');
+		nBullet.setMap(this->map);
+		this->magazine.push_back(nBullet);
+	}
+}
+
+
 void Player::shoot() {
 	if (this->state == SHOOTING) {
 		this->map->setMessage("can't shoot, reloading");
@@ -227,5 +238,78 @@ void Player::shoot() {
 	}
 	else {
 		this->state = SHOOTING;
+		this->shootBullet();
+	}
+}
+
+void Player::shootBullet() {
+	if (this->getState() == SHOOTING and this->getAmmo() > 0) {
+		this->setState(NUETRAL);
+		this->bullet = magazine[this->getAmmo()];
+		this->setAmmo(this->getAmmo() - 1);
+		if (this->getOrientation() == UP) {
+			if (this->checkSpace(this->getX(), this->getY() - 1) == true) {
+				this->bullet.setState(MOVING);
+				this->bullet.setX(this->getX());
+				this->bullet.setY(this->getY() - 1);
+				this->bullet.setOrientation(UP);
+				this->projectiles.push_back(this->bullet);
+
+			}
+
+
+		}
+		else if (this->getOrientation() == DOWN) {
+			if (this->checkSpace(this->getX(), this->getY() + 1) == true) {
+				this->bullet.setState(MOVING);
+				this->bullet.setX(this->getX());
+				this->bullet.setY(this->getY() + 1);
+				this->bullet.setOrientation(DOWN);
+				this->projectiles.push_back(this->bullet);
+
+			}
+
+
+		}
+		else if (this->getOrientation() == LEFT) {
+			if (this->checkSpace(this->getX() - 1, this->getY()) == true) {
+				this->bullet.setState(MOVING);
+				this->bullet.setX(this->getX() - 1);
+				this->bullet.setY(this->getY());
+				this->bullet.setOrientation(LEFT);
+				this->projectiles.push_back(this->bullet);
+
+			}
+
+
+		}
+		else if (this->getOrientation() == RIGHT) {
+			if (this->checkSpace(this->getX() + 1, this->getY()) == true) {
+				this->bullet.setState(MOVING);
+				this->bullet.setX(this->getX() + 1);
+				this->bullet.setY(this->getY());
+				this->bullet.setOrientation(RIGHT);
+				this->projectiles.push_back(this->bullet);
+
+			}
+
+
+		}
+	}
+}
+void Player::moveBullet() {
+
+	for (int i = 0; i < this->projectiles.size(); i++) {
+		if (this->projectiles[i].isAlive()) {
+			this->projectiles[i].Move();
+		}
+		else {
+			this->map->changeChar(' ');
+			this->map->moveEntity(this->projectiles[i].getX(), this->projectiles[i].getY());
+			this->map->moveEntity(0, 0);
+			this->projectiles.erase(projectiles.begin() + i, projectiles.begin() + i + 1);
+		}
+
+
 	}
 }

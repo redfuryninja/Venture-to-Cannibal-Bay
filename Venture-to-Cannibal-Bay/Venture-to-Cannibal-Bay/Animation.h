@@ -17,6 +17,5 @@ public:
 	Animation();
 	void swordAnimation();
 	void gunAnimation();
-	void foodAnimation();
 };
 

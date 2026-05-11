@@ -71,13 +71,7 @@ void Entity::kill()
 	this->alive = false;
 }
 
-void Entity::setMap(Maps* currMap) {
-	this->map = currMap;
-	this->mapWidth = this->map->getWidth();
-	this->mapHeight = this->map->getHeight();
-	this->map->changeChar(this->entityChar);
-	this->map->moveEntity(this->entityX, this->entityY);
-}
+
 
 bool Entity::checkSpace(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
@@ -108,6 +102,13 @@ int Entity::getKeyValue() {
 	}
 }
 
+void Entity::setMap(Maps* currMap) {
+	this->map = currMap;
+	this->mapWidth = this->map->getWidth();
+	this->mapHeight = this->map->getHeight();
+	this->map->changeChar(this->entityChar);
+	this->map->moveEntity(this->entityX, this->entityY);
+}
 
 void Entity::Move() {
 	if (this->orientation == DOWN) {
