@@ -3,34 +3,6 @@ Enemy::Enemy() :Entity() {
 	this->entityChar = 'M';
 	this->state = MOVING;
 	this->orientation = DOWN;
-	this->playerChars = {'V','^','<','>'};
-	this->playerWeapon = { 'O', '!' };
-}
-bool Enemy::checkIfPlayer(int futureX, int futureY) {
-	this->charCheck = this->map->getMapChar(futureX, futureY);
-	//this->mapChar = map[futureX + futureY * this->mapWidth];
-	for (int i = 0; i < this->playerChars.size(); i++) {
-		if (this->charCheck == playerChars[i]) {
-			return true;
-		}
-
-	}
-	
-
-	return false;
-}
-bool Enemy::checkIfWeapon(int futureX, int futureY) {
-	this->charCheck = this->map->getMapChar(futureX, futureY);
-	//this->mapChar = map[futureX + futureY * this->mapWidth];
-	for (int i = 0; i < this->playerWeapon.size(); i++) {
-		if (this->charCheck == playerChars[i]) {
-			return true;
-		}
-
-	}
-
-
-	return false;
 }
 
 bool Enemy::getWeaponDeath() {

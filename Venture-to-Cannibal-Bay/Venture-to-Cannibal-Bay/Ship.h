@@ -12,6 +12,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "RangeEnemy.h"
 
 #define KEY_UP 72
 #define KEY_DOWN 80
@@ -39,7 +40,8 @@ protected:
 	Player* user;
 	vector <Entity> magazine;
 	Entity bullet;
-	vector <Enemy> activeEntities;
+	vector <Enemy> meleeEnemies;
+	vector<RangeEnemy> rangedEnemies;
 	vector <Entity> projectiles;
 
 public:

@@ -137,6 +137,7 @@
     <ClCompile Include="PirateMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PrintFile.cpp" />
+    <ClCompile Include="RangeEnemy.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="ShipEvent.cpp" />
     <ClCompile Include="ShipRoom.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="PirateMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PrintFile.h" />
+    <ClInclude Include="RangeEnemy.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="ShipEvent.h" />
     <ClInclude Include="ShipRoom.h" />

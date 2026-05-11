@@ -55,6 +55,8 @@ protected:
 	int projY;
 	int startX;
 	int startY;
+	vector <char> playerChars;
+	vector<char> playerWeapon;
 
 
 public:
@@ -74,6 +76,8 @@ public:
 	void setMap(Maps* currMap);
 	int getKeyValue();
 	bool checkSpace(int futureX, int futureY);
+	bool checkIfPlayer(int futureX, int futureY);
+	bool checkIfWeapon(int futureX, int futureY);
 	virtual void Move();
 	void setChar(char nChar);
 };

@@ -15,7 +15,11 @@ Entity::Entity() {
 	this->canMoveX = false;
 	this->canMoveY = false;
 	this->charCheck = '/';
+	this->playerChars = { 'V','^','<','>' };
+	this->playerWeapon = { 'O', '!', 'A'};
 }
+
+
 
 int Entity::getStartX() {
 	return this->startX;
@@ -76,7 +80,7 @@ void Entity::kill()
 bool Entity::checkSpace(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
 	//this->mapChar = map[futureX + futureY * this->mapWidth];
-	if (this->charCheck == ' ') {
+	if (this->charCheck == ' ' or this->charCheck == 'A' ) {
 
 		return true;
 
@@ -85,9 +89,34 @@ bool Entity::checkSpace(int futureX, int futureY) {
 }
 
 
+bool Entity::checkIfPlayer(int futureX, int futureY) {
+	this->charCheck = this->map->getMapChar(futureX, futureY);
+	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	for (int i = 0; i < this->playerChars.size(); i++) {
+		if (this->charCheck == playerChars[i]) {
+			return true;
+		}
+
+	}
 
 
+	return false;
+}
 
+
+bool Entity::checkIfWeapon(int futureX, int futureY) {
+	this->charCheck = this->map->getMapChar(futureX, futureY);
+	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	for (int i = 0; i < this->playerWeapon.size(); i++) {
+		if (this->charCheck == playerChars[i]) {
+			return true;
+		}
+
+	}
+
+
+	return false;
+}
 
 
 
@@ -114,7 +143,7 @@ void Entity::Move() {
 	if (this->orientation == DOWN) {
 
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);
-		if (this->canMoveY == true) {
+		if (this->canMoveY == true ) {
 			this->map->changeChar(this->entityChar);
 			this->map->clearSpace(this->entityX, this->entityY);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;

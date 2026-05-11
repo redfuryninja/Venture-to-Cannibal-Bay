@@ -92,6 +92,9 @@ void Player::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 			this->shipKey = true;
 		}
+		else if (this->map->getChar(entityX, entityY + 1) == 'A') {
+			this->alive = false;
+		}
 
 
 	}
@@ -115,6 +118,9 @@ void Player::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 			this->shipKey = true;
 		}
+		else if (this->map->getChar(entityX, entityY - 1) == 'A') {
+			this->alive = false;
+		}
 
 	}
 	else if (GetAsyncKeyState(KEY_LEFT) & 0x8000) {
@@ -137,6 +143,9 @@ void Player::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 			this->shipKey = true;
 		}
+		else if (this->map->getChar(entityX-1, entityY) == 'A') {
+			this->alive = false;
+		}
 	}
 	else if (GetAsyncKeyState(KEY_RIGHT) & 0x8000) {
 		this->entityChar = '>';
@@ -158,6 +167,9 @@ void Player::Move() {
 			this->entityX += 1;
 			this->map->moveEntity(this->entityX, this->entityY);
 			this->shipKey = true;
+		}
+		else if (this->map->getChar(entityX+1, entityY) == 'A') {
+			this->alive = false;
 		}
 	}
 	else if (GetAsyncKeyState(KEY_Q)) {

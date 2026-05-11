@@ -39,21 +39,35 @@ void Ship::createEnemies() {
 	Enemy maori4 = Enemy();
 	Enemy maori5 = Enemy();
 	Enemy maori6 = Enemy();
+	RangeEnemy maori7 = RangeEnemy();
+	RangeEnemy maori8 = RangeEnemy();
 	maori1.setX(2);
 	maori2.setX(4);
-	maori3.setX(6);
+
 	maori4.setX(15);
 	maori5.setX(17);
-	maori6.setX(19);
+
+	maori7.setX(3);
+	maori8.setX(16);
+
 	maori1.setY(33);
 	maori2.setY(33);
-	maori3.setY(33);
+
 	maori4.setY(33);
 	maori5.setY(33);
-	maori6.setY(33);
-	
 
-	this->activeEntities = {maori1,maori2, maori4, maori5};
+	maori7.setY(34);
+	maori8.setY(7);
+
+	maori7.setMap(this->mapPointer);
+	maori8.setMap(this->mapPointer);
+	maori7.fillquiver();
+	maori8.fillquiver();
+	maori7.setOrientation(UP);
+	this->meleeEnemies = { maori1,maori2, maori4, maori5};
+	this->rangedEnemies = { maori7, maori8 };
+
+	
 }
 void Ship::mapLoop() {
 	this->map.createMap();
@@ -62,9 +76,10 @@ void Ship::mapLoop() {
 	this->createEnemies();
 	this->user->setMap(this->mapPointer);
 	this->user->fillMag();
+
 	
-	for (int i = 0; i < this->activeEntities.size(); i++) {
-		this->activeEntities[i].setMap(this->mapPointer);
+	for (int i = 0; i < this->meleeEnemies.size(); i++) {
+		this->meleeEnemies[i].setMap(this->mapPointer);
 	}
 
 
@@ -95,12 +110,12 @@ void Ship::mapLoop() {
 		*/
 
 
-		for (int i = 0; i < this->activeEntities.size(); i++) {
-			if (this->activeEntities[i].isAlive()) {
-				this->activeEntities[i].Move();
+		for (int i = 0; i < this->meleeEnemies.size(); i++) {
+			if (this->meleeEnemies[i].isAlive()) {
+				this->meleeEnemies[i].Move();
 			}
 			else {
-				if (this->activeEntities[i].getWeaponDeath() == false) {
+				if (this->meleeEnemies[i].getWeaponDeath() == false) {
 					this->user->setLives(this->user->getLives() - 1);
 					this->map.clearSpace(this->user->getX(), this->user->getY());
 					this->user->setX(10);
@@ -110,13 +125,47 @@ void Ship::mapLoop() {
 						this->user->kill();
 						this->map.setMessage("you lost a life");
 						}
+					if (user->getLives() == 0) {
+						system("cls");
+						cout << "you ran out of lives and never discovered the fate of the missing crew"<<endl;
+						system("pause");
+						quick_exit(0);
+					}
 				}
-				this->map.clearSpace(this->activeEntities[i].getX(), this->activeEntities[i].getY());
+				this->map.clearSpace(this->meleeEnemies[i].getX(), this->meleeEnemies[i].getY());
 				this->map.moveEntity(0, 0);
-				this->activeEntities.erase(activeEntities.begin() + i, activeEntities.begin() + i + 1);
+				this->meleeEnemies.erase(meleeEnemies.begin() + i, meleeEnemies.begin() + i + 1);
 				this->map.clearSpace(0,0);
 
 				
+			}
+
+
+		}
+		for (int i = 0; i < this->rangedEnemies.size(); i++) {
+			if (this->rangedEnemies[i].isAlive()) {
+				this->rangedEnemies[i].Move();
+				
+
+			}
+			else {
+				if (this->rangedEnemies[i].getWeaponDeath() == false) {
+					this->user->setLives(this->user->getLives() - 1);
+					this->map.clearSpace(this->user->getX(), this->user->getY());
+					this->user->setX(10);
+					this->user->setY(2);
+
+					if (user->getLives() < 0) {
+						this->user->kill();
+						this->map.setMessage("you lost a life");
+					}
+				}
+				this->map.clearSpace(this->rangedEnemies[i].getX(), this->rangedEnemies[i].getY());
+				this->map.moveEntity(0, 0);
+				this->rangedEnemies.erase(rangedEnemies.begin() + i, rangedEnemies.begin() + i + 1);
+				this->map.clearSpace(0, 0);
+
+
 			}
 
 
@@ -126,10 +175,20 @@ void Ship::mapLoop() {
 			this->user->Move();
 
 		}
+		else if (this->user->getLives() > 0) {
+			this->user->revive();
+			this->user->setX(this -> user->getStartX());
+			this->user->setY(this -> user->getStartY());
+		}
+
+
 		
 
 		this->user->moveBullet();
-		
+		for (int i = 0; i < this->rangedEnemies.size(); i++) {
+		this->rangedEnemies[i].moveArrow();
+		}
+
 		if (this->user->getY() == 1 and this->user->getX() == 8) {
 			quit = true;
 		}
