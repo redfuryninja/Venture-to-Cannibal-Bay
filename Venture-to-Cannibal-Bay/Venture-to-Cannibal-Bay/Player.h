@@ -47,6 +47,7 @@ public:
 	void fillMag();
 	void shootBullet();
 	void moveBullet();
+	void outputClue();
 	//void setMap(Maps* currMap);
 };
 

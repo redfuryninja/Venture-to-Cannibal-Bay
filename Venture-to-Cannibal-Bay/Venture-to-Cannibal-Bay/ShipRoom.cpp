@@ -52,10 +52,17 @@ void ShipRoom::mapLoop() {
 			this->user->Move();
 		}
 
+		if (this->user->getClues() == 2) {
+			this->map.changeChar('|');
+			this->map.moveEntity(9,4);
+			this->map.moveEntity(9,5);
+
+		}
+
 		if (this->user->getY() == 5 and this->user->getX() == 0) {
 			quit = true;
 		}
-
+		
 
 		system("cls");
 		cout << this->map.getMap() << endl;
@@ -64,7 +71,8 @@ void ShipRoom::mapLoop() {
 		cout << "Ammo: " << this->user->getAmmo() << endl;
 		cout << "Clues " << this->user->getClues() << "/10" << endl;
 		cout << "Time Left: " << this->user->getFood() << endl;
-
+		cout << "x "<< this->user->getX() << endl;
+		cout << "Y " << this->user->getY() << endl;
 
 
 		//######## Render ########//

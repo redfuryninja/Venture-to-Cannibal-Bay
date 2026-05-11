@@ -5,6 +5,7 @@ GameLoop::GameLoop() {
 	this->user = &Pointer;
 	this->game = Pirate(user);
 	this->Start = MainMenu();
+	this->beachLoop = Beach(this->user);
 	this->shipLoop = Ship(this->user);
 }
 
@@ -12,6 +13,7 @@ GameLoop::GameLoop(Player* cUser) {
 	this->user = cUser;
 	this->game = Pirate(user);
 	this->Start = MainMenu();
+	this->beachLoop = Beach(this->user);
 	this->shipLoop = Ship(this->user);
 } 
 void GameLoop::playGame() {
@@ -20,7 +22,9 @@ void GameLoop::playGame() {
 	*/
 
 	this->Start.displayMenu();
-	this->game.action();
 	this->shipLoop.mapLoop();
+	this->beachLoop.mapLoop();
+	this->user->outputClue();
+	this->game.action();
 	cout << "end so far";
 }

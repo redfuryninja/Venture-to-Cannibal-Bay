@@ -60,6 +60,7 @@ void Pirate::sword(){
 	}
 	else {
 		this->ani.swordAnimation();
+		system("cls");
 		PrintFile ascii = PrintFile("./Ascii-art/Win.txt");
 		ascii.OutputAscii();
 		cout << " you won the fight and didn't lose a life" << endl;

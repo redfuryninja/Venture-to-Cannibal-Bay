@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "MainMenu.h"
 #include "Ship.h"
+#include "Beach.h"
 using namespace std;
 class GameLoop
 {
@@ -12,6 +13,7 @@ private:
 	Player* user;
 	Pirate game;
 	MainMenu Start;
+	Beach beachLoop;
 	Ship shipLoop;
 public:
 	GameLoop();

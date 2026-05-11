@@ -9,6 +9,7 @@ Player::Player() : Entity() {
 	this->enemyChar = { 'M', 'A' };
 	this->clues = 0;
 	this->tree = TextTree();
+	this->shipKey = true;
 
 }
 
@@ -72,6 +73,11 @@ bool Player::checkIfEnemy(int futureX, int futureY) {
 
 
 	return false;
+}
+void Player::outputClue() {
+	this->tree.outputText();
+	this->clues += 1;
+	this->tree.setTreePoint(this->clues);
 }
 
 void Player::Move() {
@@ -237,15 +243,13 @@ void Player::Move() {
 			}
 		}
 		if (this->orientation == RIGHT and this->map->getChar(this->entityX + 1, this->entityY) == '!') {
-			
+			this->clues += 1;
 			this->tree.outputText();
-			this->clues = 1;
+
 			system("cls");
 		}
 		else if (this->orientation == LEFT and this->map->getChar(this->entityX - 1, this->entityY) == '!') {
-			
-			this->tree.outputText();
-			this->clues = 1;
+			this->outputClue();
 			system("cls");
 
 		}

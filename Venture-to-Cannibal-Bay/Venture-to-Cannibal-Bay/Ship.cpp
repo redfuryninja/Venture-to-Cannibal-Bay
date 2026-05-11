@@ -38,35 +38,34 @@ void Ship::createEnemies() {
 	Enemy maori2 = Enemy();
 	Enemy maori3 = Enemy();
 	Enemy maori4 = Enemy();
-	Enemy maori5 = Enemy();
-	Enemy maori6 = Enemy();
-	RangeEnemy maori7 = RangeEnemy();
-	RangeEnemy maori8 = RangeEnemy();
+
+	RangeEnemy maori5 = RangeEnemy();
+	RangeEnemy maori6 = RangeEnemy();
 	maori1.setX(2);
 	maori2.setX(4);
 
-	maori4.setX(15);
-	maori5.setX(17);
+	maori3.setX(15);
+	maori4.setX(17);
 
-	maori7.setX(3);
-	maori8.setX(16);
+	maori5.setX(3);
+	maori6.setX(16);
 
 	maori1.setY(33);
 	maori2.setY(33);
 
+	maori3.setY(33);
 	maori4.setY(33);
-	maori5.setY(33);
 
-	maori7.setY(34);
-	maori8.setY(7);
+	maori5.setY(34);
+	maori6.setY(7);
 
-	maori7.setMap(this->mapPointer);
-	maori8.setMap(this->mapPointer);
-	maori7.fillquiver();
-	maori8.fillquiver();
-	maori7.setOrientation(UP);
-	this->meleeEnemies = { maori1,maori2, maori4, maori5};
-	this->rangedEnemies = { maori7, maori8 };
+	maori5.setMap(this->mapPointer);
+	maori6.setMap(this->mapPointer);
+	maori5.fillquiver();
+	maori6.fillquiver();
+	maori5.setOrientation(UP);
+	this->meleeEnemies = { maori1,maori2, maori4};
+	this->rangedEnemies = { maori5, maori6 };
 
 	
 }
@@ -77,7 +76,7 @@ void Ship::mapLoop() {
 	this->createEnemies();
 	this->user->setMap(this->mapPointer);
 	this->user->fillMag();
-
+	this->user->setShipKey(false);
 	
 	for (int i = 0; i < this->meleeEnemies.size(); i++) {
 		this->meleeEnemies[i].setMap(this->mapPointer);
@@ -95,6 +94,7 @@ void Ship::mapLoop() {
 	cout << "Clues " << this->user->getClues() << "/10" << endl;
 	cout << "Time Left: " << this->user->getFood() << endl;
 	this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
+	this->user->setShipKey(false);
 	while (quit == false) {
 		clock_t start = clock();
 

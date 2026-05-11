@@ -10,13 +10,13 @@ class TextTree
 {
 private:
 	int treePoint;
-	vector <vector <string>> books;
+	vector <vector <string>> clues;
 	map <string, int> investigation; 
 public:
 	TextTree();
 	int getTreePoint();
 	void setTreePoint(int nPoint);
 	void outputText();
-	int getBookSize();
+	int getClueSize();
 };
 
