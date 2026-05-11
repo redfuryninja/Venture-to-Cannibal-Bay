@@ -14,18 +14,6 @@ Ship::Ship(){
 	this->filename = "./Ascii-art/bigShipMap.txt";
 	this->map = Maps(this->filename);
 	this->mapPointer = &this->map;
-	/*
-	
-	this->map = "";
-	this->filename = "./Ascii-art/bigShipMap.txt";
-	this->artFile = ifstream(this->filename);
-	while (getline(this->artFile, this->linePrint)) {
-		this->map += this->linePrint;
-		this->map += "\n";
-	}
-	this->map[this->playerX + this->playerY * this->mapWidth] = this->playerChar;
-	
-	*/
 }
 Ship::Ship(Player* cUser) {
 	this->user = cUser;
@@ -67,18 +55,6 @@ void Ship::createEnemies() {
 
 	this->activeEntities = {maori1,maori2, maori4, maori5};
 }
-/*
-void Ship::fillMag() {
-	for (int i = 0; i < this->user->getAmmo() + 1; i++) {
-		Entity nBullet = Entity();
-		nBullet.setChar('O');
-		nBullet.setMap(this->mapPointer);
-		this->magazine.push_back(nBullet);
-	}
-
-}
-*/
-
 void Ship::mapLoop() {
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
@@ -150,80 +126,10 @@ void Ship::mapLoop() {
 			this->user->Move();
 
 		}
-		/*
 		
-		if (this->user->getState() == SHOOTING and this->user->getAmmo() > 0) {
-			this->user->setState(NUETRAL);
-			this->bullet = magazine[this->user->getAmmo()];
-			this->user->setAmmo(this->user->getAmmo() - 1);
-				if (this->user->getOrientation() == UP) {
-					if (this->user->checkSpace(this->user->getX(), this->user->getY() - 1) == true) {
-					this->bullet.setState(MOVING);
-					this->bullet.setX(this->user->getX());
-					this->bullet.setY(this->user->getY()-1);
-					this->bullet.setOrientation(UP);
-					this->projectiles.push_back(this->bullet);
 
-					}
-					
-
-				} 
-				else if (this->user->getOrientation() == DOWN ) {
-					if (this->user->checkSpace(this->user->getX(), this->user->getY() + 1) == true) {
-						this->bullet.setState(MOVING);
-						this->bullet.setX(this->user->getX());
-						this->bullet.setY(this->user->getY() + 1);
-						this->bullet.setOrientation(DOWN);
-						this->projectiles.push_back(this->bullet);
-
-					}
-
-
-				}
-				else if (this->user->getOrientation() == LEFT) {
-					if (this->user->checkSpace(this->user->getX()-1, this->user->getY()) == true) {
-						this->bullet.setState(MOVING);
-						this->bullet.setX(this->user->getX()-1);
-						this->bullet.setY(this->user->getY());
-						this->bullet.setOrientation(LEFT);
-						this->projectiles.push_back(this->bullet);
-
-					}
-
-
-				}
-				else if (this->user->getOrientation() == RIGHT) {
-					if (this->user->checkSpace(this->user->getX() + 1, this->user->getY()) == true) {
-						this->bullet.setState(MOVING);
-						this->bullet.setX(this->user->getX() + 1);
-						this->bullet.setY(this->user->getY());
-						this->bullet.setOrientation(RIGHT);
-						this->projectiles.push_back(this->bullet);
-
-					}
-
-
-				}
-		}
-
-		*/
 		this->user->moveBullet();
-		/*
 		
-		for (int i = 0; i < this->projectiles.size(); i++) {
-			if (this->projectiles[i].isAlive()) {
-			this->projectiles[i].Move();
-			}
-			else {
-				this->map.changeChar(' ');
-				this->map.moveEntity(this->projectiles[i].getX(), this->projectiles[i].getY());
-				this->map.moveEntity(0,0);
-				this->projectiles.erase(projectiles.begin() + i, projectiles.begin() + i + 1);
-			}
-			
-
-		}
-		*/
 		if (this->user->getY() == 1 and this->user->getX() == 8) {
 			quit = true;
 		}
@@ -266,28 +172,13 @@ void Ship::mapLoop() {
 		
 		//######## Render ########//
 		
-		//outputMap();
-
-
-		//Calculating how long to wait to achieve desired FPS.
-		
-		/*
-		*/
-		
-		
 		clock_t end = clock();
 		int msDuration = end - start;
-		int msRemaining = 100 - msDuration; //This game runs at 5 FPS (change from 200 to 33 to try 30 FPS).
+		int msRemaining = 100 - msDuration;
 		this->user->setFood(this->user->getFood() - msRemaining);
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
 		
 	
 		}
-	/*
-	while (true) {
 
-		if (this->getKeyValue() == KEY_E) {
-			break;
-		}
-	*/
 	}
