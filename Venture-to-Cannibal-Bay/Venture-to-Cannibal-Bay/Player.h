@@ -29,7 +29,8 @@ private:
 	Entity bullet;
 public:
 	Player();
-
+	int getClues();
+	void setClues(int nClues);
 	int getLives();
 	int getFood();
 	int getAmmo();

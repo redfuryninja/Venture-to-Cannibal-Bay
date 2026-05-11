@@ -49,7 +49,7 @@ void Maps::setDimensions(int width, int height){
 	this->mapHeight = height;
 }
 
-void Maps::changeChar(int currChar){
+void Maps::changeChar(char currChar){
 	this->entityChar = currChar;
 }
 

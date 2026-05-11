@@ -1,6 +1,6 @@
 #include "Player.h"
-
-Player::Player(): Entity(){
+#include "PrintFile.h"
+Player::Player() : Entity() {
 	this->lives = 5;
 	this->food = 300000;
 	this->ammo = 10;
@@ -12,6 +12,12 @@ Player::Player(): Entity(){
 
 }
 
+int Player::getClues() {
+	return this->clues;
+}
+void Player::setClues(int nClues) {
+	this->clues = nClues;
+}
 int Player::getLives() {
 	return this->lives;
 }
@@ -25,7 +31,7 @@ void Player::setLives(int nLives) {
 	this->lives = nLives;
 }
 void Player::setFood(int nFood) {
-	this->food= nFood;
+	this->food = nFood;
 }
 void Player::setAmmo(int nAmmo) {
 	this->ammo = nAmmo;
@@ -72,6 +78,20 @@ void Player::Move() {
 	//int key = getKeyValue();
 	this->projX = entityX;
 	this->projY = entityY;
+
+
+	if (this->checkIfEnemy(this->entityX, this->entityY) == true){
+		this->entityX = 10;
+		this->entityY = 2;
+		this->setLives(this->getLives() - 1);
+		this->map->clearSpace(this->getX(), this->getY());
+		this->map->changeChar('V');
+		this->map->moveEntity(this->entityX, this->entityY);
+		PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
+		ascii.OutputAscii();
+		cout << " you lost a life" << endl;
+		system("pause");
+	}
 	if (GetAsyncKeyState(KEY_DOWN)) {
 		this->entityChar = 'V';
 		this->map->changeChar(this->entityChar);
@@ -219,15 +239,18 @@ void Player::Move() {
 		if (this->orientation == RIGHT and this->map->getChar(this->entityX + 1, this->entityY) == '!') {
 			
 			this->tree.outputText();
+			this->clues = 1;
 			system("cls");
 		}
 		else if (this->orientation == LEFT and this->map->getChar(this->entityX - 1, this->entityY) == '!') {
 			
 			this->tree.outputText();
+			this->clues = 1;
 			system("cls");
 
 		}
 	}
+	
 
 	
 	

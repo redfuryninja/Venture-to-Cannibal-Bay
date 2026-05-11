@@ -62,6 +62,7 @@ void ShipRoom::mapLoop() {
 		cout << this->map.getMessage() << endl;
 		cout << "Lives: " << this->user->getLives() << endl;
 		cout << "Ammo: " << this->user->getAmmo() << endl;
+		cout << "Clues " << this->user->getClues() << "/10" << endl;
 		cout << "Time Left: " << this->user->getFood() << endl;
 
 

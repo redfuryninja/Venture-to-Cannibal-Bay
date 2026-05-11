@@ -29,4 +29,5 @@ void MainMenu::redrawMenu() {
 	}
 
 	cout << "|------------------------|" << endl;
+	cout << " press up and down arrows to move and press enter to select" << endl;
 }

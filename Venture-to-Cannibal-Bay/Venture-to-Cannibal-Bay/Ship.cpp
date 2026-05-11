@@ -1,5 +1,6 @@
 #include "Ship.h"
 #include "ShipRoom.h"
+#include "PrintFile.h"
 Ship::Ship(){
 	Player Pointer = Player();
 	this->user = &Pointer;
@@ -84,15 +85,15 @@ void Ship::mapLoop() {
 
 
 	bool quit = false;
-
+	this->map.changeChar('V');
+	this->map.moveEntity(this->user->getX(), this->user->getY());
 	system("cls");
 	cout << this->map.getMap() << endl;
 	cout << this->map.getMessage() << endl;
 	cout << "Lives: " << this->user->getLives() << endl;
 	cout << "Ammo: " << this->user->getAmmo() << endl;
+	cout << "Clues " << this->user->getClues() << "/10" << endl;
 	cout << "Time Left: " << this->user->getFood() << endl;
-	cout << "x: " << this->user->getX() << endl;
-	cout << "y: " << this->user->getY() << endl;
 	this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 	while (quit == false) {
 		clock_t start = clock();
@@ -120,17 +121,17 @@ void Ship::mapLoop() {
 					this->map.clearSpace(this->user->getX(), this->user->getY());
 					this->user->setX(10);
 					this->user->setY(2);
-		
+					this->map.changeChar('V');
+					this->map.moveEntity(this->user->getX(), this->user->getY());
+					PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
+					ascii.OutputAscii();
+					cout << " you lost a life" << endl;
+					system("pause");
+						}
 					if (user->getLives() < 0) {
 						this->user->kill();
 						this->map.setMessage("you lost a life");
-						}
-					if (user->getLives() == 0) {
-						system("cls");
-						cout << "you ran out of lives and never discovered the fate of the missing crew"<<endl;
-						system("pause");
-						quick_exit(0);
-					}
+
 				}
 				this->map.clearSpace(this->meleeEnemies[i].getX(), this->meleeEnemies[i].getY());
 				this->map.moveEntity(0, 0);
@@ -154,10 +155,16 @@ void Ship::mapLoop() {
 					this->map.clearSpace(this->user->getX(), this->user->getY());
 					this->user->setX(10);
 					this->user->setY(2);
-
+					this->map.changeChar('V');
+					this->map.moveEntity(this->user->getX(), this->user->getY());
+					PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
+					ascii.OutputAscii();
+					cout << " you lost a life" << endl;
+					system("pause");
 					if (user->getLives() < 0) {
 						this->user->kill();
 						this->map.setMessage("you lost a life");
+
 					}
 				}
 				this->map.clearSpace(this->rangedEnemies[i].getX(), this->rangedEnemies[i].getY());
@@ -170,16 +177,26 @@ void Ship::mapLoop() {
 
 
 		}
-
-		if (this->user->isAlive()) {
+		if (user->getLives() == 0) {
+			system("cls");
+			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
+			system("pause");
+			quick_exit(0);
+		}
+		else if (this->user->isAlive()) {
 			this->user->Move();
 
 		}
 		else if (this->user->getLives() > 0) {
 			this->user->revive();
-			this->user->setX(this -> user->getStartX());
-			this->user->setY(this -> user->getStartY());
+			this->user->setLives(this->user->getLives() - 1);
+			this->map.clearSpace(this->user->getX(), this->user->getY());
+			this->user->setX(10);
+			this->user->setY(2);
+			this->map.changeChar('V');
+			this->map.moveEntity(this->user->getX(), this->user->getY());
 		}
+	
 
 
 		
@@ -201,12 +218,12 @@ void Ship::mapLoop() {
 
 
 		}
-		else if (this->user->getY() == 20) {
+		else if (this->user->getY() >= 20 and this->user->getY() < 30 ) {
 			if (this->user->getShipKey() == true) {
-				this->map.setMessage("if you face this door and press F you can open it");
+				this->map.setMessage("if you face that door and press F you can open it");
 			}
 			else {
-				this->map.setMessage("if you had a key you could open this door");
+				this->map.setMessage("if you had a key you could open that door");
 
 			}
 		}
@@ -221,9 +238,9 @@ void Ship::mapLoop() {
 		cout << this->map.getMessage() << endl;
 		cout << "Lives: " << this->user->getLives()<<endl;
 		cout << "Ammo: " << this->user->getAmmo()<<endl;
+		cout << "Clues " << this->user->getClues() << "/10" << endl;
 		cout << "Time Left: " << this->user->getFood()<<endl;
-		cout << "x: " << this->user->getX() << endl;
-		cout << "y: " << this->user->getY() << endl;
+	
 
 	
 

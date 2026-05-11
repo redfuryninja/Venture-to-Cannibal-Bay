@@ -28,7 +28,7 @@ public:
 	int getWidth();
 	int getHeight();
 	void setDimensions(int width, int height);
-	void changeChar(int currChar);
+	void changeChar(char currChar);
 	void moveEntity(int x, int y);
 	void clearSpace(int x, int y);
 	char getMapChar(int x, int y);

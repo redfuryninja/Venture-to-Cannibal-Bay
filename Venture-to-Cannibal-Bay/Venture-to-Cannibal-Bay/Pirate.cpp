@@ -50,7 +50,7 @@ void Pirate::sword(){
 	clock_t end = clock();
 	int duration = end - start;
 	this->user->setFood(this->user->getFood() - duration);
-	if (duration > 1500) {
+	if (duration > 3000) {
 		system("cls");
 		PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
 		ascii.OutputAscii();

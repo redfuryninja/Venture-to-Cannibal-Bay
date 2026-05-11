@@ -108,7 +108,7 @@ bool Entity::checkIfWeapon(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
 	//this->mapChar = map[futureX + futureY * this->mapWidth];
 	for (int i = 0; i < this->playerWeapon.size(); i++) {
-		if (this->charCheck == playerChars[i]) {
+		if (this->charCheck == playerWeapon[i]) {
 			return true;
 		}
 
@@ -140,10 +140,11 @@ void Entity::setMap(Maps* currMap) {
 }
 
 void Entity::Move() {
+	system("Color 0A");
 	if (this->orientation == DOWN) {
 
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);
-		if (this->canMoveY == true ) {
+		if (this->canMoveY == true or this->checkIfPlayer(this->entityX, this->entityY + 1) or this->checkIfPlayer(this->entityX, this->entityY - 1) == true) {
 			this->map->changeChar(this->entityChar);
 			this->map->clearSpace(this->entityX, this->entityY);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
@@ -157,8 +158,8 @@ void Entity::Move() {
 	}
 	else if (this->orientation == UP) {
 
-		this->canMoveY = checkSpace(this->entityX, this->entityY - 1);
-		if (this->canMoveY == true) {
+		this->canMoveY = checkSpace(this->entityX, this->entityY - 1) ;
+		if (this->canMoveY == true or this->checkIfPlayer(this->entityX, this->entityY - 1) == true) {
 			this->map->changeChar(this->entityChar);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->entityX, this->entityY);
@@ -200,5 +201,4 @@ void Entity::Move() {
 			this->alive = false;
 		}
 	}
-
 }
