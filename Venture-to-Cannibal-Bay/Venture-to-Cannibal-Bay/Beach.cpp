@@ -21,7 +21,7 @@ Beach::Beach(Player* cUser) {
 	this->playerY = 10;
 	this->user->setX(playerX);
 	this->user->setY(playerY);
-	this->mapWidth = 67;
+	this->mapWidth = 66;
 	this->mapHeight = 20;
 	this->playerChar = '>';
 	this->mapChar = ' ';
@@ -36,13 +36,16 @@ Beach::Beach(Player* cUser) {
 
 
 void Beach::mapLoop() {
+	system("Color 0B");
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
 	this->user->setMap(this->mapPointer);
 	int count = 0;
 
-	for (int i = 0; i < 60; i++) {
+	
+	
+	for (int i = 0; i < 63; i++) {
 		if (count == 0) {
 			Enemy nEnemy = Enemy();
 			nEnemy.setChar('/');
@@ -62,13 +65,15 @@ void Beach::mapLoop() {
 			this->meleeEnemies.push_back(nEnemy);
 		}
 	}
+
 	for (int i = 0; i < this->meleeEnemies.size(); i++) {
 		this->meleeEnemies[i].setMap(this->mapPointer);
 	}
-
+	
+	
 
 	bool quit = false;
-	this->map.changeChar('V');
+	this->map.changeChar('v');
 	this->map.moveEntity(this->user->getX(), this->user->getY());
 	system("cls");
 	cout << this->map.getMap() << endl;
@@ -108,18 +113,26 @@ void Beach::mapLoop() {
 
 
 
-			/*
-			if (this->user->getY() == 1 and this->user->getX() == 8) {
+			
+			if (this->user->getY() == 12 and this->user->getX() == 56) {
 				quit = true;
+				if (this->user->getTotalClues() != 2) {
+					this->user->setTotalClues(2);
+				}
+				
 			}
 
-			else if (this->user->getY() >= 20 and this->user->getY() < 30) {
+			else if (this->user->getY() == 12) {
 				if (this->user->getShipKey() == true) {
 					this->map.setMessage("if you face that door and press F you can open it");
 				}
+			}
+			
+			if (this->user->getTotalClues() == 2) {
+				this->map.changeChar('|');
+				this->map.moveEntity(56, 18);
 
-			*/
-
+			}
 
 
 
@@ -137,11 +150,12 @@ void Beach::mapLoop() {
 
 
 
+
 			//######## Render ########//
 
 			clock_t end = clock();
 			int msDuration = end - start;
-			int msRemaining = 1000 - msDuration;
+			int msRemaining = 100 - msDuration;
 			this->user->setFood(this->user->getFood() - msRemaining);
 			this_thread::sleep_for(chrono::milliseconds(msRemaining));
 

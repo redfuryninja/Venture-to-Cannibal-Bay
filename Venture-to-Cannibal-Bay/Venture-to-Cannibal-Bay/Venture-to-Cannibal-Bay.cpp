@@ -35,10 +35,22 @@ int main()
     /*
     
      */
+    
     Player user = Player();
     Player* userPointer = &user;
     GameLoop game = GameLoop(userPointer);
     game.playGame();
+
+    if (user.getRepeat() == true) {
+        while (user.getRepeat() == true) {
+            Player user = Player();
+            user.setRepeat(false);
+            Player* userPointer = &user;
+            GameLoop game = GameLoop(userPointer);
+            game.playGame();
+
+        }
+    }
     
  
 }

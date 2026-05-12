@@ -8,9 +8,25 @@ Player::Player() : Entity() {
 	this->startY = 2;
 	this->enemyChar = { 'M', 'A' };
 	this->clues = 0;
+	this->totalClues = 0;
 	this->tree = TextTree();
 	this->shipKey = true;
+	this->repeat = false;
 
+}
+
+bool Player::getRepeat() {
+	return this->repeat;
+}
+void Player::setRepeat(bool nRepeat) {
+	this->repeat = nRepeat;
+}
+
+int Player::getTotalClues() {
+	return this->totalClues;
+}
+void Player::setTotalClues(int nClues) {
+	this->totalClues = nClues;
 }
 
 int Player::getClues() {
@@ -77,7 +93,8 @@ bool Player::checkIfEnemy(int futureX, int futureY) {
 void Player::outputClue() {
 	this->tree.outputText();
 	this->clues += 1;
-	this->tree.setTreePoint(this->clues);
+	this->totalClues += 1;
+	this->tree.setTreePoint(this->totalClues);
 }
 
 void Player::Move() {
@@ -91,7 +108,7 @@ void Player::Move() {
 		this->entityY = 2;
 		this->setLives(this->getLives() - 1);
 		this->map->clearSpace(this->getX(), this->getY());
-		this->map->changeChar('V');
+		this->map->changeChar('v');
 		this->map->moveEntity(this->entityX, this->entityY);
 		PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
 		ascii.OutputAscii();
@@ -99,7 +116,7 @@ void Player::Move() {
 		system("pause");
 	}
 	if (GetAsyncKeyState(KEY_DOWN)) {
-		this->entityChar = 'V';
+		this->entityChar = 'v';
 		this->map->changeChar(this->entityChar);
 		this->map->moveEntity(this->entityX, this->entityY);
 		this->orientation = DOWN;
@@ -237,15 +254,13 @@ void Player::Move() {
 				this->map->clearSpace(this->entityX, this->entityY);
 				this->entityY += 1;
 				this->map->moveEntity(this->entityX, this->entityY);
-				this->entityChar = 'V';
+				this->entityChar = 'v';
 
 
 			}
 		}
 		if (this->orientation == RIGHT and this->map->getChar(this->entityX + 1, this->entityY) == '!') {
-			this->clues += 1;
-			this->tree.outputText();
-
+			this->outputClue();
 			system("cls");
 		}
 		else if (this->orientation == LEFT and this->map->getChar(this->entityX - 1, this->entityY) == '!') {

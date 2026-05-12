@@ -70,10 +70,13 @@ void Ship::createEnemies() {
 	
 }
 void Ship::mapLoop() {
+	system("Color 0A");
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
 	this->createEnemies();
+	this->user->setX(playerX);
+	this->user->setY(playerY);
 	this->user->setMap(this->mapPointer);
 	this->user->fillMag();
 	this->user->setShipKey(false);
@@ -181,7 +184,7 @@ void Ship::mapLoop() {
 			system("cls");
 			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
 			system("pause");
-			quick_exit(0);
+			quit = true;
 		}
 		else if (this->user->isAlive()) {
 			this->user->Move();
@@ -208,6 +211,9 @@ void Ship::mapLoop() {
 
 		if (this->user->getY() == 1 and this->user->getX() == 8) {
 			quit = true;
+			if (this->user->getTotalClues() != 3) {
+				this->user->setTotalClues(3);
+			}
 		}
 		else if (this->user->getY() == 20 and this->user->getX() == 5) {
 			ShipRoom room = ShipRoom(this->user);
@@ -240,7 +246,9 @@ void Ship::mapLoop() {
 		cout << "Ammo: " << this->user->getAmmo()<<endl;
 		cout << "Clues " << this->user->getClues() << "/10" << endl;
 		cout << "Time Left: " << this->user->getFood()<<endl;
-	
+		cout << "x " << this->user->getX() << endl;
+		cout << "Y " << this->user->getY() << endl;
+
 
 	
 

@@ -15,7 +15,7 @@ Entity::Entity() {
 	this->canMoveX = false;
 	this->canMoveY = false;
 	this->charCheck = '/';
-	this->playerChars = { 'V','^','<','>' };
+	this->playerChars = { 'v','^','<','>' };
 	this->playerWeapon = { 'O', '!', 'A'};
 }
 
@@ -140,7 +140,7 @@ void Entity::setMap(Maps* currMap) {
 }
 
 void Entity::Move() {
-	system("Color 0A");
+	
 	if (this->orientation == DOWN) {
 
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);

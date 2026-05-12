@@ -22,13 +22,19 @@ private:
 	int ammo;
 	bool shipKey;
 	int clues;
+	int totalClues;
 	vector<char> enemyChar;
 	TextTree tree;
 	vector <Entity> magazine;
 	vector <Entity> projectiles;
 	Entity bullet;
+	bool repeat;
 public:
 	Player();
+	bool getRepeat();
+	void setRepeat(bool nRepeat);
+	int getTotalClues();
+	void setTotalClues(int nClues);
 	int getClues();
 	void setClues(int nClues);
 	int getLives();

@@ -20,11 +20,11 @@ void GameLoop::playGame() {
 	
 	/* 
 	*/
-
+	
 	this->Start.displayMenu();
-	this->shipLoop.mapLoop();
-	this->beachLoop.mapLoop();
 	this->user->outputClue();
 	this->game.action();
+	this->beachLoop.mapLoop();
+	this->shipLoop.mapLoop();
 	cout << "end so far";
 }
