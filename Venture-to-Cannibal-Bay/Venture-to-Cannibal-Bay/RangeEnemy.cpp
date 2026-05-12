@@ -1,7 +1,7 @@
 #include "RangeEnemy.h"
 RangeEnemy::RangeEnemy() {
 	this->arrows = 24;
-	this->count = 8;
+	this->count = 9;
 }
 void RangeEnemy::fillquiver() {
 	for (int i = 0; i <this->arrows; i++) {
@@ -28,7 +28,7 @@ int RangeEnemy::getQuiverSize() {
 }
 
 void RangeEnemy::shootArrow() {
-	if (this->getState() == SHOOTING and this->arrows>0 and this->count == 8) {
+	if (this->getState() == SHOOTING and this->arrows>0 and this->count == 9) {
 		this->count = 0;
 		this->arrows -= 1;
 		this->bullet = this->quiver[this->arrows];
@@ -82,14 +82,14 @@ void RangeEnemy::shootArrow() {
 
 		}
 	}
-	else if (this->count != 8 and this->arrows <= 0) {
+	else if (this->count != 9 and this->arrows <= 0) {
 		this->count += 1;
 		this->arrows = 24;
 	}
 	else if (this->arrows <= 0) {
 		this->arrows = 24;
 	}
-	else if (this->count != 8) {
+	else if (this->count != 9) {
 		this->count += 1;
 	}
 

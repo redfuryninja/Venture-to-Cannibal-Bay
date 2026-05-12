@@ -10,6 +10,7 @@
 #include <thread>
 #include "Player.h"
 #include "Animation.h"
+#include "TextColour.h"
 
 #define KEY_E 101
 using namespace std;
@@ -22,6 +23,7 @@ private:
 	bool failed;
 	Player* user;
 	Animation ani;
+	TextColour colour;
 public:
 	Pirate();
 	Pirate(Player* c_User);

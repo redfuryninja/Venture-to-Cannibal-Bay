@@ -45,6 +45,7 @@ void ShipRoom::mapLoop() {
 	this->map.setMessage("press arrow keys to move, and F to interact");
 	while (quit == false) {
 		clock_t start = clock();
+		system("Color 0A");
 		//######## Process Input ########//
 
 
@@ -52,7 +53,7 @@ void ShipRoom::mapLoop() {
 			this->user->Move();
 		}
 
-		if (this->user->getClues() == 3) {
+		if (this->user->getTotalClues() == 3) {
 			this->map.changeChar('|');
 			this->map.moveEntity(9,4);
 			this->map.moveEntity(9,5);
@@ -70,10 +71,8 @@ void ShipRoom::mapLoop() {
 		cout << this->map.getMessage() << endl;
 		cout << "Lives: " << this->user->getLives() << endl;
 		cout << "Ammo: " << this->user->getAmmo() << endl;
-		cout << "Clues " << this->user->getClues() << "/10" << endl;
+		cout << "Clues " << this->user->getClues() << "/7" << endl;
 		cout << "Time Left: " << this->user->getFood() << endl;
-		cout << "x "<< this->user->getX() << endl;
-		cout << "Y " << this->user->getY() << endl;
 
 
 		//######## Render ########//

@@ -1,54 +1,52 @@
+#include "Maze.h"
 #include "Ship.h"
 #include "ShipRoom.h"
 #include "PrintFile.h"
-Ship::Ship(){
+Maze::Maze() {
 	Player Pointer = Player();
 	this->user = &Pointer;
-	this->playerX = 10;
+	this->playerX = 73;
 	this->playerY = 2;
 	this->mapWidth = 21;
 	this->mapHeight = 42;
-	this->playerChar = 'v';
+	this->playerChar = 'V';
 	this->mapChar = ' ';
 	this->canMoveX = false;
 	this->canMoveY = false;
-	this->filename = "./Ascii-art/bigShipMap.txt";
+	this->filename = "./Ascii-art/Maze.txt";
 	this->map = Maps(this->filename);
 	this->mapPointer = &this->map;
 }
-Ship::Ship(Player* cUser) {
+Maze::Maze(Player* cUser) {
 	this->user = cUser;
-	this->playerX = 10;
-	this->playerY = 2;
-	this->mapWidth = 21;
-	this->mapHeight = 42;
-	this->playerChar = 'v';
+	this->playerX = 73;
+	this->playerY = 3;
+	this->mapWidth = 79;
+	this->mapHeight = 51;
+	this->playerChar = '^';
 	this->mapChar = ' ';
 	this->canMoveX = false;
 	this->canMoveY = false;
-	this->filename = "./Ascii-art/bigShipMap.txt";
+	this->filename = "./Ascii-art/Maze.txt";
 	this->map = Maps(this->filename);
 
 
-	
+
 }
 
-void Ship::createEnemies() {
+void Maze::createEnemies() {
 	Enemy maori1 = Enemy();
 	Enemy maori2 = Enemy();
 	Enemy maori3 = Enemy();
 	Enemy maori4 = Enemy();
 
-	RangeEnemy maori5 = RangeEnemy();
-	RangeEnemy maori6 = RangeEnemy();
+
 	maori1.setX(2);
 	maori2.setX(4);
 
 	maori3.setX(15);
 	maori4.setX(17);
 
-	maori5.setX(3);
-	maori6.setX(16);
 
 	maori1.setY(33);
 	maori2.setY(33);
@@ -56,21 +54,29 @@ void Ship::createEnemies() {
 	maori3.setY(33);
 	maori4.setY(33);
 
-	maori5.setY(34);
-	maori6.setY(7);
+	RangeEnemy maori5 = RangeEnemy();
+	RangeEnemy maori6 = RangeEnemy();
+
+	maori5.setX(50);
+	maori5.setY(17);
+
+	maori6.setX(74);
+	maori6.setY(31);
 
 	maori5.setMap(this->mapPointer);
-	maori6.setMap(this->mapPointer);
+	//maori6.setMap(this->mapPointer);
 	maori5.fillquiver();
-	maori6.fillquiver();
-	maori5.setOrientation(UP);
-	this->meleeEnemies = { maori1,maori2, maori4};
-	this->rangedEnemies = { maori5, maori6 };
+	//maori6.fillquiver();
+	
+	maori5.setOrientation(DOWN);
+	maori6.setOrientation(UP);
+	this->meleeEnemies = { maori1,maori2, maori4 };
+	this->rangedEnemies = { maori5};
 
-	
+
 }
-void Ship::mapLoop() {
-	
+void Maze::mapLoop() {
+
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
@@ -79,12 +85,14 @@ void Ship::mapLoop() {
 	this->user->setY(playerY);
 	this->user->setMap(this->mapPointer);
 	this->user->fillMag();
-	this->user->setShipKey(false);
+	this->user->setShipKey(true);
+	/*
 	
 	for (int i = 0; i < this->meleeEnemies.size(); i++) {
 		this->meleeEnemies[i].setMap(this->mapPointer);
 	}
 
+	*/
 
 	bool quit = false;
 	this->map.changeChar('V');
@@ -100,20 +108,19 @@ void Ship::mapLoop() {
 	this->user->setShipKey(false);
 	while (quit == false) {
 		clock_t start = clock();
-		system("Color 0A");
+		system("Color 40");
 		//######## Process Input ########//
 		/*
 		create map
 		pass map to entity
 		run entity movement
 		give map entity coords
-		
+
 		*/
+
 		
 		/*
-		*/
-
-
+		
 		for (int i = 0; i < this->meleeEnemies.size(); i++) {
 			if (this->meleeEnemies[i].isAlive()) {
 				this->meleeEnemies[i].Move();
@@ -130,26 +137,29 @@ void Ship::mapLoop() {
 					ascii.OutputAscii();
 					cout << " you lost a life" << endl;
 					system("pause");
-						}
-					if (user->getLives() < 0) {
-						this->user->kill();
-						this->map.setMessage("you lost a life");
+				}
+				if (user->getLives() < 0) {
+					this->user->kill();
+					this->map.setMessage("you lost a life");
 
 				}
 				this->map.clearSpace(this->meleeEnemies[i].getX(), this->meleeEnemies[i].getY());
 				this->map.moveEntity(0, 0);
 				this->meleeEnemies.erase(meleeEnemies.begin() + i, meleeEnemies.begin() + i + 1);
-				this->map.clearSpace(0,0);
+				this->map.clearSpace(0, 0);
 
-				
+
 			}
 
 
 		}
+
+		*/
+
 		for (int i = 0; i < this->rangedEnemies.size(); i++) {
 			if (this->rangedEnemies[i].isAlive()) {
 				this->rangedEnemies[i].Move();
-				
+
 
 			}
 			else {
@@ -180,6 +190,8 @@ void Ship::mapLoop() {
 
 
 		}
+		
+
 		if (user->getLives() == 0) {
 			system("cls");
 			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
@@ -199,23 +211,25 @@ void Ship::mapLoop() {
 			this->map.changeChar('V');
 			this->map.moveEntity(this->user->getX(), this->user->getY());
 		}
-	
 
 
-		
 
+
+
+		/*
 		this->user->moveBullet();
 		for (int i = 0; i < this->rangedEnemies.size(); i++) {
-		this->rangedEnemies[i].moveArrow();
+			this->rangedEnemies[i].moveArrow();
 		}
-
+		
 		if (this->user->getY() == 1 and this->user->getX() == 9) {
 			quit = true;
 			if (this->user->getTotalClues() != 3) {
 				this->user->setTotalClues(3);
 			}
 		}
-		else if (this->user->getY() == 20 and this->user->getX() == 5) {
+		*/
+		if (this->user->getY() == 20 and this->user->getX() == 5) {
 			ShipRoom room = ShipRoom(this->user);
 			room.mapLoop();
 			this->user->setX(4);
@@ -224,7 +238,7 @@ void Ship::mapLoop() {
 
 
 		}
-		else if (this->user->getY() >= 20 and this->user->getY() < 30 ) {
+		else if (this->user->getY() >= 20 and this->user->getY() < 30) {
 			if (this->user->getShipKey() == true) {
 				this->map.setMessage("if you face that door and press F you can open it");
 			}
@@ -236,32 +250,32 @@ void Ship::mapLoop() {
 		else {
 			this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 		}
-		
-		
+
+
 
 		system("cls");
-		
+
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
-		cout << "Lives: " << this->user->getLives()<<endl;
-		cout << "Ammo: " << this->user->getAmmo()<<endl;
+		cout << "Lives: " << this->user->getLives() << endl;
+		cout << "Ammo: " << this->user->getAmmo() << endl;
 		cout << "Clues " << this->user->getClues() << "/7" << endl;
-		cout << "Time Left: " << this->user->getFood()<<endl;
+		cout << "Time Left: " << this->user->getFood() << endl;
 
 
-	
 
 
-		
+
+
 		//######## Render ########//
-		
+
 		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 70 - msDuration;
 		this->user->setFood(this->user->getFood() - msRemaining);
 		this_thread::sleep_for(chrono::milliseconds(msRemaining));
-		
-	
-		}
+
 
 	}
+
+}

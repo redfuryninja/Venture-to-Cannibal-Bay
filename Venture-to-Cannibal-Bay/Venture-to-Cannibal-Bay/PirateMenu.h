@@ -7,6 +7,7 @@
 #include <sstream> 
 #include "PrintFile.h"
 #include "Menu.h"
+#include "TextColour.h"
 
 using namespace std;
 

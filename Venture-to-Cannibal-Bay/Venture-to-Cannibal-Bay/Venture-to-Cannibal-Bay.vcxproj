@@ -123,15 +123,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Act2.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Beach.cpp" />
+    <ClCompile Include="captured.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="Investigation.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Maps.cpp" />
+    <ClCompile Include="Maze.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Pirate.cpp" />
     <ClCompile Include="PirateMenu.cpp" />
@@ -140,18 +141,21 @@
     <ClCompile Include="RangeEnemy.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="ShipRoom.cpp" />
+    <ClCompile Include="TextColour.cpp" />
     <ClCompile Include="TextTree.cpp" />
     <ClCompile Include="Venture-to-Cannibal-Bay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Beach.h" />
+    <ClInclude Include="captured.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="Investigation.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Maps.h" />
+    <ClInclude Include="Maze.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Pirate.h" />
     <ClInclude Include="PirateMenu.h" />
@@ -160,6 +164,7 @@
     <ClInclude Include="RangeEnemy.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="ShipRoom.h" />
+    <ClInclude Include="TextColour.h" />
     <ClInclude Include="TextTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

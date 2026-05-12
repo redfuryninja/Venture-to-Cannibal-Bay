@@ -14,6 +14,7 @@ Menu::Menu(Player* c_User) {
 	this->waiting = true;
 	this->keyValue = -1;
 	this->fileName = "./Ascii-art/menu.txt";
+
 }
 
 int Menu::getKeyValue() {

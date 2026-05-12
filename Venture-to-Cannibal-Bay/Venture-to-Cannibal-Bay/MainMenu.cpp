@@ -6,8 +6,13 @@ MainMenu::MainMenu(): Menu() {
 
 
 void MainMenu::displayTitle() {
+	TextColour colour;
+	colour.changeColour(4);
 	PrintFile ascii = PrintFile("./Ascii-art/Title.txt");
 	ascii.OutputAscii();
+	colour.changeColour(15);
+	PrintFile controls = PrintFile("./Ascii-art/controls.txt");
+	controls.OutputAscii();
 }
 
 void MainMenu::redrawMenu() {

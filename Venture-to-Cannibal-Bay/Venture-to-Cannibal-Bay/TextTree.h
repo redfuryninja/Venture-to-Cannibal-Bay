@@ -1,4 +1,5 @@
 #pragma once
+#include "TextColour.h"
 #include <iostream>
 #include <string>
 #include <vector>

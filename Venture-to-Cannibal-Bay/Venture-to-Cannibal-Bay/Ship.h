@@ -47,7 +47,6 @@ protected:
 public:
 	Ship();
 	Ship(Player* c_User);
-	//void fillMag();
 	virtual void mapLoop();
 	void createEnemies();
 

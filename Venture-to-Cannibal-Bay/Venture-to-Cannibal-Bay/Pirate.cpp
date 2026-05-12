@@ -40,7 +40,10 @@ void Pirate::action() {
 
 void Pirate::sword(){
 	clock_t start = clock();
+	
+	this->colour.changeColour(64);
 	cout << "you are being attacked by pirates, press E to Dodge" << endl;
+	this->colour.changeColour(15);
 	while (true) {
 
 		if (this->getKeyValue() == KEY_E) {
@@ -63,14 +66,18 @@ void Pirate::sword(){
 		system("cls");
 		PrintFile ascii = PrintFile("./Ascii-art/Win.txt");
 		ascii.OutputAscii();
+		this->colour.changeColour(4);
 		cout << " you won the fight and didn't lose a life" << endl;
+		this->colour.changeColour(15);
 		system("pause");
 	}
 	
 }
 void Pirate::gun() {
 	this->ani.gunAnimation();
+	this->colour.changeColour(4);
 	cout << " you shot all the pirates" << endl;
+	this->colour.changeColour(15);
 	system("pause");
 	this->user->setAmmo(this->user->getAmmo() - 5);
 }
@@ -78,7 +85,9 @@ void Pirate::gun() {
 void Pirate::food() {
 	PrintFile ascii = PrintFile("./Ascii-art/supplies.txt");
 	ascii.OutputAscii();
+	this->colour.changeColour(4);
 	cout << " you bribed the Pirates and gave up your supplies in exchange for your lives" << endl;
+	this->colour.changeColour(15);
 	this->user->setFood(this->user->getFood() - 200000);
 	system("pause");
 }

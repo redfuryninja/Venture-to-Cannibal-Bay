@@ -9,6 +9,7 @@ bool Enemy::getWeaponDeath() {
 	return this->weaponDeath;
 }
 void Enemy::Move() {
+	
 	if (this->orientation == DOWN) {
 
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);

@@ -36,7 +36,7 @@ Beach::Beach(Player* cUser) {
 
 
 void Beach::mapLoop() {
-	system("Color 0B");
+	
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
@@ -48,7 +48,7 @@ void Beach::mapLoop() {
 	for (int i = 0; i < 63; i++) {
 		if (count == 0) {
 			Enemy nEnemy = Enemy();
-			nEnemy.setChar('/');
+			nEnemy.setChar('X');
 			nEnemy.setY(1);
 			nEnemy.setX(i + 1);
 			count = 1;
@@ -58,7 +58,7 @@ void Beach::mapLoop() {
 		else if (count == 1) {
 			count = 0;
 			Enemy nEnemy = Enemy();
-			nEnemy.setChar('\\');
+			nEnemy.setChar('x');
 			nEnemy.setY(1);
 			nEnemy.setX(i + 1);
 			count = 0;
@@ -80,14 +80,14 @@ void Beach::mapLoop() {
 	cout << this->map.getMessage() << endl;
 	cout << "Lives: " << this->user->getLives() << endl;
 	cout << "Ammo: " << this->user->getAmmo() << endl;
-	cout << "Clues " << this->user->getClues() << "/10" << endl;
+	cout << "Clues " << this->user->getClues() << "/7" << endl;
 	cout << "Time Left: " << this->user->getFood() << endl;
 	this->map.setMessage("press arrow keys to move and F to interact");
 
 	while (quit == false) {
 
 		clock_t start = clock();
-
+		
 		//######## Process Input ########//
 		/*
 		create map
@@ -130,21 +130,20 @@ void Beach::mapLoop() {
 			
 			if (this->user->getTotalClues() == 2) {
 				this->map.changeChar('|');
-				this->map.moveEntity(56, 18);
+				this->map.moveEntity(56, 7);
 
 			}
 
 
 
+			system("Color 0B");
 			system("cls");
 			cout << this->map.getMap() << endl;
 			cout << this->map.getMessage() << endl;
 			cout << "Lives: " << this->user->getLives() << endl;
 			cout << "Ammo: " << this->user->getAmmo() << endl;
-			cout << "Clues " << this->user->getClues() << "/10" << endl;
+			cout << "Clues " << this->user->getClues() << "/7" << endl;
 			cout << "Time Left: " << this->user->getFood() << endl;
-			cout << "x " << this->user->getX() << endl;
-			cout << "Y " << this->user->getY() << endl;
 
 
 

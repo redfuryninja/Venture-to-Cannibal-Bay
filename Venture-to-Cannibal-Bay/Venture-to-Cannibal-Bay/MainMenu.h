@@ -1,5 +1,5 @@
 #pragma once
-#include "MainMenu.h"
+#include "TextColour.h"
 #include "Menu.h"
 using namespace std;
 class MainMenu: public Menu

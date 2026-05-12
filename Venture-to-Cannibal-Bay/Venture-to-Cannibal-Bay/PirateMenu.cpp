@@ -16,6 +16,10 @@ void PirateMenu::displayTitle() {
 void PirateMenu::redrawMenu() {
 	system("cls");
 	displayTitle();
+	TextColour colour;
+	colour.changeColour(4);
+	cout << "Pirate Ships are approacing what will you do" << endl;
+	colour.changeColour(15);
 	cout << "|------------------------|" << endl;
 	if (this->menuPosition < 0) this->menuPosition = 2;
 	if (this->menuPosition > 2) this->menuPosition = 0;
@@ -59,15 +63,14 @@ bool PirateMenu::getKeyInput() {
 			switch (this->menuPosition) {
 			case 0:
 				this->path = "swords";
-				cout << "swords" << endl;
+	
 				return false;
 			case 1:
 				this->path = "guns";
-				cout << "guns" << endl;
+
 				return false;
 			case 2:
 				this->path = "supplies";
-				cout << "supplies" << endl;
 				return false;
 			}
 		}

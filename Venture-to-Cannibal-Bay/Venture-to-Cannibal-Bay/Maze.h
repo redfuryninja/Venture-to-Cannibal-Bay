@@ -15,17 +15,10 @@
 #include "RangeEnemy.h"
 #include "TextColour.h"
 using namespace std;
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
-#define KEY_ENTER 13
-#define KEY_E 101
-using namespace std;
 
-class Beach
+class Maze
 {
-private:
+protected:
 	int playerX;
 	int playerY;
 	int mapWidth;
@@ -40,12 +33,21 @@ private:
 	ifstream artFile;
 	string linePrint;
 	Player* user;
+	vector <Entity> magazine;
+	Entity bullet;
 	vector <Enemy> meleeEnemies;
+	vector<RangeEnemy> rangedEnemies;
+	vector <Entity> projectiles;
 	TextColour colour;
 
 public:
-	Beach();
-	Beach(Player* c_User);
-	void mapLoop();
+	Maze();
+	Maze(Player* c_User);
+	virtual void mapLoop();
+	void createEnemies();
 
 };
+
+
+
+
