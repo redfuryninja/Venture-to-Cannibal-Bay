@@ -75,9 +75,11 @@ void Enemy::Move() {
 		}
 		else if (this->checkIfWeapon(this->entityX-1, this->entityY)) {
 			this->alive = false;
+			this->weaponDeath = true;
 		}
-		else if (this->map->getChar(entityX, entityY - 1) == 'O' or this->map->getChar(entityX, entityY + 1) == '!') {
+		else if (this->map->getChar(entityX-1, entityY) == 'O' or this->map->getChar(entityX-1, entityY) == '!') {
 			this->alive = false;
+			this->weaponDeath = true;
 		}
 		else {
 			this->orientation = RIGHT;
@@ -94,14 +96,16 @@ void Enemy::Move() {
 			this->map->moveEntity(this->entityX, this->entityY);
 			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
-		else if (this->map->getChar(entityX, entityY + 1) == 'O' or this->map->getChar(entityX, entityY + 1) == '!') {
+		else if (this->map->getChar(entityX+1, entityY) == 'O' or this->map->getChar(entityX+1, entityY) == '!') {
 			this->alive = false;
+			this->weaponDeath = true;
 		}
 		else if (this->checkIfPlayer(this->entityX+1, this->entityY)) {
 			this->alive = false;
 		}
 		else if (this->checkIfWeapon(this->entityX + 1, this->entityY)) {
 			this->alive = false;
+			this->weaponDeath = true;
 		}
 
 		else {

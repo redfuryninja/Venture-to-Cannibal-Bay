@@ -42,7 +42,7 @@ void Beach::mapLoop() {
 	this->mapPointer = &this->map;
 	this->user->setMap(this->mapPointer);
 	int count = 0;
-
+	this->user->setShipKey(true);
 	
 	
 	for (int i = 0; i < 63; i++) {
@@ -119,6 +119,7 @@ void Beach::mapLoop() {
 				if (this->user->getTotalClues() != 2) {
 					this->user->setTotalClues(2);
 					this->user->setTreePoint();
+					this->user->setShipKey(false);
 				}
 				
 			}

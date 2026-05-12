@@ -17,6 +17,7 @@ GameLoop::GameLoop(Player* cUser) {
 	this->shipLoop = Ship(this->user);
 	this->cutscene = captured(this->user);
 	this->mazeLoop = Maze(this->user);
+	this->ending = End(this->user);
 } 
 void GameLoop::playGame() {
 	
@@ -29,5 +30,5 @@ void GameLoop::playGame() {
 	this->shipLoop.mapLoop();
 	this->cutscene.cutscene();
 	this->mazeLoop.mapLoop();
-	cout << "end so far";
+	this->ending.Ending();
 }

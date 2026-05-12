@@ -8,6 +8,7 @@
 #include "Beach.h"
 #include "captured.h"
 #include "Maze.h"
+#include "End.h"
 using namespace std;
 class GameLoop
 {
@@ -19,6 +20,7 @@ private:
 	Beach beachLoop;
 	Ship shipLoop;
 	captured cutscene;
+	End ending;
 public:
 	GameLoop();
 	GameLoop(Player* cUser);

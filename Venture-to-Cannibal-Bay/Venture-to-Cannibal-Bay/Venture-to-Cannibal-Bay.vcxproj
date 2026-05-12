@@ -126,6 +126,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Beach.cpp" />
     <ClCompile Include="captured.cpp" />
+    <ClCompile Include="End.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameLoop.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Beach.h" />
     <ClInclude Include="captured.h" />
+    <ClInclude Include="End.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameLoop.h" />

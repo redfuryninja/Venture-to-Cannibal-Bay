@@ -6,8 +6,8 @@ Maze::Maze() {
 	Player Pointer = Player();
 	this->user = &Pointer;
 	this->playerX = 73;
-	this->playerY = 2;
-	this->mapWidth = 21;
+	this->playerY = 3;
+	this->mapWidth = 79;
 	this->mapHeight = 42;
 	this->playerChar = 'V';
 	this->mapChar = ' ';
@@ -22,7 +22,7 @@ Maze::Maze(Player* cUser) {
 	this->playerX = 73;
 	this->playerY = 3;
 	this->mapWidth = 79;
-	this->mapHeight = 51;
+	this->mapHeight = 50;
 	this->playerChar = '^';
 	this->mapChar = ' ';
 	this->canMoveX = false;
@@ -129,7 +129,6 @@ void Maze::mapLoop() {
 	cout << "Clues " << this->user->getClues() << "/7" << endl;
 	cout << "Time Left: " << this->user->getFood() << endl;
 	this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
-	this->user->setShipKey(false);
 	while (quit == false) {
 		clock_t start = clock();
 		system("Color 0C");
@@ -248,12 +247,10 @@ void Maze::mapLoop() {
 		}
 		
 
-		if (this->user->getY() == 50 and this->user->getX() == 39) {
+		if (this->user->getY() == 50 and this->user->getX() == 38) {
 			quit = true;
-			if (this->user->getTotalClues() != 3) {
-				this->user->setTotalClues(3);
-			}
 		}
+
 
 
 		else {

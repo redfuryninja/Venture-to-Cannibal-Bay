@@ -39,6 +39,7 @@ int main()
     Player user = Player();
     Player* userPointer = &user;
     GameLoop game = GameLoop(userPointer);
+
     game.playGame();
 
     if (user.getRepeat() == true) {

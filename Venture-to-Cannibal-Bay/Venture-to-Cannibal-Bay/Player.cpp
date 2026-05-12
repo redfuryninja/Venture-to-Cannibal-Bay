@@ -10,7 +10,6 @@ Player::Player() : Entity() {
 	this->clues = 0;
 	this->totalClues = 0;
 	this->tree = TextTree();
-	this->shipKey = true;
 	this->repeat = false;
 
 }

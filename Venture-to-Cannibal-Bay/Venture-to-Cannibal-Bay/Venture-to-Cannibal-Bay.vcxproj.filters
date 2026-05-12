@@ -78,6 +78,9 @@
     <ClCompile Include="Maze.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="End.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">
@@ -138,6 +141,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Maze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="End.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,7 @@ captured::captured() {
 	this->colour = TextColour();
 }
 captured::captured(Player* c_User) {
+	this->colour = TextColour();
 	this->fileName = "./Ascii-art/surrounded.txt";
 	this->user = c_User;
 }

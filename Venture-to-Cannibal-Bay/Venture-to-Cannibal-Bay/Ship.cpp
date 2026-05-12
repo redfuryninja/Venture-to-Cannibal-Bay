@@ -209,7 +209,7 @@ void Ship::mapLoop() {
 		this->rangedEnemies[i].moveArrow();
 		}
 
-		if (this->user->getY() == 1 and this->user->getX() == 9) {
+		if (this->user->getY() == 1 and this->user->getX() == 8) {
 			quit = true;
 			if (this->user->getTotalClues() != 3) {
 				this->user->setTotalClues(3);
