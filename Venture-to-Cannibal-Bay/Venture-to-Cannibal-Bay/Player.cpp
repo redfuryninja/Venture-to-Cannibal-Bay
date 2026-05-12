@@ -107,21 +107,15 @@ void Player::setStartY(int nY) {
 	this->startY = nY;
 }
 void Player::Move() {
-	//int key = getKeyValue();
 	this->projX = entityX;
 	this->projY = entityY;
 
 
 	if (this->checkIfEnemy(this->entityX, this->entityY) == true){
-		if (this->totalClues > 3) {
-			this->entityX = 73;
-			this->entityY = 2;
-		}
-		else{
+		
 		this->entityX = this->startX;
-		this->entityY = this->startX;
+		this->entityY = this->startY;
 
-		}
 		this->setLives(this->getLives() - 1);
 		this->map->clearSpace(this->getX(), this->getY());
 		this->map->changeChar('v');

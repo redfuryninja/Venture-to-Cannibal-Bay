@@ -23,12 +23,38 @@ void GameLoop::playGame() {
 	
 	/* 
 	*/
-	this->Start.displayMenu();
-	this->user->outputClue();
-	this->game.action();
-	this->beachLoop.mapLoop();
-	this->shipLoop.mapLoop();
-	this->cutscene.cutscene();
-	this->mazeLoop.mapLoop();
-	this->ending.Ending();
+	if (this->user->isAlive() == true) {
+		this->Start.displayMenu();
+	}
+	if (this->user->isAlive() == true) {
+		this->user->outputClue();
+
+	}
+	if (this->user->isAlive() == true) {
+		this->game.action();
+
+	}
+	if (this->user->isAlive() == true) {
+		this->beachLoop.mapLoop();
+
+
+	}
+	if (this->user->isAlive() == true) {
+
+		this->shipLoop.mapLoop();
+		
+	}
+	
+	if (this->user->isAlive() == true) {
+
+		this->cutscene.cutscene();
+	}
+	if (this->user->isAlive() == true) {
+
+		this->mazeLoop.mapLoop();
+	}
+	if (this->user->isAlive() == true) {
+		this->ending.Ending();
+
+	}
 }

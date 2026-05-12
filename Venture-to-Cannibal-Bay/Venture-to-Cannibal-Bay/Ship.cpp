@@ -77,6 +77,8 @@ void Ship::mapLoop() {
 	this->createEnemies();
 	this->user->setX(playerX);
 	this->user->setY(playerY);
+	this->user->setStartX(playerX);
+	this->user->setStartY(playerY);
 	this->user->setMap(this->mapPointer);
 	this->user->fillMag();
 	this->user->setShipKey(false);
@@ -180,10 +182,18 @@ void Ship::mapLoop() {
 
 
 		}
-		if (user->getLives() == 0) {
+		if (this->user->getLives() == 0) {
 			system("cls");
 			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
 			system("pause");
+			this->user->setRepeat(true);
+			quit = true;
+		}
+		else if (this->user->getFood() <= 0) {
+			system("cls");
+			cout << "you ran out of time and never discovered the fate of the missing crew" << endl;
+			system("pause");
+			this->user->setRepeat(true);
 			quit = true;
 		}
 		else if (this->user->isAlive()) {

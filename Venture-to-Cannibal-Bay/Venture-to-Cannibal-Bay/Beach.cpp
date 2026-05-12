@@ -83,6 +83,7 @@ void Beach::mapLoop() {
 	cout << "Clues " << this->user->getClues() << "/7" << endl;
 	cout << "Time Left: " << this->user->getFood() << endl;
 	this->map.setMessage("press arrow keys to move and F to interact");
+	this->user->fillMag();
 
 	while (quit == false) {
 
@@ -106,7 +107,24 @@ void Beach::mapLoop() {
 		}
 
 
+		if (this->user->getLives() == 0) {
+			system("cls");
+			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
+			system("pause");
+			this->user->setRepeat(true);
+			quit = true;
+		}
+		else if (this->user->getFood() <= 0) {
+			system("cls");
+			cout << "you ran out of time and never discovered the fate of the missing crew" << endl;
+			system("pause");
+			this->user->setRepeat(true);
+			quit = true;
+		}
+		else if (this->user->isAlive()) {
 			this->user->Move();
+
+		}
 
 
 
