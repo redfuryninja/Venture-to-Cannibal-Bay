@@ -1,6 +1,6 @@
 ___________________________________________________________________________________________________________________________________ 
 |                                                  Controls                                                                        |
-| you player icon depending on direction is v,^,<,>                                                                                |
+| your player icon depending on direction is v,^,<,>                                                                                |
 | press the arrow keys to move your character and the up and down keys to move in a menu press enter to select an option           |
 | you can press Q to shoot bullets which are O in the direction you are facing >'Q' o                                              |
 | Enemies are represented by M colliding with melee enemies causes you to lose a life you have to shoot them                       |
