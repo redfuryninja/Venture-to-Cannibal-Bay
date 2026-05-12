@@ -118,6 +118,7 @@ void Beach::mapLoop() {
 				quit = true;
 				if (this->user->getTotalClues() != 2) {
 					this->user->setTotalClues(2);
+					this->user->setTreePoint();
 				}
 				
 			}
@@ -142,7 +143,7 @@ void Beach::mapLoop() {
 			cout << this->map.getMessage() << endl;
 			cout << "Lives: " << this->user->getLives() << endl;
 			cout << "Ammo: " << this->user->getAmmo() << endl;
-			cout << "Clues " << this->user->getClues() << "/7" << endl;
+			cout << "Clues " << this->user->getClues() << "/8" << endl;
 			cout << "Time Left: " << this->user->getFood() << endl;
 
 

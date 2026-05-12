@@ -31,11 +31,14 @@ private:
 	bool repeat;
 public:
 	Player();
+	void setStartX(int nX);
+	void setStartY(int nY);
 	bool getRepeat();
 	void setRepeat(bool nRepeat);
 	int getTotalClues();
 	void setTotalClues(int nClues);
 	int getClues();
+	void setTreePoint();
 	void setClues(int nClues);
 	int getLives();
 	int getFood();

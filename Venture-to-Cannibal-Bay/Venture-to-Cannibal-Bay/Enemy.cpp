@@ -76,7 +76,7 @@ void Enemy::Move() {
 		else if (this->checkIfWeapon(this->entityX-1, this->entityY)) {
 			this->alive = false;
 		}
-		else if (this->map->getChar(entityX, entityY + 1) == 'O' or this->map->getChar(entityX, entityY + 1) == '!') {
+		else if (this->map->getChar(entityX, entityY - 1) == 'O' or this->map->getChar(entityX, entityY + 1) == '!') {
 			this->alive = false;
 		}
 		else {

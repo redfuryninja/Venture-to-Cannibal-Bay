@@ -29,7 +29,7 @@ void TextTree::outputText() {
 
 	for (int i = 0; i < this->clues[this->treePoint].size(); i++) {
 		TextColour colour;
-		colour.changeColour(4);
+		colour.changeColour(64);
 		cout << this->clues[this->treePoint][i] << endl;
 		colour.changeColour(15);
 		system("pause");

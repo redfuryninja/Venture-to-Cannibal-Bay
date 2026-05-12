@@ -39,39 +39,61 @@ void Maze::createEnemies() {
 	Enemy maori2 = Enemy();
 	Enemy maori3 = Enemy();
 	Enemy maori4 = Enemy();
+	Enemy maori5 = Enemy();
+	Enemy maori9 = Enemy();
+	Enemy maori10 = Enemy();
+
+	maori1.setX(26);
+	maori1.setY(1);
+	maori1.setOrientation(LEFT);
+
+	maori2.setX(2);
+	maori2.setY(31);
+
+	maori3.setX(35);
+	maori3.setY(11);
+
+	maori4.setX(66);
+	maori4.setY(17);
+	maori4.setOrientation(LEFT);
 
 
-	maori1.setX(2);
-	maori2.setX(4);
+	maori5.setX(19);
+	maori5.setY(33);
 
-	maori3.setX(15);
-	maori4.setX(17);
+	maori9.setX(49);
+	maori9.setY(41);
+	maori9.setOrientation(LEFT);
 
+	maori10.setX(74);
+	maori10.setY(49);
 
-	maori1.setY(33);
-	maori2.setY(33);
-
-	maori3.setY(33);
-	maori4.setY(33);
-
-	RangeEnemy maori5 = RangeEnemy();
 	RangeEnemy maori6 = RangeEnemy();
+	RangeEnemy maori7 = RangeEnemy();
+	RangeEnemy maori8 = RangeEnemy();
 
-	maori5.setX(50);
-	maori5.setY(17);
+	maori6.setX(50);
+	maori6.setY(7);
 
-	maori6.setX(74);
-	maori6.setY(31);
+	maori7.setX(74);
+	maori7.setY(31);
 
-	maori5.setMap(this->mapPointer);
-	//maori6.setMap(this->mapPointer);
-	maori5.fillquiver();
-	//maori6.fillquiver();
-	
-	maori5.setOrientation(DOWN);
-	maori6.setOrientation(UP);
-	this->meleeEnemies = { maori1,maori2, maori4 };
-	this->rangedEnemies = { maori5};
+	maori8.setX(1);
+	maori8.setY(2);
+
+	maori6.setMap(this->mapPointer);
+	maori8.setMap(this->mapPointer);
+	maori7.setMap(this->mapPointer);
+
+	maori6.fillquiver();
+	maori7.fillquiver();
+	maori8.fillquiver();
+
+	maori6.setOrientation(DOWN);
+	maori7.setOrientation(UP);
+
+	this->meleeEnemies = { maori1, maori2, maori3, maori4, maori5, maori9, maori10 };
+	this->rangedEnemies = {maori6, maori7, maori8};
 
 
 }
@@ -83,19 +105,21 @@ void Maze::mapLoop() {
 	this->createEnemies();
 	this->user->setX(playerX);
 	this->user->setY(playerY);
+	this->user->setStartX(playerX);
+	this->user->setStartY(playerY);
 	this->user->setMap(this->mapPointer);
 	this->user->fillMag();
 	this->user->setShipKey(true);
-	/*
+	
 	
 	for (int i = 0; i < this->meleeEnemies.size(); i++) {
 		this->meleeEnemies[i].setMap(this->mapPointer);
 	}
 
-	*/
+	
 
 	bool quit = false;
-	this->map.changeChar('V');
+	this->map.changeChar('v');
 	this->map.moveEntity(this->user->getX(), this->user->getY());
 	system("cls");
 	cout << this->map.getMap() << endl;
@@ -108,7 +132,7 @@ void Maze::mapLoop() {
 	this->user->setShipKey(false);
 	while (quit == false) {
 		clock_t start = clock();
-		system("Color 40");
+		system("Color 0C");
 		//######## Process Input ########//
 		/*
 		create map
@@ -119,7 +143,7 @@ void Maze::mapLoop() {
 		*/
 
 		
-		/*
+		
 		
 		for (int i = 0; i < this->meleeEnemies.size(); i++) {
 			if (this->meleeEnemies[i].isAlive()) {
@@ -129,8 +153,8 @@ void Maze::mapLoop() {
 				if (this->meleeEnemies[i].getWeaponDeath() == false) {
 					this->user->setLives(this->user->getLives() - 1);
 					this->map.clearSpace(this->user->getX(), this->user->getY());
-					this->user->setX(10);
-					this->user->setY(2);
+					this->user->setX(this->playerX);
+					this->user->setY(this->playerY);
 					this->map.changeChar('V');
 					this->map.moveEntity(this->user->getX(), this->user->getY());
 					PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
@@ -154,7 +178,7 @@ void Maze::mapLoop() {
 
 		}
 
-		*/
+		
 
 		for (int i = 0; i < this->rangedEnemies.size(); i++) {
 			if (this->rangedEnemies[i].isAlive()) {
@@ -166,9 +190,9 @@ void Maze::mapLoop() {
 				if (this->rangedEnemies[i].getWeaponDeath() == false) {
 					this->user->setLives(this->user->getLives() - 1);
 					this->map.clearSpace(this->user->getX(), this->user->getY());
-					this->user->setX(10);
-					this->user->setY(2);
-					this->map.changeChar('V');
+					this->user->setX(this->playerX);
+					this->user->setY(this->playerY);
+					this->map.changeChar('v');
 					this->map.moveEntity(this->user->getX(), this->user->getY());
 					PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
 					ascii.OutputAscii();
@@ -206,9 +230,9 @@ void Maze::mapLoop() {
 			this->user->revive();
 			this->user->setLives(this->user->getLives() - 1);
 			this->map.clearSpace(this->user->getX(), this->user->getY());
-			this->user->setX(10);
-			this->user->setY(2);
-			this->map.changeChar('V');
+			this->user->setX(this->playerX);
+			this->user->setY(this->playerY);
+			this->map.changeChar('v');
 			this->map.moveEntity(this->user->getX(), this->user->getY());
 		}
 
@@ -216,37 +240,22 @@ void Maze::mapLoop() {
 
 
 
-		/*
+		
 		this->user->moveBullet();
+
 		for (int i = 0; i < this->rangedEnemies.size(); i++) {
 			this->rangedEnemies[i].moveArrow();
 		}
 		
-		if (this->user->getY() == 1 and this->user->getX() == 9) {
+
+		if (this->user->getY() == 50 and this->user->getX() == 39) {
 			quit = true;
 			if (this->user->getTotalClues() != 3) {
 				this->user->setTotalClues(3);
 			}
 		}
-		*/
-		if (this->user->getY() == 20 and this->user->getX() == 5) {
-			ShipRoom room = ShipRoom(this->user);
-			room.mapLoop();
-			this->user->setX(4);
-			this->user->setY(20);
-			this->user->setMap(this->mapPointer);
 
 
-		}
-		else if (this->user->getY() >= 20 and this->user->getY() < 30) {
-			if (this->user->getShipKey() == true) {
-				this->map.setMessage("if you face that door and press F you can open it");
-			}
-			else {
-				this->map.setMessage("if you had a key you could open that door");
-
-			}
-		}
 		else {
 			this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 		}
@@ -254,14 +263,15 @@ void Maze::mapLoop() {
 
 
 		system("cls");
-
+	
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
 		cout << "Lives: " << this->user->getLives() << endl;
 		cout << "Ammo: " << this->user->getAmmo() << endl;
-		cout << "Clues " << this->user->getClues() << "/7" << endl;
+		cout << "Clues " << this->user->getClues() << "/8" << endl;
+		cout << "x: " << this->user->getX() << endl;
+		cout << "y: " << this->user->getY() << endl;
 		cout << "Time Left: " << this->user->getFood() << endl;
-
 
 
 

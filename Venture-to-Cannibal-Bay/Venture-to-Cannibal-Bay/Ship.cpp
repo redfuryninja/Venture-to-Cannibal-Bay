@@ -213,6 +213,7 @@ void Ship::mapLoop() {
 			quit = true;
 			if (this->user->getTotalClues() != 3) {
 				this->user->setTotalClues(3);
+				this->user->setTreePoint();
 			}
 		}
 		else if (this->user->getY() == 20 and this->user->getX() == 5) {
@@ -245,9 +246,8 @@ void Ship::mapLoop() {
 		cout << this->map.getMessage() << endl;
 		cout << "Lives: " << this->user->getLives()<<endl;
 		cout << "Ammo: " << this->user->getAmmo()<<endl;
-		cout << "Clues " << this->user->getClues() << "/7" << endl;
+		cout << "Clues " << this->user->getClues() << "/8" << endl;
 		cout << "Time Left: " << this->user->getFood()<<endl;
-
 
 	
 

@@ -4,8 +4,6 @@ Entity::Entity() {
 	this->state = NUETRAL;
 	this->orientation = DOWN;
 	this->alive = true;
-	this->entityX = 10;
-	this->entityY = 2;
 	this->startX = 0;
 	this->startY = 0;
 	this->mapWidth = 21;

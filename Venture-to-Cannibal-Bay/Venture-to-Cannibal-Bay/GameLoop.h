@@ -14,11 +14,11 @@ class GameLoop
 private:
 	Player* user;
 	Pirate game;
+	Maze mazeLoop;
 	MainMenu Start;
 	Beach beachLoop;
 	Ship shipLoop;
 	captured cutscene;
-	Maze mazeLoop;
 public:
 	GameLoop();
 	GameLoop(Player* cUser);

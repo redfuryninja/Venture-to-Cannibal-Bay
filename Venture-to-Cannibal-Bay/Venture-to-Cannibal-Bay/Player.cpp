@@ -1,9 +1,9 @@
 #include "Player.h"
 #include "PrintFile.h"
 Player::Player() : Entity() {
-	this->lives = 5;
+	this->lives = 10;
 	this->food = 300000;
-	this->ammo = 10;
+	this->ammo = 35;
 	this->startX = 10;
 	this->startY = 2;
 	this->enemyChar = { 'M', 'A' };
@@ -97,6 +97,16 @@ void Player::outputClue() {
 	this->tree.setTreePoint(this->totalClues);
 }
 
+void Player::setTreePoint() {
+	this->tree.setTreePoint(this->totalClues);
+}
+
+void Player::setStartX(int nX) {
+	this->startX = nX;
+}
+void Player::setStartY(int nY) {
+	this->startY = nY;
+}
 void Player::Move() {
 	//int key = getKeyValue();
 	this->projX = entityX;
@@ -104,8 +114,15 @@ void Player::Move() {
 
 
 	if (this->checkIfEnemy(this->entityX, this->entityY) == true){
-		this->entityX = 10;
-		this->entityY = 2;
+		if (this->totalClues > 3) {
+			this->entityX = 73;
+			this->entityY = 2;
+		}
+		else{
+		this->entityX = this->startX;
+		this->entityY = this->startX;
+
+		}
 		this->setLives(this->getLives() - 1);
 		this->map->clearSpace(this->getX(), this->getY());
 		this->map->changeChar('v');
@@ -259,13 +276,38 @@ void Player::Move() {
 
 			}
 		}
-		if (this->orientation == RIGHT and this->map->getChar(this->entityX + 1, this->entityY) == '!') {
+		if (this->orientation == RIGHT and this->map->getChar(this->entityX + 1, this->entityY) == 'F') {
 			this->outputClue();
 			system("cls");
+			this->entityChar = ' ';
+			this->map->changeChar(this->entityChar);
+			this->map->moveEntity(this->entityX+1, this->entityY);
+			this->entityChar = '>';
 		}
-		else if (this->orientation == LEFT and this->map->getChar(this->entityX - 1, this->entityY) == '!') {
+		else if (this->orientation == LEFT and this->map->getChar(this->entityX - 1, this->entityY) == 'F') {
 			this->outputClue();
 			system("cls");
+			this->entityChar = ' ';
+			this->map->changeChar(this->entityChar);
+			this->map->moveEntity(this->entityX - 1, this->entityY);
+			this->entityChar = '<';
+
+		}
+		if (this->orientation == UP and this->map->getChar(this->entityX, this->entityY-1) == 'F') {
+			this->outputClue();
+			system("cls");
+			this->entityChar = ' ';
+			this->map->changeChar(this->entityChar);
+			this->map->moveEntity(this->entityX, this->entityY-1);
+			this->entityChar = '^';
+		}
+		else if (this->orientation == DOWN and this->map->getChar(this->entityX, this->entityY+1) == 'F') {
+			this->outputClue();
+			system("cls");
+			this->entityChar = ' ';
+			this->map->changeChar(this->entityChar);
+			this->map->moveEntity(this->entityX, this->entityY+1);
+			this->entityChar = 'v';
 
 		}
 	}
@@ -276,6 +318,8 @@ void Player::Move() {
 }
 
 void Player::fillMag() {
+	this->magazine = {};
+	this->projectiles = {};
 	for (int i = 0; i < this->ammo + 1; i++) {
 		Entity nBullet = Entity();
 		nBullet.setChar('O');

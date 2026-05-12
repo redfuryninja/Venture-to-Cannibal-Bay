@@ -5,6 +5,6 @@ ________________________________________________________________________________
 | you can press Q to shoot bullets which are O in the direction you are facing >'Q' o                                              |
 | Enemies are represented by M colliding with melee enemies causes you to lose a life you have to shoot them                       |
 | Ranged Enemies don't move and don't harm you if you touch them but they shoot arrows A which will kill you if they touch you     |
-| you can press F to interact with doors which are D and clues which are !                                                         |
+| you can press F to interact with doors which are D, and clues which are F                                                         |
 | some doors require a Key to enter keys are K and you only need to walk over them to collect the key                              |
 |__________________________________________________________________________________________________________________________________|
