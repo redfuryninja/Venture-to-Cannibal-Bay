@@ -44,7 +44,7 @@ void End::Ending() {
 		for (int i = 0; i < this->endMessage[0].size(); i++) {
 			TextColour colour;
 			colour.changeColour(64);
-			cout << this->endMessage[0][i] << endl;
+			cout << this->endMessage[1][i] << endl;
 			colour.changeColour(15);
 			system("pause");
 		}
