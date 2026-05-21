@@ -5,6 +5,7 @@ using namespace std;
 class TextColour
 {
 public:
+	//changes text output colour
 	void changeColour(int colour);
 	
 };

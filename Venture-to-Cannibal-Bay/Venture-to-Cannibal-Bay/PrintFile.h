@@ -14,8 +14,10 @@ private:
 	ifstream artFile;
 	string linePrint;
 public:
+	//constructor one basic the other takes file name
 	PrintFile();
 	PrintFile(string nFileName);
+	//outputs the file
 	void OutputAscii();
 
 };

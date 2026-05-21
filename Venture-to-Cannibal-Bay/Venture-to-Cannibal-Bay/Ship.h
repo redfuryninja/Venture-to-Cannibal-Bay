@@ -45,9 +45,12 @@ protected:
 	vector <Entity> projectiles;
 
 public:
+	//default constructorer and one with player
 	Ship();
 	Ship(Player* c_User);
+	//looops through the player map
 	virtual void mapLoop();
+	//creates the enemies for the level
 	void createEnemies();
 
 };

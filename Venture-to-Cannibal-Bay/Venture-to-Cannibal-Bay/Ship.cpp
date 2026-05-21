@@ -1,6 +1,8 @@
 #include "Ship.h"
 #include "ShipRoom.h"
 #include "PrintFile.h"
+
+//sets all the details for the map thats being used
 Ship::Ship(){
 	Player Pointer = Player();
 	this->user = &Pointer;
@@ -32,7 +34,7 @@ Ship::Ship(Player* cUser) {
 
 	
 }
-
+//creates all the enemoes
 void Ship::createEnemies() {
 	Enemy maori1 = Enemy();
 	Enemy maori2 = Enemy();
@@ -41,6 +43,7 @@ void Ship::createEnemies() {
 
 	RangeEnemy maori5 = RangeEnemy();
 	RangeEnemy maori6 = RangeEnemy();
+	//setting their positions on themap
 	maori1.setX(2);
 	maori2.setX(4);
 
@@ -61,28 +64,33 @@ void Ship::createEnemies() {
 
 	maori5.setMap(this->mapPointer);
 	maori6.setMap(this->mapPointer);
+	//fill up their ammo count with an entity class that will move in the direction with the player
 	maori5.fillquiver();
 	maori6.fillquiver();
 	maori5.setOrientation(UP);
+	//adding them to seperate vectors to loop through to handle movement
 	this->meleeEnemies = { maori1,maori2, maori4};
 	this->rangedEnemies = { maori5, maori6 };
 
 	
 }
 void Ship::mapLoop() {
-	
+	//setting details for the map and the player
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
 	this->createEnemies();
+	//giving the player the map pointer so any changes that happen in the player class also happen here
 	this->user->setX(playerX);
 	this->user->setY(playerY);
 	this->user->setStartX(playerX);
 	this->user->setStartY(playerY);
 	this->user->setMap(this->mapPointer);
+	//filling player with an entity to act as bullet that kill all enemies on contact
 	this->user->fillMag();
 	this->user->setShipKey(false);
 	
+	//gives all the enemies that move their position on the map
 	for (int i = 0; i < this->meleeEnemies.size(); i++) {
 		this->meleeEnemies[i].setMap(this->mapPointer);
 	}
@@ -90,44 +98,40 @@ void Ship::mapLoop() {
 
 	bool quit = false;
 	this->map.changeChar('V');
+	//physically puts the player on the map string
 	this->map.moveEntity(this->user->getX(), this->user->getY());
 	system("cls");
+	//prints the map details
 	cout << this->map.getMap() << endl;
 	cout << this->map.getMessage() << endl;
 	cout << "Lives: " << this->user->getLives() << endl;
 	cout << "Ammo: " << this->user->getAmmo() << endl;
-	cout << "Clues " << this->user->getClues() << "/7" << endl;
+	cout << "Clues " << this->user->getClues() << "/8" << endl;
 	cout << "Time Left: " << this->user->getFood() << endl;
 	this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 	this->user->setShipKey(false);
 	while (quit == false) {
 		clock_t start = clock();
 		system("Color 0A");
-		//######## Process Input ########//
-		/*
-		create map
-		pass map to entity
-		run entity movement
-		give map entity coords
-		
-		*/
-		
-		/*
-		*/
+
 
 
 		for (int i = 0; i < this->meleeEnemies.size(); i++) {
+			//checks with an enemy if its alive it can move
 			if (this->meleeEnemies[i].isAlive()) {
 				this->meleeEnemies[i].Move();
 			}
 			else {
+				//checking how the enemy died if it collided with a player then it also kills the player and also resets the player postion
 				if (this->meleeEnemies[i].getWeaponDeath() == false) {
+					//resets player details back to beginning and loses a life
 					this->user->setLives(this->user->getLives() - 1);
 					this->map.clearSpace(this->user->getX(), this->user->getY());
 					this->user->setX(10);
 					this->user->setY(2);
 					this->map.changeChar('V');
 					this->map.moveEntity(this->user->getX(), this->user->getY());
+					//displays the lost life ascii art to give the player a bigger sign that they lost a life
 					PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
 					ascii.OutputAscii();
 					cout << " you lost a life" << endl;
@@ -138,6 +142,7 @@ void Ship::mapLoop() {
 						this->map.setMessage("you lost a life");
 
 				}
+				//removes the enemy from the vector and moves their position so they are not in the way
 				this->map.clearSpace(this->meleeEnemies[i].getX(), this->meleeEnemies[i].getY());
 				this->map.moveEntity(0, 0);
 				this->meleeEnemies.erase(meleeEnemies.begin() + i, meleeEnemies.begin() + i + 1);
@@ -148,6 +153,7 @@ void Ship::mapLoop() {
 
 
 		}
+		// moves the enemies
 		for (int i = 0; i < this->rangedEnemies.size(); i++) {
 			if (this->rangedEnemies[i].isAlive()) {
 				this->rangedEnemies[i].Move();
@@ -155,6 +161,7 @@ void Ship::mapLoop() {
 
 			}
 			else {
+				// handles the enemies death
 				if (this->rangedEnemies[i].getWeaponDeath() == false) {
 					this->user->setLives(this->user->getLives() - 1);
 					this->map.clearSpace(this->user->getX(), this->user->getY());
@@ -172,6 +179,7 @@ void Ship::mapLoop() {
 
 					}
 				}
+				//removes the enemies when they die
 				this->map.clearSpace(this->rangedEnemies[i].getX(), this->rangedEnemies[i].getY());
 				this->map.moveEntity(0, 0);
 				this->rangedEnemies.erase(rangedEnemies.begin() + i, rangedEnemies.begin() + i + 1);
@@ -182,6 +190,7 @@ void Ship::mapLoop() {
 
 
 		}
+		//handles case if player dies or runs out of time
 		if (this->user->getLives() == 0) {
 			system("cls");
 			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
@@ -196,10 +205,12 @@ void Ship::mapLoop() {
 			this->user->setRepeat(true);
 			quit = true;
 		}
+		//handles player movement
 		else if (this->user->isAlive()) {
 			this->user->Move();
 
 		}
+		//relocates player if they still have lives left
 		else if (this->user->getLives() > 0) {
 			this->user->revive();
 			this->user->setLives(this->user->getLives() - 1);
@@ -212,13 +223,13 @@ void Ship::mapLoop() {
 	
 
 
-		
+		//moves the projectiles of player and enemies
 
 		this->user->moveBullet();
 		for (int i = 0; i < this->rangedEnemies.size(); i++) {
 		this->rangedEnemies[i].moveArrow();
 		}
-
+		//allows player to exit level and moves up total clues so player can view the future clues and not see previous ones
 		if (this->user->getY() == 1 and this->user->getX() == 8) {
 			quit = true;
 			if (this->user->getTotalClues() != 3) {
@@ -226,6 +237,7 @@ void Ship::mapLoop() {
 				this->user->setTreePoint();
 			}
 		}
+		//moves the palyer into a room within the ship
 		else if (this->user->getY() == 20 and this->user->getX() == 5) {
 			ShipRoom room = ShipRoom(this->user);
 			room.mapLoop();
@@ -235,6 +247,7 @@ void Ship::mapLoop() {
 
 
 		}
+		//sets the message on the screen telling them how to move and telling them about the doors
 		else if (this->user->getY() >= 20 and this->user->getY() < 30 ) {
 			if (this->user->getShipKey() == true) {
 				this->map.setMessage("if you face that door and press F you can open it");
@@ -251,7 +264,7 @@ void Ship::mapLoop() {
 		
 
 		system("cls");
-		
+		//displays map and player info
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
 		cout << "Lives: " << this->user->getLives()<<endl;
@@ -262,9 +275,7 @@ void Ship::mapLoop() {
 	
 
 
-		
-		//######## Render ########//
-		
+		//Calculating how long to wait to achieve desired FPS.	
 		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 70 - msDuration;

@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "PrintFile.h"
+//constructer
 Player::Player() : Entity() {
 	this->lives = 10;
 	this->food = 300000;
@@ -13,7 +14,7 @@ Player::Player() : Entity() {
 	this->repeat = false;
 
 }
-
+//getters and setters
 bool Player::getRepeat() {
 	return this->repeat;
 }
@@ -64,9 +65,10 @@ bool Player::getShipKey() {
 void Player::setShipKey(bool nKey) {
 	this->shipKey = nKey;
 }
+//checks if the tile in fron it a key
 bool Player::checkIfKey(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
-	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	//sets the players key to true
 	if (this->charCheck == 'K') {
 
 		return true;
@@ -75,10 +77,10 @@ bool Player::checkIfKey(int futureX, int futureY) {
 	return false;
 }
 
-
+//checks if they player shares the same space an enemy
 bool Player::checkIfEnemy(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
-	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	
 	for (int i = 0; i < this->enemyChar.size(); i++) {
 		if (this->charCheck == enemyChar[i]) {
 			return true;
@@ -88,14 +90,14 @@ bool Player::checkIfEnemy(int futureX, int futureY) {
 
 
 	return false;
-}
+}//outputs text from the text tree
 void Player::outputClue() {
 	this->tree.outputText();
 	this->clues += 1;
 	this->totalClues += 1;
 	this->tree.setTreePoint(this->totalClues);
 }
-
+//setters
 void Player::setTreePoint() {
 	this->tree.setTreePoint(this->totalClues);
 }
@@ -106,11 +108,12 @@ void Player::setStartX(int nX) {
 void Player::setStartY(int nY) {
 	this->startY = nY;
 }
+//handles player movement
 void Player::Move() {
 	this->projX = entityX;
 	this->projY = entityY;
 
-
+	//checks if player shares a space with enemy and kills them if they do
 	if (this->checkIfEnemy(this->entityX, this->entityY) == true){
 		
 		this->entityX = this->startX;
@@ -125,6 +128,8 @@ void Player::Move() {
 		cout << " you lost a life" << endl;
 		system("pause");
 	}
+	//gets key input, uses Async key state so everything else can move and is independent of the player
+	//checks the space infront of the direction the player pressed, checks if it is in a moveable spots and checks for special characters like keys and enemy projectiles
 	if (GetAsyncKeyState(KEY_DOWN)) {
 		this->entityChar = 'v';
 		this->map->changeChar(this->entityChar);
@@ -225,9 +230,11 @@ void Player::Move() {
 			this->alive = false;
 		}
 	}
+	//shots a projectile if q is pressed
 	else if (GetAsyncKeyState(KEY_Q)) {
 		shoot();
 	}
+	//checks what the player is interacting with and checks collectible ship key if they have it they move foward onto the door space
 	else if (GetAsyncKeyState(KEY_F) & 0x8000) {
 		if (this->shipKey == true) {
 			if (this->orientation == RIGHT and this->map->getChar(this->entityX+1, this->entityY) == 'D') {
@@ -269,6 +276,7 @@ void Player::Move() {
 
 			}
 		}
+		//checks if it is an interactable spot and handles action if it is
 		if (this->orientation == RIGHT and this->map->getChar(this->entityX + 1, this->entityY) == 'F') {
 			this->outputClue();
 			system("cls");
@@ -309,7 +317,7 @@ void Player::Move() {
 	
 	
 }
-
+//fills vector with entity
 void Player::fillMag() {
 	this->magazine = {};
 	this->projectiles = {};
@@ -321,7 +329,7 @@ void Player::fillMag() {
 	}
 }
 
-
+//checks if player can shoot and fires projectile if they can
 void Player::shoot() {
 	if (this->state == SHOOTING) {
 		this->map->setMessage("can't shoot, reloading");
@@ -332,7 +340,7 @@ void Player::shoot() {
 		this->shootBullet();
 	}
 }
-
+//places bullet in front of player
 void Player::shootBullet() {
 	if (this->getState() == SHOOTING and this->getAmmo() > 0) {
 		this->setState(NUETRAL);
@@ -388,6 +396,7 @@ void Player::shootBullet() {
 		}
 	}
 }
+//handles bullet movement using movement funtion in entity class
 void Player::moveBullet() {
 
 	for (int i = 0; i < this->projectiles.size(); i++) {

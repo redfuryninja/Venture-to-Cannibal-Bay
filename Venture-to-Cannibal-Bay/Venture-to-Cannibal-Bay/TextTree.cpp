@@ -1,5 +1,5 @@
 #include "TextTree.h"
-
+//contructor adding text and setting treePoint
 TextTree::TextTree() {
 	this->treePoint = 0;
 	this->clues = { 
@@ -13,21 +13,21 @@ TextTree::TextTree() {
 		{"you find a Mother, Ann Morley and her baby, somehow she seems to be the most level headed of all the survivors as she comforted her baby", "'they accused the chief's son Te Ara of stealing all this was them getting revenge'", "'how much death and destruction will follow this i wonder'"}
 	};
 }
+//getters and setters the get and set the treePoint variable
 int TextTree::getTreePoint() {
 	return this->treePoint;
 }
 void TextTree::setTreePoint(int nPoint) {
 	this->treePoint = nPoint;
 }
-
+//gets the size of the vector
 int TextTree::getClueSize() {
 	return this->clues.size();
 }
+//outputs the text calls on text colour to change the colour output
 void TextTree::outputText() {
-	HANDLE  hConsole;
-
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
+	
+	//loops through vector outputting the what point I is at
 	for (int i = 0; i < this->clues[this->treePoint].size(); i++) {
 		TextColour colour;
 		colour.changeColour(64);

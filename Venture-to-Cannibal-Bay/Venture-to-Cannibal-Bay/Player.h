@@ -13,7 +13,7 @@
 #include "TextTree.h"
 using namespace std;
 
-
+//inherits from entity
 class Player: public Entity
 {
 private:
@@ -30,7 +30,9 @@ private:
 	Entity bullet;
 	bool repeat;
 public:
+	//constructor
 	Player();
+	//getters and setters for all the variables
 	void setStartX(int nX);
 	void setStartY(int nY);
 	bool getRepeat();
@@ -49,14 +51,21 @@ public:
 	void setLives(int nLives);
 	void setFood(int nFood);
 	void setAmmo(int nAmmo);
+	//checks if player can shoot
 	void shoot();
+	//moves the player
 	void Move() override;
+	//checks if the enemy is on a tile
 	bool checkIfEnemy(int futureX, int futureY);
+	//changes alive variable to true
 	void revive();
+	//fill a variable with an entity to serve as a projectile
 	void fillMag();
+	//spawns the projectile infront of player
 	void shootBullet();
+	//handels projectile movement
 	void moveBullet();
+	//outputs text for the story
 	void outputClue();
-	//void setMap(Maps* currMap);
 };
 
