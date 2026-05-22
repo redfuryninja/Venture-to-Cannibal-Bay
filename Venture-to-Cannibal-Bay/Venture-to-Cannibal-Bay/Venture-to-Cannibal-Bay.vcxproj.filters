@@ -48,9 +48,6 @@
     <ClCompile Include="Pirate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Investigation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Ship.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,9 +108,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pirate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Investigation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ship.h">
