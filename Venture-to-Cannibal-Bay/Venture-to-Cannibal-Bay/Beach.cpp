@@ -1,6 +1,6 @@
 #include "Beach.h"
 #include "PrintFile.h"
-
+//constructors set the map variavles
 Beach::Beach() {
 	this->playerX = 3;
 	this->playerY = 1;
@@ -36,17 +36,19 @@ Beach::Beach(Player* cUser) {
 
 
 void Beach::mapLoop() {
-	
+	//sets the map
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
 	this->user->setMap(this->mapPointer);
 	int count = 0;
+	//player starts off with a key but losses it when they enter into the ship
 	this->user->setShipKey(true);
 	
-	
+	//creates many X's that move back and forth on the map alternating between X and x
 	for (int i = 0; i < 63; i++) {
 		if (count == 0) {
+			//they are set as enemies as the movemnt is the same, just moving back and forth
 			Enemy nEnemy = Enemy();
 			nEnemy.setChar('X');
 			nEnemy.setY(1);
@@ -65,7 +67,7 @@ void Beach::mapLoop() {
 			this->meleeEnemies.push_back(nEnemy);
 		}
 	}
-
+	//moves the X's
 	for (int i = 0; i < this->meleeEnemies.size(); i++) {
 		this->meleeEnemies[i].setMap(this->mapPointer);
 	}
@@ -89,16 +91,7 @@ void Beach::mapLoop() {
 
 		clock_t start = clock();
 		
-		//######## Process Input ########//
-		/*
-		create map
-		pass map to entity
-		run entity movement
-		give map entity coords
-
-		*/
-
-
+		//moves enenmy entites
 		for (int i = 0; i < this->meleeEnemies.size(); i++) {
 			if (this->meleeEnemies[i].isAlive()) {
 				this->meleeEnemies[i].Move();
@@ -106,7 +99,7 @@ void Beach::mapLoop() {
 
 		}
 
-
+		//handles lose cases that resets everything
 		if (this->user->getLives() == 0) {
 			system("cls");
 			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
@@ -131,7 +124,7 @@ void Beach::mapLoop() {
 
 
 
-			
+			//moves up total clues to keep the clues going along with player progression
 			if (this->user->getY() == 12 and this->user->getX() == 56) {
 				quit = true;
 				if (this->user->getTotalClues() != 2) {
@@ -147,7 +140,7 @@ void Beach::mapLoop() {
 					this->map.setMessage("if you face that door and press F you can open it");
 				}
 			}
-			
+			//chanes the interaction points so the player cant interact with them again and increace the clues
 			if (this->user->getTotalClues() == 2) {
 				this->map.changeChar('|');
 				this->map.moveEntity(56, 7);
@@ -155,7 +148,7 @@ void Beach::mapLoop() {
 			}
 
 
-
+			//displays map and player info
 			system("Color 0B");
 			system("cls");
 			cout << this->map.getMap() << endl;
@@ -168,9 +161,8 @@ void Beach::mapLoop() {
 
 
 
-
-
-			//######## Render ########//
+			//Calculating how long to wait to achieve desired FPS.
+			//after trial and error this gives the best frame rate
 
 			clock_t end = clock();
 			int msDuration = end - start;

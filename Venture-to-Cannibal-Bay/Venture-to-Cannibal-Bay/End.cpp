@@ -22,10 +22,11 @@ void End::Ending() {
 	this->colour.changeColour(4);
 	cout << "You managed to escape the Maori prison and get back to your ship where a Carrier Pidgeon Awaits your message, you quickly scribble down all that you know" << endl;
 	system("pause");
+	//plays an animation
 	ani.arrowAnimation();
 	this->colour.changeColour(15);
 	
-	
+	//gets the clues of the player and gives the win screen or the lose screen and messaging depending on the number of clues they player has
 	if (this->user->getClues() >= 6 ) {
 		PrintFile ascii = PrintFile("./Ascii-art/youWin.txt");
 		ascii.OutputAscii();

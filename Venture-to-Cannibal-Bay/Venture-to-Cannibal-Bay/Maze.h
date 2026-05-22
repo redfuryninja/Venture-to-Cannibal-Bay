@@ -18,6 +18,7 @@ using namespace std;
 
 class Maze
 {
+//sets all map and player values
 protected:
 	int playerX;
 	int playerY;
@@ -41,9 +42,12 @@ protected:
 	TextColour colour;
 
 public:
+	//constructors
 	Maze();
 	Maze(Player* c_User);
+	// loops through the map with all player and npc inputs
 	virtual void mapLoop();
+	//creates the enemies for the map
 	void createEnemies();
 
 };

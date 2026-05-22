@@ -3,11 +3,15 @@
 Animation::Animation() {
 
 }
+
 void Animation::arrowAnimation(){
 	bool quit = false;
 	int pos = 0;
+	//the count is set for how many frames i want it to cycle through
 	for (int i = 0; i < 27; i++) {
+		//each from is selected based on the position each frame passes to the next looping round
 		clock_t start = clock();
+		//it clears at the begining so it can print right after the pause through each loop
 		system("cls");
 		if (pos == 0) {
 			PrintFile ascii1 = PrintFile("./Ascii-art/arrowFrame1.txt");
@@ -63,6 +67,7 @@ void Animation::arrowAnimation(){
 			pos = 0;
 
 		}
+		//it then pasuses the its not flashing and looks like a smooth transition
 		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 200 - msDuration;

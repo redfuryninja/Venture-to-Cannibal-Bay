@@ -1,14 +1,15 @@
 #include "PirateMenu.h"
 
-
+//constructor
 PirateMenu::PirateMenu():Menu() {
 	this->path = "N/A";
 }
 string PirateMenu::getPath() {
 	return path;
 }
-
+//displays the ascii art of ships
 void PirateMenu::displayTitle() {
+	//creates printfile class and passes the filename into it to print
 	PrintFile ascii = PrintFile("./Ascii-art/Ships.txt");
 	ascii.OutputAscii();
 }
@@ -23,6 +24,7 @@ void PirateMenu::redrawMenu() {
 	cout << "|------------------------|" << endl;
 	if (this->menuPosition < 0) this->menuPosition = 2;
 	if (this->menuPosition > 2) this->menuPosition = 0;
+	//switches what is output depending on the input of the player
 	switch (this->menuPosition) {
 	case 0:
 		cout << "|  > Fight with Swords < |" << endl;
@@ -51,7 +53,9 @@ void PirateMenu::redrawMenu() {
 
 bool PirateMenu::getKeyInput() {
 	while (this->waiting) {
+		//gets the value of the player input
 		this->keyValue = getKeyValue();
+		//takes different action depending on input value
 		switch (this->keyValue) {
 		case KEY_UP:
 			this->menuPosition--;

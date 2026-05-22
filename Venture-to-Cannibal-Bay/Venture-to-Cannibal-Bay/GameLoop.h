@@ -22,8 +22,10 @@ private:
 	captured cutscene;
 	End ending;
 public:
+	//constructo
 	GameLoop();
 	GameLoop(Player* cUser);
+	//goes through all the game loops
 	void playGame();
 
 };

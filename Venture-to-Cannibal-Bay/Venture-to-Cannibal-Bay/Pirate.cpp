@@ -1,6 +1,6 @@
 #include "Pirate.h"
 #include "PirateMenu.h"
-
+//constructors
 Pirate::Pirate() {
 	int startClock = 0;
 	int endClock = 0;
@@ -15,14 +15,20 @@ Pirate::Pirate(Player* c_User) {
 	Animation ani = Animation();
 }
 void Pirate::action() {
+	
 	PirateMenu options = PirateMenu();
 	bool loop = true;
+	/*
+	loops through menu until player makes choice, closes and reopens with each choice
+	so it doesnt take to much up to much storage
+	*/
+	
 	while (loop == true) {
 		options.redrawMenu();
 		loop = options.getKeyInput();
 	}
 		
-
+	//opens path to choice player selected
 	if (options.getPath() == "swords") {
 		this->sword();
 	}
@@ -39,6 +45,7 @@ void Pirate::action() {
 }
 
 void Pirate::sword(){
+	//gets starting clock value
 	clock_t start = clock();
 	
 	this->colour.changeColour(64);
@@ -50,9 +57,11 @@ void Pirate::sword(){
 			break;
 		}
 	}
+	//gets end clock value
 	clock_t end = clock();
 	int duration = end - start;
 	this->user->setFood(this->user->getFood() - duration);
+	//if player was quick enough in hitting key then it will play an animation but if they're too slow it just shows an ascii image
 	if (duration > 3000) {
 		system("cls");
 		PrintFile ascii = PrintFile("./Ascii-art/lostLife.txt");
@@ -62,8 +71,10 @@ void Pirate::sword(){
 		system("pause");
 	}
 	else {
+		//starts animation callin animaton class
 		this->ani.swordAnimation();
 		system("cls");
+		//outputs ascii art
 		PrintFile ascii = PrintFile("./Ascii-art/Win.txt");
 		ascii.OutputAscii();
 		this->colour.changeColour(4);
@@ -73,6 +84,7 @@ void Pirate::sword(){
 	}
 	
 }
+//plays ascii animation before continuing
 void Pirate::gun() {
 	this->ani.gunAnimation();
 	this->colour.changeColour(4);
@@ -81,18 +93,18 @@ void Pirate::gun() {
 	system("pause");
 	this->user->setAmmo(this->user->getAmmo() - 5);
 }
-
+// outputs ascii image
 void Pirate::food() {
 	PrintFile ascii = PrintFile("./Ascii-art/supplies.txt");
 	ascii.OutputAscii();
 	this->colour.changeColour(4);
 	cout << " you bribed the Pirates and gave up your supplies in exchange for your lives" << endl;
 	this->colour.changeColour(15);
-	this->user->setFood(this->user->getFood() - 200000);
+	this->user->setFood(this->user->getFood() /2);
 	system("pause");
 }
 
-
+//gets key value of input
 int Pirate::getKeyValue() {
 	int value = -1;
 

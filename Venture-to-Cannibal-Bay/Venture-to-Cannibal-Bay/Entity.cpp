@@ -1,5 +1,5 @@
 #include "Entity.h"
-
+//constuor
 Entity::Entity() {
 	this->state = NUETRAL;
 	this->orientation = DOWN;
@@ -74,10 +74,10 @@ void Entity::kill()
 }
 
 
-
+//checks if the character in the coordinates is a space or an A returns true if that is the case
 bool Entity::checkSpace(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
-	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	
 	if (this->charCheck == ' ' or this->charCheck == 'A' ) {
 
 		return true;
@@ -86,10 +86,10 @@ bool Entity::checkSpace(int futureX, int futureY) {
 	return false;
 }
 
-
+//checks if player on coordinates is a player
 bool Entity::checkIfPlayer(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
-	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	
 	for (int i = 0; i < this->playerChars.size(); i++) {
 		if (this->charCheck == playerChars[i]) {
 			return true;
@@ -101,10 +101,10 @@ bool Entity::checkIfPlayer(int futureX, int futureY) {
 	return false;
 }
 
-
+//checks if player on coordinates is a weapon
 bool Entity::checkIfWeapon(int futureX, int futureY) {
 	this->charCheck = this->map->getMapChar(futureX, futureY);
-	//this->mapChar = map[futureX + futureY * this->mapWidth];
+	
 	for (int i = 0; i < this->playerWeapon.size(); i++) {
 		if (this->charCheck == playerWeapon[i]) {
 			return true;
@@ -117,7 +117,7 @@ bool Entity::checkIfWeapon(int futureX, int futureY) {
 }
 
 
-
+//gets value of a keypress
 int Entity::getKeyValue() {
 	int value = -1;
 
@@ -128,7 +128,7 @@ int Entity::getKeyValue() {
 			return value;
 	}
 }
-
+// gets the map dimention from the map pointer and places the entity on the given cooridinates
 void Entity::setMap(Maps* currMap) {
 	this->map = currMap;
 	this->mapWidth = this->map->getWidth();
@@ -138,16 +138,16 @@ void Entity::setMap(Maps* currMap) {
 }
 
 void Entity::Move() {
-	
+	//checks the space in the orientation set to the entity and if its not a wall it will keep moving until it shares teh x and y coords
 	if (this->orientation == DOWN) {
 
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);
 		if (this->canMoveY == true or this->checkIfPlayer(this->entityX, this->entityY + 1) or this->checkIfPlayer(this->entityX, this->entityY - 1) == true) {
 			this->map->changeChar(this->entityChar);
 			this->map->clearSpace(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
+		
 			this->entityY += 1;
-			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
+
 			this->map->moveEntity(this->entityX, this->entityY);
 		}
 		else {
@@ -159,11 +159,11 @@ void Entity::Move() {
 		this->canMoveY = checkSpace(this->entityX, this->entityY - 1) ;
 		if (this->canMoveY == true or this->checkIfPlayer(this->entityX, this->entityY - 1) == true) {
 			this->map->changeChar(this->entityChar);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
+
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityY -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
+
 		}
 		else {
 			this->alive = false;
@@ -174,11 +174,11 @@ void Entity::Move() {
 		this->canMoveX = checkSpace(this->entityX - 1, this->entityY);
 		if (this->canMoveX == true) {
 			this->map->changeChar(this->entityChar);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
+
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityX -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
+
 		}
 		else {
 			this->alive = false;
@@ -189,11 +189,11 @@ void Entity::Move() {
 		this->canMoveX = checkSpace(this->entityX + 1, this->entityY);
 		if (this->canMoveX == true) {
 			this->map->changeChar(this->entityChar);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
+
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityX += 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
+
 		}
 		else {
 			this->alive = false;

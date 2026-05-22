@@ -1,6 +1,6 @@
 #include "Menu.h"
 #include "GameLoop.h"
-
+//constructors
 Menu::Menu() {
 	this->menuPosition = 0;
 	this->waiting = true;
@@ -16,7 +16,7 @@ Menu::Menu(Player* c_User) {
 	this->fileName = "./Ascii-art/menu.txt";
 
 }
-
+//gets value of key input
 int Menu::getKeyValue() {
 	int value = -1;
 
@@ -27,12 +27,13 @@ int Menu::getKeyValue() {
 			return value;
 	}
 }
+//displays ascii art
 void Menu::displayTitle() {
 	PrintFile ascii = PrintFile("./Ascii-art/menu.txt");
 	ascii.OutputAscii();
 	
 }
-
+//loops through menu and key input so as to not repeatedly make menus
 void Menu::displayMenu() {
 	bool loop = true;
 	while (loop == true) {
@@ -41,7 +42,7 @@ void Menu::displayMenu() {
 	}
 
 }
-
+//prints the menu
 void Menu::redrawMenu() {
 	system("cls");
 	displayTitle();
@@ -64,7 +65,7 @@ void Menu::redrawMenu() {
 	
 }
 
-
+//gets int player input
 bool Menu::getKeyInput() {
 	while (this->waiting) {
 		this->keyValue = getKeyValue();

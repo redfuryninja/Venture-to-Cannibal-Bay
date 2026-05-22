@@ -46,6 +46,7 @@ private:
 public:
 	Beach();
 	Beach(Player* c_User);
+	//map loop for the player
 	void mapLoop();
 
 };

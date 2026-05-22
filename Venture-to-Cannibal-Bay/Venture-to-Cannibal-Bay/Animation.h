@@ -15,6 +15,7 @@ private:
 
 public:
 	Animation();
+	//plays the ascii animations for different scenes
 	void swordAnimation();
 	void gunAnimation();
 	void arrowAnimation();

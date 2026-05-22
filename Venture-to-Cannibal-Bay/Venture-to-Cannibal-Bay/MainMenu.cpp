@@ -4,7 +4,7 @@
 MainMenu::MainMenu(): Menu() {
 }
 
-
+//displays thet title card and the controls to the player
 void MainMenu::displayTitle() {
 	TextColour colour;
 	colour.changeColour(4);
@@ -14,7 +14,7 @@ void MainMenu::displayTitle() {
 	PrintFile controls = PrintFile("./Ascii-art/controls.txt");
 	controls.OutputAscii();
 }
-
+//displays the options to the player
 void MainMenu::redrawMenu() {
 	system("cls");
 	displayTitle();

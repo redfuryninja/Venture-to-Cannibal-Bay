@@ -9,26 +9,26 @@ bool Enemy::getWeaponDeath() {
 	return this->weaponDeath;
 }
 void Enemy::Move() {
-	
+	//moves back and forth based on orientation
 	if (this->orientation == DOWN) {
-
+		//checks the space in front if it can move the enemy it will
 		this->canMoveY = checkSpace(this->entityX, this->entityY + 1);
 		if (this->canMoveY == true) {
 			this->map->changeChar(this->entityChar);
 			this->map->clearSpace(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->entityY += 1;
-			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 			this->map->moveEntity(this->entityX, this->entityY);
 		}
+		//if it's a weapon then it sets weapon death to true so the player doest die
 		else if (this->map->getChar(entityX,entityY+1) == 'O' or this->map->getChar(entityX, entityY + 1) == '!') {
 			this->alive = false;
 			this->weaponDeath = true;
 		}
+		//unless it is the player then it doesnt change it so the player dies
 		else if (this->checkIfPlayer(this->entityX, this->entityY +1)){
 			this->alive = false;
 		}
-	
+	//anything and the orientation changes to the opposite direction
 		else {
 			
 			this->orientation = UP;
@@ -41,11 +41,9 @@ void Enemy::Move() {
 		this->canMoveY = checkSpace(this->entityX, this->entityY - 1);
 		if (this->canMoveY == true) {
 			this->map->changeChar(this->entityChar);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityY -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
 		}
 		else if (this->map->getChar(entityX, entityY - 1) == 'O' or this->map->getChar(entityX, entityY + 1) == '!') {
 			this->alive = false;
@@ -64,11 +62,10 @@ void Enemy::Move() {
 		this->canMoveX = checkSpace(this->entityX - 1, this->entityY);
 		if (this->canMoveX == true) {
 			this->map->changeChar(this->entityChar);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityX -= 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
+
 		}
 		else if (this->checkIfPlayer(this->entityX-1, this->entityY)) {
 			this->alive = false;
@@ -90,11 +87,10 @@ void Enemy::Move() {
 		this->canMoveX = checkSpace(this->entityX + 1, this->entityY);
 		if (this->canMoveX == true) {
 			this->map->changeChar(this->entityChar);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->mapChar;
 			this->map->clearSpace(this->entityX, this->entityY);
 			this->entityX += 1;
 			this->map->moveEntity(this->entityX, this->entityY);
-			//map[this->entityX + this->entityY * this->mapWidth] = this->entityChar;
+
 		}
 		else if (this->map->getChar(entityX+1, entityY) == 'O' or this->map->getChar(entityX+1, entityY) == '!') {
 			this->alive = false;

@@ -25,5 +25,6 @@ private:
 public:
 	End();
 	End(Player* cUser);
+	//loops through the neding sequences of the game
 	void Ending();
 };

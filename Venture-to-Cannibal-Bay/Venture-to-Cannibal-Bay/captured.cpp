@@ -9,7 +9,7 @@ captured::captured(Player* c_User) {
 	this->fileName = "./Ascii-art/surrounded.txt";
 	this->user = c_User;
 }
-
+//gets the clue and displays it giving the player a text based cutscene
 void captured::cutscene() {
 	system("cls");
 	PrintFile ascii = PrintFile(this->fileName);

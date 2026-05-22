@@ -2,6 +2,7 @@
 #include "Ship.h"
 #include "ShipRoom.h"
 #include "PrintFile.h"
+//constructors
 Maze::Maze() {
 	Player Pointer = Player();
 	this->user = &Pointer;
@@ -33,7 +34,7 @@ Maze::Maze(Player* cUser) {
 
 
 }
-
+//creates enemies and sets their position in themap
 void Maze::createEnemies() {
 	Enemy maori1 = Enemy();
 	Enemy maori2 = Enemy();
@@ -80,25 +81,25 @@ void Maze::createEnemies() {
 
 	maori8.setX(1);
 	maori8.setY(2);
-
+	//puts the ranged enemies on the map
 	maori6.setMap(this->mapPointer);
 	maori8.setMap(this->mapPointer);
 	maori7.setMap(this->mapPointer);
-
+	// fills a vector full of entities to act as projectiles
 	maori6.fillquiver();
 	maori7.fillquiver();
 	maori8.fillquiver();
 
 	maori6.setOrientation(DOWN);
 	maori7.setOrientation(UP);
-
+	//adds the enemies to a vector to handle movement later
 	this->meleeEnemies = { maori1, maori2, maori3, maori4, maori5, maori9, maori10 };
 	this->rangedEnemies = {maori6, maori7, maori8};
 
 
 }
 void Maze::mapLoop() {
-
+	// creates the map and sets the diminsions, and gives those details to the player
 	this->map.createMap();
 	this->map.setDimensions(this->mapWidth, this->mapHeight);
 	this->mapPointer = &this->map;
@@ -110,18 +111,19 @@ void Maze::mapLoop() {
 	this->user->setMap(this->mapPointer);
 	this->user->fillMag();
 	this->user->setShipKey(true);
-	
+	//places enemies in map
 	
 	for (int i = 0; i < this->meleeEnemies.size(); i++) {
 		this->meleeEnemies[i].setMap(this->mapPointer);
 	}
 
 	
-
 	bool quit = false;
+	//puts the player on the map
 	this->map.changeChar('v');
 	this->map.moveEntity(this->user->getX(), this->user->getY());
 	system("cls");
+	//prints the map
 	cout << this->map.getMap() << endl;
 	cout << this->map.getMessage() << endl;
 	cout << "Lives: " << this->user->getLives() << endl;
@@ -131,24 +133,20 @@ void Maze::mapLoop() {
 	this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 	while (quit == false) {
 		clock_t start = clock();
+		//setting system colour before system clear stops the screen from flashing so much
 		system("Color 0C");
-		//######## Process Input ########//
-		/*
-		create map
-		pass map to entity
-		run entity movement
-		give map entity coords
-
-		*/
 
 		
 		
-		
+		//cycles through all enemies in vector
 		for (int i = 0; i < this->meleeEnemies.size(); i++) {
 			if (this->meleeEnemies[i].isAlive()) {
+				//moves the current enemy
 				this->meleeEnemies[i].Move();
 			}
 			else {
+				//handles enemy deaths and if they are not killed by a weapon the player dies aswell
+				//handles player death and reloction
 				if (this->meleeEnemies[i].getWeaponDeath() == false) {
 					this->user->setLives(this->user->getLives() - 1);
 					this->map.clearSpace(this->user->getX(), this->user->getY());
@@ -166,6 +164,7 @@ void Maze::mapLoop() {
 					this->map.setMessage("you lost a life");
 
 				}
+				//removes enemy from vector and changes their space they are on
 				this->map.clearSpace(this->meleeEnemies[i].getX(), this->meleeEnemies[i].getY());
 				this->map.moveEntity(0, 0);
 				this->meleeEnemies.erase(meleeEnemies.begin() + i, meleeEnemies.begin() + i + 1);
@@ -178,8 +177,9 @@ void Maze::mapLoop() {
 		}
 
 		
-
+		
 		for (int i = 0; i < this->rangedEnemies.size(); i++) {
+		//checks if any entity shares a space with the enemy
 			if (this->rangedEnemies[i].isAlive()) {
 				this->rangedEnemies[i].Move();
 
@@ -215,10 +215,19 @@ void Maze::mapLoop() {
 		}
 		
 
-		if (user->getLives() == 0) {
+		//handles lose cases that resets everything
+		if (this->user->getLives() == 0) {
 			system("cls");
 			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
 			system("pause");
+			this->user->setRepeat(true);
+			quit = true;
+		}
+		else if (this->user->getFood() <= 0) {
+			system("cls");
+			cout << "you ran out of time and never discovered the fate of the missing crew" << endl;
+			system("pause");
+			this->user->setRepeat(true);
 			quit = true;
 		}
 		else if (this->user->isAlive()) {
@@ -239,20 +248,19 @@ void Maze::mapLoop() {
 
 
 
-		
+		//moves player projectiles
 		this->user->moveBullet();
-
+		//moves enemy projectiles
 		for (int i = 0; i < this->rangedEnemies.size(); i++) {
 			this->rangedEnemies[i].moveArrow();
 		}
 		
-
+		//checks player position to see if they have left map
 		if (this->user->getY() == 50 and this->user->getX() == 38) {
 			quit = true;
 		}
 
-
-
+		//sets the message for controls
 		else {
 			this->map.setMessage("press arrow keys to move, q to shoot and F to open a door you are facing if you have a key");
 		}
@@ -260,7 +268,7 @@ void Maze::mapLoop() {
 
 
 		system("cls");
-	
+	//outputs map
 		cout << this->map.getMap() << endl;
 		cout << this->map.getMessage() << endl;
 		cout << "Lives: " << this->user->getLives() << endl;
@@ -274,8 +282,7 @@ void Maze::mapLoop() {
 
 
 
-		//######## Render ########//
-
+		//Calculating how long to wait to achieve desired FPS.	
 		clock_t end = clock();
 		int msDuration = end - start;
 		int msRemaining = 70 - msDuration;

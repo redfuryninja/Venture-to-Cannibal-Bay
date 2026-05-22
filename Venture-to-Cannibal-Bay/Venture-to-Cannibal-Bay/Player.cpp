@@ -3,7 +3,7 @@
 //constructer
 Player::Player() : Entity() {
 	this->lives = 10;
-	this->food = 300000;
+	this->food = 200000;
 	this->ammo = 35;
 	this->startX = 10;
 	this->startY = 2;

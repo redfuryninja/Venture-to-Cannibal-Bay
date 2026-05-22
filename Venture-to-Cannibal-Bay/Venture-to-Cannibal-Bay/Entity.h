@@ -10,6 +10,7 @@
 #include <conio.h>
 #include "Maps.h"
 #include "Entity.h"
+//defines the key input values, different from other key values to match with the Async Key function
 #define KEY_UP 38
 #define KEY_DOWN 40
 #define KEY_LEFT 37
@@ -20,7 +21,7 @@
 #define KEY_F 70
 
 using namespace std;
-
+//sets up statesor orientation and the state the entity is in
 enum EntityOrientation {
 	UP,
 	DOWN,
@@ -60,24 +61,33 @@ protected:
 
 
 public:
+	//constructor
 	Entity();
+	//getters and setters for coordinates
 	int getStartX();
 	int getStartY();
 	void setX(int nX);
 	int getX();
 	void setY(int nY);
 	int getY();
+	// checks if the player is alive
 	bool isAlive();
+	//kills the player
 	void kill();
+	//getters and setters or orientation and state
 	EntityState getState();
 	EntityOrientation getOrientation();
 	void setState(EntityState nState);
 	void setOrientation(EntityOrientation nOrientation);
 	void setMap(Maps* currMap);
+	//gets the value of the key input
 	int getKeyValue();
+	//checks if anything is at the coordinates given
 	bool checkSpace(int futureX, int futureY);
 	bool checkIfPlayer(int futureX, int futureY);
 	bool checkIfWeapon(int futureX, int futureY);
+	//handles entity movement
 	virtual void Move();
+	//sets the charater of theentity
 	void setChar(char nChar);
 };

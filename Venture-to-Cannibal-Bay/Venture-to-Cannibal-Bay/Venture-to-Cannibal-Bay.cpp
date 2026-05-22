@@ -11,37 +11,16 @@
 #include "GameLoop.h"
 
 using namespace std;
-/*
-* print title
-* menu option, begin quit
-* ship animation
-* print pirates
-* choose between ammo food people
-* ship animation
-* print sirens
-* choose between ammo food people
-* ship animations
-* print cyclone
-* choose between ammo food people
-*/
 int main()
 {
 
-    /*
-    AsciiArt title = AsciiArt("./Ascii-art/Title.txt");
-    title.printAscii();
-    */
-
-    /*
-    
-     */
-    
+    // creates the player and pointer as well as passing the pointer to the came loop
     Player user = Player();
     Player* userPointer = &user;
     GameLoop game = GameLoop(userPointer);
-
+    //starts the game
     game.playGame();
-
+    //loops through the game if the player fails at any point that is not the end
     if (user.getRepeat() == true) {
         while (user.getRepeat() == true) {
             Player user = Player();

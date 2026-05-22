@@ -190,7 +190,7 @@ void Ship::mapLoop() {
 
 
 		}
-		//handles case if player dies or runs out of time
+		//handles lose cases that resets everything
 		if (this->user->getLives() == 0) {
 			system("cls");
 			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;

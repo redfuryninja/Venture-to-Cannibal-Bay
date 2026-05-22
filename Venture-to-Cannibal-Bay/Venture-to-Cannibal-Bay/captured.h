@@ -20,6 +20,7 @@ private:
 public:
 	captured();
 	captured(Player* c_User);
+	//goes through the text cutscene the player reads
 	void cutscene();
 };
 

@@ -70,6 +70,21 @@ void ShipRoom::mapLoop() {
 
 		}
 		
+		//handles lose cases that resets everything
+		if (this->user->getLives() == 0) {
+			system("cls");
+			cout << "you ran out of lives and never discovered the fate of the missing crew" << endl;
+			system("pause");
+			this->user->setRepeat(true);
+			quit = true;
+		}
+		else if (this->user->getFood() <= 0) {
+			system("cls");
+			cout << "you ran out of time and never discovered the fate of the missing crew" << endl;
+			system("pause");
+			this->user->setRepeat(true);
+			quit = true;
+		}
 		//clears the system and the displays the new map and all the changes as well as all player information
 		system("cls");
 		cout << this->map.getMap() << endl;
